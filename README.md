@@ -1,2 +1,3 @@
 # skyelynwaddell.github.io
-My Personal Blog for GitHub!
+
+My Personal Blog for GitHub! 
