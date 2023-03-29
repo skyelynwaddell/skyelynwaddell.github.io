@@ -1,3 +1,3 @@
-# skyelynwaddell.github.io
+# SkyesBlog
 
-My Personal Blog for GitHub! 
+My Personal Blog for GitHub! I hope you all enjoy!
