@@ -25,11 +25,17 @@ jobs:
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         run: |
-          # Remove existing content in the public folder (which is the main directory for GitHub Pages)
-          rm -rf ${GITHUB_WORKSPACE}/skyesblog/public/*
-          
-          # Copy built files to the public folder
-          cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/skyesblog/
+          # Check if the public directory exists and is not empty
+          if [ -d "${GITHUB_WORKSPACE}/skyesblog/public" ] && [ "$(ls -A ${GITHUB_WORKSPACE}/skyesblog/public)" ]; then
+            # Remove existing content in the GitHub Pages root
+            rm -rf ${GITHUB_WORKSPACE}/skyesblog/public/*
+            
+            # Copy built files to the public folder
+            cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/skyesblog/public/
+          else
+            echo "Public directory is missing or empty, aborting deployment."
+            exit 1
+          fi
           
           cd ${GITHUB_WORKSPACE}/skyesblog
           git config user.name 'skyelynwaddell'
