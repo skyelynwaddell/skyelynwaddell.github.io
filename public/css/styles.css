@@ -1,4 +1,4 @@
-body{
+body,html{
     background-color: #0d1117;
     overflow-x: hidden;
 }
@@ -26,7 +26,6 @@ body{
 
     transition-duration: 0s;
     margin-bottom: 10px;
-    width:100%;
     max-width: 220px;
     transform : scale(1);
     border-radius: 50%;
@@ -51,8 +50,8 @@ body{
 }
 
 .post-image{
-    width: 150px;
-    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
     margin-right:10px;
     border-radius: 10px;
     margin-right: 20px;
@@ -75,12 +74,10 @@ body{
 
 /* Style the navbar */
 .top-nav {
-    position: fixed;
+    position: sticky;
     top: 0;
-    overflow: hidden;
+    overflow-x: hidden;
     z-index: 10;
-    left:0;
-    right:0;
 
   }
 
@@ -101,7 +98,7 @@ body{
 }
 
 .md {
-    padding:20px;
+    padding:10px;
     border-style: solid;
     border-width: 2px;
     border-color:white;
@@ -135,7 +132,7 @@ body{
 
 
 .main-row{
-    margin: 20px;
+    margin: 5px;
 }
 
 pre{
@@ -159,7 +156,6 @@ pre{
 
 }
 
-
 .single-image{
     width: 100%;
     height: 100%;
@@ -173,7 +169,7 @@ pre{
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-
+    margin-bottom:10px;
 }
 
 .tab{
@@ -198,6 +194,27 @@ pre{
         flex-direction: column;
     }
 
+
+    .post-image{
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 10px;
+        margin:10px;
+    }
+
+    .single-header{
+        flex-direction: column;
+    }
+
+    .single-details{
+        margin:0;
+        margin-bottom:10px;
+        
+    }
+
+    .post{
+        flex-direction: column;
+    }
 
 
   }

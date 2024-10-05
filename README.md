@@ -1,6 +1,16 @@
 # Skyesblog
 #### Developed with Hugo, HTML, and JS
 
+## Starting the server
+simply run
+```
+hugo server
+```
+in some instances if things dont work try it in dev mode
+```
+hugo -D server
+```
+
 ## Creating a new post
 To create a new post run the following command
 ```
