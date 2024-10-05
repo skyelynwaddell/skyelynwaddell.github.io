@@ -1,6 +1,13 @@
+html {
+}
 body,html{
-    background-color: #0d1117;
+    left:0;
+    margin:0;
+    padding:0;
+    background-color: hsl(216, 28%, 7%);
     overflow-x: hidden;
+    scroll-behavior: smooth;
+
 }
 
 .inner-row{
@@ -72,14 +79,6 @@ body,html{
     
 }
 
-/* Style the navbar */
-.top-nav {
-    position: sticky;
-    top: 0;
-    overflow-x: hidden;
-    z-index: 10;
-
-  }
 
  .pagination{
     justify-content: center;
@@ -127,12 +126,13 @@ body,html{
 }
 
 .br{
-    height:50px;
+    height:70px;
 }
 
 
 .main-row{
     margin: 5px;
+    min-height:100vh;
 }
 
 pre{
@@ -144,7 +144,7 @@ pre{
     display: flex;
     text-align: center;
     justify-content: center;
-    margin: 20px;
+    margin: 20px 0;
     width: 100%;
 }
 
@@ -243,3 +243,13 @@ pre{
 
   }
 
+
+/* Style the navbar */
+#navbar {
+    position: fixed;
+    top: 0;
+    width:100%;
+    z-index: 2;
+    overflow: hidden;
+    background-color: #333;
+  }

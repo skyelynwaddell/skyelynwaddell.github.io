@@ -2,7 +2,7 @@
 {{ if eq .RelPermalink "/authors/" }}
 <div class="col">
 <h1 class="title">Authors</h1>
-{{ partial "header" (dict "title" (printf "Skyeblog | Authors") "context" .) }}
+{{ partial "header" (dict "title" (printf "Skyesblog | Authors") "context" .) }}
 {{ range $.Site.Taxonomies.authors.ByCount }}
 <a class="text-white tab border-2" href="/authors/{{ .Name | urlize }}">
     # {{ .Name }} {{ .Count }} 
@@ -11,7 +11,7 @@
 {{ end }}
 {{ else }}
 
-{{ partial "header" (dict "title" (printf "Skyeblog | %s" .Name) "context" .) }}
+{{ partial "header" (dict "title" (printf "Skyesblog | %s" .Name) "context" .) }}
 <div class="col">
 {{ partial "postlist" . }}
 </div>
