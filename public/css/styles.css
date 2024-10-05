@@ -75,16 +75,20 @@ body{
 
 /* Style the navbar */
 .top-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
     overflow: hidden;
     z-index: 10;
+    left:0;
+    right:0;
+
   }
 
  .pagination{
     justify-content: center;
     text-align: center;
 }
+
 
 .explore{
     display: flex;
