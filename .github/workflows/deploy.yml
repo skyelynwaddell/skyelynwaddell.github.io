@@ -25,15 +25,16 @@ jobs:
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         run: |
-          # Clone the GitHub Pages repo
-          git clone --depth 1 --branch main git@github.com:skyelynwaddell/skyelynwaddell.github.io.git built-site
-          # Remove existing content
-          rm -rf built-site/*
-          # Copy built files to the root of the GitHub Pages repo
-          cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* built-site/
-          cd built-site
+          # Remove existing content in the public folder (which is the main directory for GitHub Pages)
+          rm -rf ${GITHUB_WORKSPACE}/skyesblog/public/*
+          
+          # Copy built files to the public folder
+          cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/skyesblog/
+          
+          cd ${GITHUB_WORKSPACE}/skyesblog
           git config user.name 'skyelynwaddell'
           git config user.email 'dillonleewaddell@gmail.com'
           git add .
           git commit -m 'Deploy to GitHub Pages'
-          git push
+          # Push to the GitHub Pages repo using GITHUB_TOKEN for authentication
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/skyelynwaddell/skyelynwaddell.github.io.git main
