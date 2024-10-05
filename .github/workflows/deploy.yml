@@ -19,26 +19,28 @@ jobs:
 
       - name: Build
         run: |
-          cd ${GITHUB_WORKSPACE}/skyesblog  # Change to the skyesblog directory
-          ${RUNNER_TEMP}/hugo  # Run Hugo to build the site
+          # Build the site; Hugo will output to the configured public directory
+          ${RUNNER_TEMP}/hugo  # Hugo will automatically build to the public directory at the root
 
       - name: Verify Build Output
         run: |
-          ls -la ${GITHUB_WORKSPACE}/skyesblog/public  # List contents of the public directory to verify it exists
+          ls -la public  # List contents of the public directory to verify it exists
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         run: |
           # Check if the public directory exists and is not empty
-          if [ -d "${GITHUB_WORKSPACE}/skyesblog/public" ] && [ "$(ls -A ${GITHUB_WORKSPACE}/skyesblog/public)" ]; then
-            # Copy built files to the root of the GitHub Pages repo
-            cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/
+          if [ -d "public" ] && [ "$(ls -A public)" ]; then
+            # Clear the root directory for GitHub Pages
+            rm -rf ./*
+            
+            # Copy built files from public to the root
+            cp -R public/* ./
           else
             echo "Public directory is missing or empty, aborting deployment."
             exit 1
           fi
           
-          cd ${GITHUB_WORKSPACE}/skyesblog
           git config user.name 'skyelynwaddell'
           git config user.email 'dillonleewaddell@gmail.com'
           git add .
