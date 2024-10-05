@@ -1,15 +1,15 @@
 +++
-title = 'Cpp Notes'
+title = 'C++ Notes'
 date = 2024-10-04T16:44:00-06:00
 draft = false
 description = "Some cpp notes of mine."
-image = "/images/1.webp"
-categories = ["cpp", "basics", "notes"]
+image = "/images/cpp-logo.webp"
+categories = ["c++", "sdl"]
 authors = ["Skye Waddell"]
 avatar = "/images/avatar.webp"
 +++
 
-## CPP Notes
+## C++ Notes
 
 ### some test content
 
