@@ -4,65 +4,80 @@
     <title>Categories on Skyesblog</title>
     <link>https://skyelynwaddell.github.io/categories/</link>
     <description>Recent content in Categories on Skyesblog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Oct 2024 16:44:00 -0600</lastBuildDate>
-    <atom:link href="https://skyelynwaddell.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Oct 2024 16:44:00 -0600</lastBuildDate><atom:link href="https://skyelynwaddell.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Basics</title>
+      <title>basics</title>
       <link>https://skyelynwaddell.github.io/categories/basics/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/basics/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Bob</title>
+      <title>bob</title>
       <link>https://skyelynwaddell.github.io/categories/bob/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/bob/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Cpp</title>
+      <title>cpp</title>
       <link>https://skyelynwaddell.github.io/categories/cpp/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/cpp/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Dogs</title>
+      <title>dogs</title>
       <link>https://skyelynwaddell.github.io/categories/dogs/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/dogs/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Google</title>
+      <title>google</title>
       <link>https://skyelynwaddell.github.io/categories/google/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/google/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Jane</title>
+      <title>jane</title>
       <link>https://skyelynwaddell.github.io/categories/jane/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/jane/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Joe</title>
+      <title>joe</title>
       <link>https://skyelynwaddell.github.io/categories/joe/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/joe/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Notes</title>
+      <title>notes</title>
       <link>https://skyelynwaddell.github.io/categories/notes/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
+      
       <guid>https://skyelynwaddell.github.io/categories/notes/</guid>
       <description></description>
     </item>
+    
   </channel>
 </rss>
