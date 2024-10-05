@@ -24,6 +24,9 @@ jobs:
 
       - name: Verify Build Output
         run: |
+          echo "Listing files in the root directory:"
+          ls -la  # List contents of the root directory
+          echo "Listing files in the public directory:"
           ls -la public  # List contents of the public directory to verify it exists
 
       - name: Deploy to GitHub Pages
