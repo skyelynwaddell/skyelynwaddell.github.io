@@ -22,16 +22,17 @@ jobs:
           cd ${GITHUB_WORKSPACE}/skyesblog  # Change to the skyesblog directory
           ${RUNNER_TEMP}/hugo  # Run Hugo to build the site
 
+      - name: Verify Build Output
+        run: |
+          ls -la ${GITHUB_WORKSPACE}/skyesblog/public  # List contents of the public directory to verify it exists
+
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         run: |
           # Check if the public directory exists and is not empty
           if [ -d "${GITHUB_WORKSPACE}/skyesblog/public" ] && [ "$(ls -A ${GITHUB_WORKSPACE}/skyesblog/public)" ]; then
-            # Remove existing content in the GitHub Pages root
-            rm -rf ${GITHUB_WORKSPACE}/skyesblog/public/*
-            
-            # Copy built files to the public folder
-            cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/skyesblog/public/
+            # Copy built files to the root of the GitHub Pages repo
+            cp -R ${GITHUB_WORKSPACE}/skyesblog/public/* ${GITHUB_WORKSPACE}/
           else
             echo "Public directory is missing or empty, aborting deployment."
             exit 1
