@@ -26,7 +26,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           # Clone the GitHub Pages repo
-          git clone --depth 1 --branch main https://github.com/skyelynwaddell/skyelynwaddell.github.io built-site
+          git clone --depth 1 --branch main git@github.com:skyelynwaddell/skyelynwaddell.github.io.git built-site
           # Remove existing content
           rm -rf built-site/*
           # Copy built files to the root of the GitHub Pages repo
