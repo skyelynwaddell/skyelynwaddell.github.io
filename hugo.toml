@@ -2,6 +2,8 @@ baseURL = 'https://skyelynwaddell.github.io/'
 languageCode = 'en-us'
 title = 'Skyesblog'
 
+publishDir = "public"  # Make sure this line is present
+
 paginate = 10
 
 [params]

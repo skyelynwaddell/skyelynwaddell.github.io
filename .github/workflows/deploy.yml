@@ -19,15 +19,19 @@ jobs:
 
       - name: Build
         run: |
-          # Build the site; Hugo will output to the configured public directory
-          ${RUNNER_TEMP}/hugo  # Hugo will automatically build to the public directory at the root
+          echo "Building the site with Hugo..."
+          ${RUNNER_TEMP}/hugo  # Hugo will build to the configured public directory in the root
 
       - name: Verify Build Output
         run: |
           echo "Listing files in the root directory:"
           ls -la  # List contents of the root directory
           echo "Listing files in the public directory:"
-          ls -la public  # List contents of the public directory to verify it exists
+          if [ -d "public" ]; then
+            ls -la public  # List contents of the public directory if it exists
+          else
+            echo "Public directory does not exist."
+          fi
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
