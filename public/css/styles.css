@@ -5,9 +5,7 @@ body,html{
     margin:0;
     padding:0;
     background-color: hsl(216, 28%, 7%);
-    overflow-x: hidden;
     scroll-behavior: smooth;
-
 }
 
 .inner-row{
@@ -102,7 +100,9 @@ body,html{
     border-width: 2px;
     border-color:white;
     border-radius: 5px;
-    width: 100%;
+    max-width:100%;
+    min-width:calc(100% - 400px);
+
 }
 
 
@@ -133,6 +133,7 @@ body,html{
 .main-row{
     margin: 5px;
     min-height:100vh;
+    max-width: calc(100%-400px);
 }
 
 pre{
@@ -189,7 +190,6 @@ pre{
 @media only screen and (max-width: 1200px) {
 
     .main-row {
-        
         display: flex;
         flex-direction: column;
     }
@@ -224,7 +224,6 @@ pre{
         display: flex;
         flex-direction: row;
         justify-content: space-between; /* Ensure even spacing */
-        width: calc(100% - 20px);
         box-sizing: border-box;
     }
 
@@ -233,6 +232,7 @@ pre{
     }
 
     .sidebar{
+        width:100%;
         max-width: 500px;
     }
 
