@@ -61,6 +61,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
 
+    <script src="/js/prism.js"></script>
+    <link rel="stylesheet" href="/css/prism.css">
 
 </head>
 
@@ -109,562 +111,600 @@
     <h1 id="c-notes">C++ Notes</h1>
 <h1 id="iostream">iostream</h1>
 <p>The <!-- raw HTML omitted --> library provides objects which can read user input and output data to the console or to a file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>cerr <span style="color:#75715e">//output stream for error messages
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>clog <span style="color:#75715e">//output stream to log program info
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cin  <span style="color:#75715e">//input stream that reads keyboard input from the console
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#75715e">//output stream which writes output to console
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+cerr //output stream for error messages
+clog //output stream to log program info
+cin  //input stream that reads keyboard input from the console
+cout //output stream which writes output to console
+</code></pre>
+<hr>
 <h1 id="fstream">fstream</h1>
 <p>The <!-- raw HTML omitted --> library provides classes for reading and writing into files or data streams.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fstream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>filebuf  <span style="color:#75715e">//lower level file handling class used internally by fstream, ifstream, and ofstream classes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fstream  <span style="color:#75715e">//a class that can read and write to files
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ifstream <span style="color:#75715e">//a class that can read from files
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ofstream <span style="color:#75715e">//a class that can write to files
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+
+filebuf  //lower level file handling class used internally by fstream, ifstream, and ofstream classes
+fstream  //a class that can read and write to files
+ifstream //a class that can read from files
+ofstream //a class that can write to files
+</code></pre>
+<hr>
 <h1 id="cmath">cmath</h1>
 <p>The <!-- raw HTML omitted --> library has many functions that allow you to perform mathematical tasks on numbers.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>erfc(x);    <span style="color:#75715e">// Returns the value of the complementary error function at x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fabs(x);    <span style="color:#75715e">// Returns the absolute value of a floating-point x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fdim(x, y); <span style="color:#75715e">// Returns the positive difference between x and y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>floor(x);   <span style="color:#75715e">// Returns the value of x rounded down to its nearest integer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fma(x, y, z); <span style="color:#75715e">// Returns x*y+z without losing precision
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fmax(x, y); <span style="color:#75715e">// Returns the highest value of a floating-point x and y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fmin(x, y); <span style="color:#75715e">// Returns the lowest value of a floating-point x and y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fmod(x, y); <span style="color:#75715e">// Returns the floating point remainder of x/y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>frexp(x, y); <span style="color:#75715e">// With x expressed as m*2^n, returns the value of m (0.5 to 1.0) and writes n to memory at y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>hypot(x, y); <span style="color:#75715e">// Returns sqrt(x² + y²) without intermediate overflow/underflow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ilogb(x);   <span style="color:#75715e">// Returns the integer part of the floating-point base logarithm of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ldexp(x, y); <span style="color:#75715e">// Returns x * 2^y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>lgamma(x);  <span style="color:#75715e">// Returns the logarithm of the absolute value of the gamma function at x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>llrint(x);  <span style="color:#75715e">// Rounds x to a nearby integer and returns as long long int
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>llround(x); <span style="color:#75715e">// Rounds x to the nearest integer and returns as long long int
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>log(x);     <span style="color:#75715e">// Returns the natural logarithm of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>log10(x);   <span style="color:#75715e">// Returns the base 10 logarithm of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>log1p(x);   <span style="color:#75715e">// Returns the natural logarithm of x+1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>log2(x);    <span style="color:#75715e">// Returns the base 2 logarithm of the absolute value of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>logb(x);    <span style="color:#75715e">// Returns the floating-point base logarithm of the absolute value of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>lrint(x);   <span style="color:#75715e">// Rounds x to a nearby integer and returns as long int
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>lround(x);  <span style="color:#75715e">// Rounds x to the nearest integer and returns as long int
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>modf(x, y); <span style="color:#75715e">// Returns the decimal part of x and writes the integer part to memory at y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>nan(s);     <span style="color:#75715e">// Returns a NaN (Not a Number) value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>nearbyint(x); <span style="color:#75715e">// Returns x rounded to a nearby integer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>nextafter(x, y); <span style="color:#75715e">// Returns the closest floating-point number to x in the direction of y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>nexttoward(x, y); <span style="color:#75715e">// Returns the closest floating-point number to x in the direction of y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>pow(x, y);  <span style="color:#75715e">// Returns the value of x to the power of y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>remainder(x, y); <span style="color:#75715e">// Returns the remainder of x/y rounded to the nearest integer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>remquo(x, y, z); <span style="color:#75715e">// Calculates x/y rounded to nearest integer, writes to memory at z, returns remainder
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>rint(x);    <span style="color:#75715e">// Returns x rounded to a nearby integer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>round(x);   <span style="color:#75715e">// Returns x rounded to the nearest integer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>scalbln(x, y); <span style="color:#75715e">// Returns x * R^y (R usually 2)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>scalbn(x, y); <span style="color:#75715e">// Returns x * R^y (R usually 2)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sin(x);     <span style="color:#75715e">// Returns the sine of x (in radians)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sinh(x);    <span style="color:#75715e">// Returns the hyperbolic sine of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sqrt(x);    <span style="color:#75715e">// Returns the square root of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>tan(x);     <span style="color:#75715e">// Returns the tangent of x (in radians)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>tanh(x);    <span style="color:#75715e">// Returns the hyperbolic tangent of x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>tgamma(x);  <span style="color:#75715e">// Returns the value of the gamma function at x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>trunc(x);   <span style="color:#75715e">// Returns the integer part of x
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;cmath&gt;
+erfc(x);    // Returns the value of the complementary error function at x
+fabs(x);    // Returns the absolute value of a floating-point x
+fdim(x, y); // Returns the positive difference between x and y
+floor(x);   // Returns the value of x rounded down to its nearest integer
+fma(x, y, z); // Returns x*y+z without losing precision
+fmax(x, y); // Returns the highest value of a floating-point x and y
+fmin(x, y); // Returns the lowest value of a floating-point x and y
+fmod(x, y); // Returns the floating point remainder of x/y
+frexp(x, y); // With x expressed as m*2^n, returns the value of m (0.5 to 1.0) and writes n to memory at y
+hypot(x, y); // Returns sqrt(x² + y²) without intermediate overflow/underflow
+ilogb(x);   // Returns the integer part of the floating-point base logarithm of x
+ldexp(x, y); // Returns x * 2^y
+lgamma(x);  // Returns the logarithm of the absolute value of the gamma function at x
+llrint(x);  // Rounds x to a nearby integer and returns as long long int
+llround(x); // Rounds x to the nearest integer and returns as long long int
+log(x);     // Returns the natural logarithm of x
+log10(x);   // Returns the base 10 logarithm of x
+log1p(x);   // Returns the natural logarithm of x+1
+log2(x);    // Returns the base 2 logarithm of the absolute value of x
+logb(x);    // Returns the floating-point base logarithm of the absolute value of x
+lrint(x);   // Rounds x to a nearby integer and returns as long int
+lround(x);  // Rounds x to the nearest integer and returns as long int
+modf(x, y); // Returns the decimal part of x and writes the integer part to memory at y
+nan(s);     // Returns a NaN (Not a Number) value
+nearbyint(x); // Returns x rounded to a nearby integer
+nextafter(x, y); // Returns the closest floating-point number to x in the direction of y
+nexttoward(x, y); // Returns the closest floating-point number to x in the direction of y
+pow(x, y);  // Returns the value of x to the power of y
+remainder(x, y); // Returns the remainder of x/y rounded to the nearest integer
+remquo(x, y, z); // Calculates x/y rounded to nearest integer, writes to memory at z, returns remainder
+rint(x);    // Returns x rounded to a nearby integer
+round(x);   // Returns x rounded to the nearest integer
+scalbln(x, y); // Returns x * R^y (R usually 2)
+scalbn(x, y); // Returns x * R^y (R usually 2)
+sin(x);     // Returns the sine of x (in radians)
+sinh(x);    // Returns the hyperbolic sine of x
+sqrt(x);    // Returns the square root of x
+tan(x);     // Returns the tangent of x (in radians)
+tanh(x);    // Returns the hyperbolic tangent of x
+tgamma(x);  // Returns the value of the gamma function at x
+trunc(x);   // Returns the integer part of x
+
+</code></pre>
+<hr>
 <h1 id="string">string</h1>
 <p>The <!-- raw HTML omitted --> library has many functions that allow you to perform tasks on strings.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>at(index);       <span style="color:#75715e">// Returns an indexed character from a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>length();        <span style="color:#75715e">// Returns the length of a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>size();          <span style="color:#75715e">// Alias of length(). Returns the length of a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>max_size();      <span style="color:#75715e">// Returns the maximum length of a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>empty();         <span style="color:#75715e">// Checks whether a string is empty or not
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>append(str);     <span style="color:#75715e">// Appends a string (or a part of a string) to another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>substr(pos, len); <span style="color:#75715e">// Returns a part of a string from a start index (position) and length
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>find(str);       <span style="color:#75715e">// Returns the index (position) of the first occurrence of a string or character
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>rfind(str);      <span style="color:#75715e">// Returns the index (position) of the last occurrence of a string or character
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>replace(pos, len, str); <span style="color:#75715e">// Replaces a part of a string with another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>insert(pos, str); <span style="color:#75715e">// Inserts a string at a specified index (position)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>erase(pos, len);  <span style="color:#75715e">// Removes characters from a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>compare(str);     <span style="color:#75715e">// Compares two strings
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;string&gt;
+at(index);       // Returns an indexed character from a string
+length();        // Returns the length of a string
+size();          // Alias of length(). Returns the length of a string
+max_size();      // Returns the maximum length of a string
+empty();         // Checks whether a string is empty or not
+append(str);     // Appends a string (or a part of a string) to another string
+substr(pos, len); // Returns a part of a string from a start index (position) and length
+find(str);       // Returns the index (position) of the first occurrence of a string or character
+rfind(str);      // Returns the index (position) of the last occurrence of a string or character
+replace(pos, len, str); // Replaces a part of a string with another string
+insert(pos, str); // Inserts a string at a specified index (position)
+erase(pos, len);  // Removes characters from a string
+compare(str);     // Compares two strings
+
+</code></pre>
+<hr>
 <h1 id="cstring">cstring</h1>
 <p>The <!-- raw HTML omitted --> library has many functions that allow you to perform tasks on arrays and C-style strings.</p>
 <p>Note that C-style strings are different than regular strings. A C-style string is an array of characters, created with the char type.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstring&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>memchr(ptr, value, num);   <span style="color:#75715e">// Returns a pointer to the first occurrence of a value in a block of memory
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>memcmp(ptr1, ptr2, num);   <span style="color:#75715e">// Compares two blocks of memory to determine which one represents a larger numeric value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>memcpy(dest, src, num);    <span style="color:#75715e">// Copies data from one block of memory to another
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>memmove(dest, src, num);   <span style="color:#75715e">// Copies data from one block of memory to another, accounting for memory overlap
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>memset(ptr, value, num);   <span style="color:#75715e">// Sets all of the bytes in a block of memory to the same value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strcat(dest, src);         <span style="color:#75715e">// Appends one C-style string to the end of another
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strchr(str, ch);           <span style="color:#75715e">// Returns a pointer to the first occurrence of a character in a C-style string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strcmp(str1, str2);        <span style="color:#75715e">// Compares the ASCII values of characters in two C-style strings to determine which has a higher value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strcoll(str1, str2);       <span style="color:#75715e">// Compares the locale-based values of characters in two C-style strings to determine which has a higher value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strcpy(dest, src);         <span style="color:#75715e">// Copies the characters of a C-style string into the memory of another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strcspn(str1, str2);       <span style="color:#75715e">// Returns the length of a C-style string up to the first occurrence of one of the specified characters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strerror(errnum);          <span style="color:#75715e">// Returns a C-style string describing the meaning of an error code
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strlen(str);               <span style="color:#75715e">// Returns the length of a C-style string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strncat(dest, src, num);   <span style="color:#75715e">// Appends a number of characters from a C-style string to the end of another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strncmp(str1, str2, num);  <span style="color:#75715e">// Compares the ASCII values of a specified number of characters in two C-style strings
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strncpy(dest, src, num);   <span style="color:#75715e">// Copies a number of characters from one C-style string into the memory of another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strpbrk(str1, str2);       <span style="color:#75715e">// Returns a pointer to the first position in a C-style string that contains one of the specified characters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strrchr(str, ch);          <span style="color:#75715e">// Returns a pointer to the last occurrence of a character in a C-style string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strspn(str1, str2);        <span style="color:#75715e">// Returns the length of a C-style string up to the first character not in the specified set
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strstr(str1, str2);        <span style="color:#75715e">// Returns a pointer to the first occurrence of a C-style string within another string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strtok(str, delim);        <span style="color:#75715e">// Splits a string into pieces using delimiters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strxfrm(dest, src, num);   <span style="color:#75715e">// Converts characters in a C-style string from ASCII encoding to the encoding of the current locale
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;cstring&gt;
+memchr(ptr, value, num);   // Returns a pointer to the first occurrence of a value in a block of memory
+memcmp(ptr1, ptr2, num);   // Compares two blocks of memory to determine which one represents a larger numeric value
+memcpy(dest, src, num);    // Copies data from one block of memory to another
+memmove(dest, src, num);   // Copies data from one block of memory to another, accounting for memory overlap
+memset(ptr, value, num);   // Sets all of the bytes in a block of memory to the same value
+strcat(dest, src);         // Appends one C-style string to the end of another
+strchr(str, ch);           // Returns a pointer to the first occurrence of a character in a C-style string
+strcmp(str1, str2);        // Compares the ASCII values of characters in two C-style strings to determine which has a higher value
+strcoll(str1, str2);       // Compares the locale-based values of characters in two C-style strings to determine which has a higher value
+strcpy(dest, src);         // Copies the characters of a C-style string into the memory of another string
+strcspn(str1, str2);       // Returns the length of a C-style string up to the first occurrence of one of the specified characters
+strerror(errnum);          // Returns a C-style string describing the meaning of an error code
+strlen(str);               // Returns the length of a C-style string
+strncat(dest, src, num);   // Appends a number of characters from a C-style string to the end of another string
+strncmp(str1, str2, num);  // Compares the ASCII values of a specified number of characters in two C-style strings
+strncpy(dest, src, num);   // Copies a number of characters from one C-style string into the memory of another string
+strpbrk(str1, str2);       // Returns a pointer to the first position in a C-style string that contains one of the specified characters
+strrchr(str, ch);          // Returns a pointer to the last occurrence of a character in a C-style string
+strspn(str1, str2);        // Returns the length of a C-style string up to the first character not in the specified set
+strstr(str1, str2);        // Returns a pointer to the first occurrence of a C-style string within another string
+strtok(str, delim);        // Splits a string into pieces using delimiters
+strxfrm(dest, src, num);   // Converts characters in a C-style string from ASCII encoding to the encoding of the current locale
+</code></pre>
+<hr>
 <h1 id="ctime">ctime</h1>
 <p>The <!-- raw HTML omitted --> library has a variety of functions that allow you to measure dates and times.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>asctime(tm);          <span style="color:#75715e">// Returns a C-style string representation of the time in a tm structure
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>clock();              <span style="color:#75715e">// Returns a number representing the amount of time that has passed while the program is running
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ctime(timestamp);    <span style="color:#75715e">// Returns a C-style string representation of the time in a timestamp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>difftime(time1, time2); <span style="color:#75715e">// Returns the time difference between two timestamps
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>gmtime(timestamp);   <span style="color:#75715e">// Converts a timestamp into a tm structure representing its time at the GMT time zone
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>localtime(timestamp); <span style="color:#75715e">// Converts a timestamp into a tm structure representing its time in the system&#39;s local time zone
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mktime(tm);          <span style="color:#75715e">// Converts a tm structure into a timestamp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>strftime(buffer, maxsize, format, tm); <span style="color:#75715e">// Writes a C-style string representing the date and time of a tm structure with formatting options
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>time(<span style="color:#66d9ef">nullptr</span>);       <span style="color:#75715e">// Returns a timestamp representing the current moment in time
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;ctime&gt;
+asctime(tm);          // Returns a C-style string representation of the time in a tm structure
+clock();              // Returns a number representing the amount of time that has passed while the program is running
+ctime(timestamp);    // Returns a C-style string representation of the time in a timestamp
+difftime(time1, time2); // Returns the time difference between two timestamps
+gmtime(timestamp);   // Converts a timestamp into a tm structure representing its time at the GMT time zone
+localtime(timestamp); // Converts a timestamp into a tm structure representing its time in the system's local time zone
+mktime(tm);          // Converts a tm structure into a timestamp
+strftime(buffer, maxsize, format, tm); // Writes a C-style string representing the date and time of a tm structure with formatting options
+time(nullptr);       // Returns a timestamp representing the current moment in time
+</code></pre>
+<hr>
 <h1 id="types">Types</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#75715e">//10
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#75715e">//5.75
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#75715e">//true-false
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> <span style="color:#75715e">//single character/letter/number/ascii
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>string <span style="color:#75715e">// &#34;the default string&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> POWER <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>; <span style="color:#75715e">//constant variables (use CAPS for consts)
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">int //10
+double //5.75
+bool //true-false
+char //single character/letter/number/ascii
+std::string // &quot;the default string&quot;
+
+const int POWER = 100; //constant variables (use CAPS for consts)
+</code></pre>
+<hr>
 <h1 id="switch-statement">Switch Statement</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">switch</span>(state){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//state hello
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;Goodbye&#34;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//state goodbye
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">break</span>;
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">switch(state){
+    default:
+    case &quot;Hello&quot;:
+        //state hello
+    break;
+    case &quot;Goodbye&quot;:
+        //state goodbye
+    break;
+
+</code></pre>
+<hr>
 <h1 id="loops">Loops</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//for
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//while
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>) {
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//do while
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span> {
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">break</span>; <span style="color:#75715e">//breaks loop
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">continue</span>; <span style="color:#75715e">//continues loop
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//for
+for (int i = 0; i &lt; 5; i++) {
+    cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+}
+
+//while
+int i = 0;
+while (i &lt; 5) {
+    cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+    i++;
+}
+
+//do while
+int i = 0;
+do {
+    cout &lt;&lt; i &lt;&lt; &quot;\n&quot;;
+    i++;
+}
+while (i &lt; 5);
+
+break; //breaks loop
+continue; //continues loop
+</code></pre>
+<hr>
 <h1 id="arrays">Arrays</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//define an array
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>string cars[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;Volvo&#34;</span>, <span style="color:#e6db74">&#34;BMW&#34;</span>, <span style="color:#e6db74">&#34;Ford&#34;</span>, <span style="color:#e6db74">&#34;Mazda&#34;</span> };
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> cars[<span style="color:#ae81ff">0</span>]; <span style="color:#75715e">//prints Volvo
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//get size of an array
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> arraySize <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(cars)<span style="color:#f92672">/</span><span style="color:#66d9ef">sizeof</span>(cars[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//2d array
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>string[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;D&#34;</span> },
-</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;E&#34;</span>, <span style="color:#e6db74">&#34;F&#34;</span>, <span style="color:#e6db74">&#34;G&#34;</span>, <span style="color:#e6db74">&#34;H&#34;</span> }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//define an array
+std::string cars[4] = { &quot;Volvo&quot;, &quot;BMW&quot;, &quot;Ford&quot;, &quot;Mazda&quot; };
+std::cout &lt;&lt; cars[0]; //prints Volvo
+
+//get size of an array
+int arraySize = sizeof(cars)/sizeof(cars[0]
+
+//2d array
+std::string[2][4] = {
+    { &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot; },
+    { &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot; }
+};
+</code></pre>
+<hr>
 <h1 id="structs">Structs</h1>
 <p>Similar to an object, these can be used when oop is not needed for a simple data object.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//define the structure
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Player</span> {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string name;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> hp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> level;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//create instance of struct and define its values
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Player player;
-</span></span><span style="display:flex;"><span>player.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Skye&#34;</span>;
-</span></span><span style="display:flex;"><span>player.hp <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
-</span></span><span style="display:flex;"><span>player.level <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//define the structure
+struct Player {
+    std::string name;
+    int hp;
+    int level;
+};
+
+//create instance of struct and define its values
+Player player;
+player.name = &quot;Skye&quot;;
+player.hp = 100;
+player.level = 5;
+</code></pre>
+<hr>
 <h1 id="casting-struct-to-a-function">Casting Struct to a Function</h1>
 <p>If you are trying to modify the original values of the struct you passed into the function, you must also use the address-of operator &amp;.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//define struct
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Car</span> {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string model;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> year;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string color;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printCar</span>(Car <span style="color:#f92672">&amp;</span>car); <span style="color:#75715e">//declare function
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//main duh
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create objects of the struct
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Car car1;
-</span></span><span style="display:flex;"><span>    Car car2;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define car1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    car1.model <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Honda&#34;</span>;
-</span></span><span style="display:flex;"><span>    car1.year <span style="color:#f92672">=</span> <span style="color:#ae81ff">1997</span>;
-</span></span><span style="display:flex;"><span>    car1.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define car2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    car2.model <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Nissan&#34;</span>;
-</span></span><span style="display:flex;"><span>    car2.year <span style="color:#f92672">=</span> <span style="color:#ae81ff">2002</span>;
-</span></span><span style="display:flex;"><span>    car2.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    printCar(car1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//define print car function
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printCar</span>(Car <span style="color:#f92672">&amp;</span>car){
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> car.model;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> car.year;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> car.color;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//define struct
+struct Car {
+    std::string model;
+    int year;
+    std::string color;
+};
+
+void printCar(Car &amp;car); //declare function
+
+//main duh
+int main(){
+    //create objects of the struct
+    Car car1;
+    Car car2;
+
+    //define car1
+    car1.model = &quot;Honda&quot;;
+    car1.year = 1997;
+    car1.color = &quot;white&quot;;
+
+    //define car2
+    car2.model = &quot;Nissan&quot;;
+    car2.year = 2002;
+    car2.color = &quot;black&quot;;
+
+    printCar(car1);
+
+    return 0;
+}
+
+//define print car function
+void printCar(Car &amp;car){
+    std::cout &lt;&lt; car.model;
+    std::cout &lt;&lt; car.year;
+    std::cout &lt;&lt; car.color;
+}
+</code></pre>
+<hr>
 <h1 id="enums">Enums</h1>
 <p>Enumerations are lists of data you can use to save memory space, and organize data with names.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//define the enum
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Level</span> {
-</span></span><span style="display:flex;"><span>    LOW,    <span style="color:#75715e">//0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MEDIUM, <span style="color:#75715e">//1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    HIGH    <span style="color:#75715e">//2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}; 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//set a variable to the enum value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Level</span> myLevel <span style="color:#f92672">=</span> MEDIUM;
-</span></span></code></pre></div><h1 id="pointers">Pointers</h1>
+<pre><code class="language-cpp">//define the enum
+enum Level {
+    LOW,    //0
+    MEDIUM, //1
+    HIGH    //2
+}; 
+
+//set a variable to the enum value
+enum Level myLevel = MEDIUM;
+</code></pre>
+<h1 id="pointers">Pointers</h1>
 <p>A pointer is a variable that stores the MEMORY ADDRESS of another variable. This allows you to directly manipulate memory and work with data directly.</p>
 <p>Analogy: Instead of going door-to-door with 20 free pizzas, its easier to just tell people where the free pizza is.</p>
 <p>Pointers are often used in game dev when working with memory, large objects or interacting with graphics API&rsquo;s.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Skye&#34;</span>;
-</span></span><span style="display:flex;"><span>std:string <span style="color:#f92672">*</span>pName <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>name; <span style="color:#75715e">//create a pointer, with a reference to the name variable
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> pName; <span style="color:#75715e">//prints 0xff99eeb90
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>pName; <span style="color:#75715e">//prints Skye
-</span></span></span></code></pre></div><h2 id="when-to-use-a-pointer">When to use a pointer?</h2>
+<pre><code class="language-cpp">std::string name = &quot;Skye&quot;;
+std:string *pName = &amp;name; //create a pointer, with a reference to the name variable
+
+std::cout &lt;&lt; pName; //prints 0xff99eeb90
+std::cout &lt;&lt; *pName; //prints Skye
+</code></pre>
+<h2 id="when-to-use-a-pointer">When to use a pointer?</h2>
 <p>When you need to allocate memory dynamically.
 Example: Creating objects, or arrays whose sizes are determined at runtime.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Enemy<span style="color:#f92672">*</span> enemies <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Enemy[<span style="color:#ae81ff">10</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span>[] enemies <span style="color:#75715e">//make sure to free up memory
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">Enemy* enemies = new Enemy[10];
+delete[] enemies //make sure to free up memory
+</code></pre>
+<hr>
 <h1 id="dynamic-memory">Dynamic Memory</h1>
 <p>Memory that is allocated after the program is already compiled and running.
 Use the &rsquo;new&rsquo; operator to allocate memory in the heap rather than the stack.</p>
 <p>useful when we don&rsquo;t know how much memory we will need. Makes our programs much more flexible especially when accepting user input.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pNum <span style="color:#f92672">=</span> NULL;
-</span></span><span style="display:flex;"><span>pNum <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>pNum <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> pNum; <span style="color:#75715e">//prints 0xff99cc
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>pNum; <span style="color:#75715e">//print 21
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//make sure to use the delete operator if using the new operator
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">delete</span> pNum;
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">int *pNum = NULL;
+pNum = new int;
+
+*pNum = 21;
+std::cout &lt;&lt; pNum; //prints 0xff99cc
+std::cout &lt;&lt; *pNum; //print 21
+
+//make sure to use the delete operator if using the new operator
+delete pNum;
+</code></pre>
+<hr>
 <h1 id="pointers-with-arrays">Pointers with Arrays</h1>
 <p>When working with pointers and arrays, its good to be cognitive that using the address-of operator on an array will return its memory address!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string freePizzas[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;2&#34;</span>,<span style="color:#e6db74">&#34;3&#34;</span>,<span style="color:#e6db74">&#34;4&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span> };
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string <span style="color:#f92672">*</span>pFreePizzas <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>freePizzas;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//The above code will throw an error because freePizzas is already pointing to a memory address!
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> freePizzas; <span style="color:#75715e">//prints 0xff99c88c
-</span></span></span></code></pre></div><p>So you can just pass the array to pointer, with the address-of operator.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string <span style="color:#f92672">*</span>pFreePizzas <span style="color:#f92672">=</span> freePizzas;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> pFreePizzas; <span style="color:#75715e">//prints 0xff99cc
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>pFreePizzas; <span style="color:#75715e">//prints 1 (the first element in the array)
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">std::string freePizzas[5] = { &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot; };
+std::string *pFreePizzas = &amp;freePizzas;
+
+//The above code will throw an error because freePizzas is already pointing to a memory address!
+std::cout &lt;&lt; freePizzas; //prints 0xff99c88c
+</code></pre>
+<p>So you can just pass the array to pointer, with the address-of operator.</p>
+<pre><code class="language-cpp">std::string *pFreePizzas = freePizzas;
+
+std::cout &lt;&lt; pFreePizzas; //prints 0xff99cc
+std::cout &lt;&lt; *pFreePizzas; //prints 1 (the first element in the array)
+</code></pre>
+<hr>
 <h1 id="null-pointers">Null Pointers</h1>
 <p>A special value that means something has no value.
 When a pointer is holding a null value that pointer is not pointing at anything (null pointer).
 Null pointers are helpful when determining if an address was successfully assigned to a pointer.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">nullptr</span> <span style="color:#75715e">//keyword that represents a null pointer literal
-</span></span></span></code></pre></div><p>Lets show some example of null pointers below. You usually use these when defining pointer addresses that don&rsquo;t yet have data to be stored in it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pointer <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; <span style="color:#75715e">//init a memory address, that doesnt yet have data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> x  <span style="color:#ae81ff">123</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>pointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>x;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//validate pointer assignment
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(pointer <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>){
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Address was NOT assigned!&#34;</span>;
-</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Address was assigned&#34;</span>;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>pointer; <span style="color:#75715e">//prints 123
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">nullptr //keyword that represents a null pointer literal
+</code></pre>
+<p>Lets show some example of null pointers below. You usually use these when defining pointer addresses that don&rsquo;t yet have data to be stored in it.</p>
+<pre><code class="language-cpp">int *pointer = nullptr; //init a memory address, that doesnt yet have data
+int x  123;
+
+*pointer = &amp;x;
+
+//validate pointer assignment
+if(pointer == nullptr){
+    std::cout &lt;&lt; &quot;Address was NOT assigned!&quot;;
+} else {
+    std::cout &lt;&lt; &quot;Address was assigned&quot;;
+    std::cout &lt;&lt; *pointer; //prints 123
+}
+</code></pre>
+<hr>
 <h1 id="references">References</h1>
 <p>A reference is an alias to another variable, meaning it refers to an existing variable.</p>
 <p>Once a reference is initialized to a variable, it cannot be changed to another variable.
 References are generally easier and safer to use than pointers because they are guaranteed to point to valid data (not null).
 References will also automatically update themselves whenever the variable they are referencing changes.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> ref <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> ref; <span style="color:#75715e">//prints 10
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ref <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> x; <span style="color:#75715e">//prints 20
-</span></span></span></code></pre></div><h3 id="when-to-use-a-reference-to-a-variable">When to use a reference to a variable?</h3>
+<pre><code class="language-cpp">int x = 10;
+int&amp; ref = x;
+
+std::cout &lt;&lt; ref; //prints 10
+ref = 20;
+std::cout &lt;&lt; x; //prints 20
+</code></pre>
+<h3 id="when-to-use-a-reference-to-a-variable">When to use a reference to a variable?</h3>
 <p>Example: when passing objects like Player or Enemy to a function that will manipulate them, it&rsquo;s often better to use references because the object is already created and guaranteed to exist.
 References make it more readable and don&rsquo;t require pointer syntax (-&gt;)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updatePosition</span>(Player<span style="color:#f92672">&amp;</span> player) {
-</span></span><span style="display:flex;"><span>    player.x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">void updatePosition(Player&amp; player) {
+    player.x += 10;
+}
+</code></pre>
+<hr>
 <h1 id="passing-by-value-vs-reference">Passing by Value vs Reference</h1>
 <p>Next we have to discuss passing by reference when creating functions. Check out the following code which initializes some variables and prints their data</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Kool-Aid&#34;</span>;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Water&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> x; <span style="color:#75715e">//print Kool-Aid
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> y; <span style="color:#75715e">//print Water
-</span></span></span></code></pre></div><p>All seems normal correct? It is printing the variables, now lets try making a function that requires x and y.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(std<span style="color:#f92672">::</span>string x, std<span style="color:#f92672">::</span>string y){
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string temp;
-</span></span><span style="display:flex;"><span>    temp <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> temp;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Okay cool, all is still well now lets try invoking this function and see what happens :)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>swap(x,y);
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> x; <span style="color:#75715e">//still prints Kool-Aid
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> y; <span style="color:#75715e">//still prints Water
-</span></span></span></code></pre></div><p>So what happened, is when you passed x and y into the swap function, it merely made copies of those variables and it didn&rsquo;t actually modify the original variables at all. This is a quirk of c++ you will have to get used to.</p>
+<pre><code class="language-cpp">std::string x = &quot;Kool-Aid&quot;;
+std::string y = &quot;Water&quot;;
+
+std::cout &lt;&lt; x; //print Kool-Aid
+std::cout &lt;&lt; y; //print Water
+</code></pre>
+<p>All seems normal correct? It is printing the variables, now lets try making a function that requires x and y.</p>
+<pre><code class="language-cpp">void swap(std::string x, std::string y){
+    std::string temp;
+    temp = x;
+    x = x;
+    y = temp;
+}
+</code></pre>
+<p>Okay cool, all is still well now lets try invoking this function and see what happens :)</p>
+<pre><code class="language-cpp">swap(x,y);
+std::cout &lt;&lt; x; //still prints Kool-Aid
+std::cout &lt;&lt; y; //still prints Water
+</code></pre>
+<p>So what happened, is when you passed x and y into the swap function, it merely made copies of those variables and it didn&rsquo;t actually modify the original variables at all. This is a quirk of c++ you will have to get used to.</p>
 <p>If you need to change the original values, you need to pass the variables by reference.</p>
 <p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>x, std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>y){
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string temp;
-</span></span><span style="display:flex;"><span>    temp <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> y;
-</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> temp;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now when we will call swap with x and y, it will update the original variables values and not the copies.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>swap(x,y);
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> x; <span style="color:#75715e">//prints Water
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> y; <span style="color:#75715e">//prints Kool-Aids
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">void swap(std::string &amp;x, std::string &amp;y){
+    std::string temp;
+    temp = x;
+    x = y;
+    y = temp;
+}
+</code></pre>
+<p>Now when we will call swap with x and y, it will update the original variables values and not the copies.</p>
+<pre><code class="language-cpp">swap(x,y);
+std::cout &lt;&lt; x; //prints Water
+std::cout &lt;&lt; y; //prints Kool-Aids
+</code></pre>
+<hr>
 <h1 id="memory-address">Memory Address</h1>
 <p>A location in memory where data is stored.
 Memory addresses can be accessed with &amp; (address-of operator).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Skye&#34;</span>;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>name; <span style="color:#75715e">//prints 0xfcbbff9e0
-</span></span></span></code></pre></div><hr>
+<pre><code class="language-cpp">std::string name = &quot;Skye&quot;;
+std::cout &lt;&lt; &amp;name; //prints 0xfcbbff9e0
+</code></pre>
+<hr>
 <h1 id="function-templates">Function Templates</h1>
 <p>Describes what the function is.
 Can be used to generate many overloaded functions, each using different data types.</p>
 <p>For example, say you have a max function that has 3 overloaded versions to accept different types.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">max</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&gt;</span> y) <span style="color:#f92672">?</span> x : y ;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">max</span>(<span style="color:#66d9ef">double</span> x, <span style="color:#66d9ef">double</span> y){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&gt;</span> y) <span style="color:#f92672">?</span> x : y ;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>string max(std<span style="color:#f92672">::</span>string x, std<span style="color:#f92672">::</span>string y){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&gt;</span> y) <span style="color:#f92672">?</span> x : y;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>So we have 3 functions, and they all have the exact same functionality, the only difference is the typing, so in an instance such as this you can define and use the T operator, which will allow you to pass any type to the function!</p>
+<pre><code class="language-cpp">int max(int x, int y){
+    return (x &gt; y) ? x : y ;
+}
+
+double max(double x, double y){
+    return (x &gt; y) ? x : y ;
+}
+
+std::string max(std::string x, std::string y){
+    return (x &gt; y) ? x : y;
+}
+</code></pre>
+<p>So we have 3 functions, and they all have the exact same functionality, the only difference is the typing, so in an instance such as this you can define and use the T operator, which will allow you to pass any type to the function!</p>
 <p>Imagine T represents &ldquo;thing&rdquo; because we aren&rsquo;t really sure what the data type is!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> max(T x, U y){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&gt;</span> y) <span style="color:#f92672">?</span> x : y ;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">template &lt;typename T, typename U&gt;
+auto max(T x, U y){
+    return (x &gt; y) ? x : y ;
+}
+</code></pre>
+<hr>
 <h1 id="objects--classes">Objects &amp; Classes</h1>
 <p>A collection of attributes, methods, and variables.
 Examples are: Car, Player, Enemy, Phone, etc.
 created from a class which is the objects &ldquo;blueprint&rdquo;.</p>
 <p>First lets define a class!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//define the class variables
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>string name;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> level;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> highscore;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//define the class methods/functions
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">attack</span>(){ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Attack&#34;</span>; }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span>(){ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Walking&#34;</span>; }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//create new object of player class
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Player player1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//set the newly created objects data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    player1.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Skye&#34;</span>;
-</span></span><span style="display:flex;"><span>    player1.level <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    player1.highscore <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//optionally call the classes methods
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    player1.attack(); <span style="color:#75715e">//prints Attack
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    player1.move(); <span style="color:#75715e">//prints Walking
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+class Player{
+    public:
+        //define the class variables
+        std::string name;
+        int level;
+        int highscore;
+        
+        //define the class methods/functions
+        void attack(){ std::cout &lt;&lt; &quot;Attack&quot;; }
+        void move(){ std::cout &lt;&lt; &quot;Walking&quot;; }
+}
+
+int main(){
+
+    //create new object of player class
+    Player player1;
+
+    //set the newly created objects data
+    player1.name = &quot;Skye&quot;;
+    player1.level = 1;
+    player1.highscore = 0;
+
+    //optionally call the classes methods
+    player1.attack(); //prints Attack
+    player1.move(); //prints Walking
+
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="class-constructors">Class Constructors</h1>
 <p>Here&rsquo;s how to make a constructor for a class.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//define the new class, with its constructor
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define public variables
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string name;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> age;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> gpa;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//define the constructor with the same name as the class/object
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Student(std<span style="color:#f92672">::</span>string name, <span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">double</span> gpa){
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>name <span style="color:#f92672">=</span> name;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>age <span style="color:#f92672">=</span> age;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>gpa <span style="color:#f92672">=</span> gpa;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//Example of instantiating the object with the constructor
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    Student student1(<span style="color:#e6db74">&#34;Spongebob&#34;</span>, <span style="color:#ae81ff">27</span>, <span style="color:#ae81ff">3.2</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//the following console prints
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> student1.name; <span style="color:#75715e">//Spongebob
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> student1.age;  <span style="color:#75715e">//27
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> student1.gpa;  <span style="color:#75715e">//3.2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//define the new class, with its constructor
+class Student {
+    //define public variables
+    public:
+        std::string name;
+        int age;
+        double gpa;
+
+    //define the constructor with the same name as the class/object
+    Student(std::string name, int age, double gpa){
+        this-&gt;name = name;
+        this-&gt;age = age;
+        this-&gt;gpa = gpa;
+    }
+};
+
+//Example of instantiating the object with the constructor
+int main() {
+    Student student1(&quot;Spongebob&quot;, 27, 3.2);
+    
+    //the following console prints
+    std::cout &lt;&lt; student1.name; //Spongebob
+    std::cout &lt;&lt; student1.age;  //27
+    std::cout &lt;&lt; student1.gpa;  //3.2
+
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="overloaded-constructors">Overloaded Constructors</h1>
 <p>These are good for when you have items that have multiple possible constructors to choose from.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IceCream</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string flavour1;
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string flavour2;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Constructor #0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IceCream() { }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Constructor #1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IceCream(std<span style="color:#f92672">::</span>string flavour1){
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>flavour1 <span style="color:#f92672">=</span> flavour1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Constructor #2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IceCream(std<span style="color:#f92672">::</span>string flavour1, std<span style="color:#f92672">::</span>string flavour2){
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>flavour1 <span style="color:#f92672">=</span> flavour1;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>flavour2 <span style="color:#f92672">=</span> flavour2;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    IceCream icecream1(<span style="color:#e6db74">&#34;vanilla&#34;</span>); <span style="color:#75715e">//chooses constructor #1 automagically
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IceCream icecream2(<span style="color:#e6db74">&#34;vanilla&#34;</span>, <span style="color:#e6db74">&#34;tiger&#34;</span>); <span style="color:#75715e">//chooses constructor #2 automagically
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IceCream icecream3; <span style="color:#75715e">//chooses constructor #0 automagically
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">class IceCream {
+    public:
+        std::string flavour1;
+        std::string flavour2;
+    
+    //Constructor #0
+    IceCream() { }
+
+    //Constructor #1
+    IceCream(std::string flavour1){
+        this-&gt;flavour1 = flavour1;
+    }
+    
+    //Constructor #2
+    IceCream(std::string flavour1, std::string flavour2){
+        this-&gt;flavour1 = flavour1;
+        this-&gt;flavour2 = flavour2;
+    }
+}
+
+int main(){
+    
+    IceCream icecream1(&quot;vanilla&quot;); //chooses constructor #1 automagically
+    IceCream icecream2(&quot;vanilla&quot;, &quot;tiger&quot;); //chooses constructor #2 automagically
+    IceCream icecream3; //chooses constructor #0 automagically
+    
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="abstraction--getterssetters">Abstraction &amp; Getters/Setters</h1>
 <p>Imagine, you are coding a Stove, and someone hacks into it and changes all the public variables we declared up there, and sets the furnace to 100000 degrees to destroy everything. 🔥</p>
 <p>That would suck.</p>
 <p>So we should use private variables and use getters and setters for better protection over our variables.
 And then use getters and setters that will allow these variables to be read / modified.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e"> </span><span style="color:#75715e">//for std::max
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Stove</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">210</span>; <span style="color:#75715e">//in celcius
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        Stove(){} <span style="color:#75715e">//Empty constructor for no default temp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//create constructor that sets the private variable by default
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Stove(<span style="color:#66d9ef">int</span> temp){
-</span></span><span style="display:flex;"><span>            setTemp(temp);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//getter
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getTemp</span>(){ <span style="color:#66d9ef">return</span> temp; }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//setter
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTemp</span>(<span style="color:#66d9ef">int</span> temp){
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//validate the temp isnt being set too high
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> newTemp <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>max(<span style="color:#ae81ff">300</span>,temp);
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//validate the temp isnt being set in the negatives
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (newTemp <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) newTemp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//update the temperature with the safely handled data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>temp <span style="color:#f92672">=</span> newTemp;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    Stove stove; <span style="color:#75715e">//create an object of the Stove class
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    stove.temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000</span>; <span style="color:#75715e">//throws error because we cant modify private variables directly
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> stove.getTemp(); <span style="color:#75715e">//prints 210
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    stove.setTemp(<span style="color:#ae81ff">99999999</span>); <span style="color:#75715e">//try to set the temperature too high and destroy everything
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> stove.getTemp(); <span style="color:#75715e">// prints 300 because we safely handled this a private variable
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    Stove stove2(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> stove2.getTemp(); <span style="color:#75715e">//prints 10 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt; //for std::max
+
+class Stove {
+    private:
+        int temp = 210; //in celcius
+
+    public:
+        Stove(){} //Empty constructor for no default temp
+
+        //create constructor that sets the private variable by default
+        Stove(int temp){
+            setTemp(temp);
+        }
+
+        //getter
+        int getTemp(){ return temp; }
+
+        //setter
+        void setTemp(int temp){
+            //validate the temp isnt being set too high
+            int newTemp = std::max(300,temp);
+            
+            //validate the temp isnt being set in the negatives
+            if (newTemp &lt; 0) newTemp = 0;
+
+            //update the temperature with the safely handled data
+            this-&gt;temp = newTemp;
+        }
+};
+
+int main(){
+    Stove stove; //create an object of the Stove class
+    stove.temp = 1000000; //throws error because we cant modify private variables directly
+    std::cout &lt;&lt; stove.getTemp(); //prints 210
+    stove.setTemp(99999999); //try to set the temperature too high and destroy everything
+    std::cout &lt;&lt; stove.getTemp(); // prints 300 because we safely handled this a private variable
+
+    Stove stove2(10);
+    std::cout &lt;&lt; stove2.getTemp(); //prints 10 
+
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="inheritence">Inheritence</h1>
 <p>A class inherit the attributes and methods of another class. Classes can be children of parent classes.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//create parent class
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>string name;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> age;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> alive <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span>(){
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;nom nom&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//create child class that inherits the parent class, and add or override attributes/methods
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Animal {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bark</span>(){
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;woof woof&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    Dog dog1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    dog1.eat(); <span style="color:#75715e">// nom nom
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    dog1.bark(); <span style="color:#75715e">// woof woof
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">//create parent class
+class Animal {
+    public:
+        std::string name;
+        int age;
+        bool alive = true;
+
+    void eat(){
+        std::cout &lt;&lt; &quot;nom nom&quot;;
+    }
+};
+
+//create child class that inherits the parent class, and add or override attributes/methods
+class Dog : public Animal {
+    void bark(){
+        std::cout &lt;&lt; &quot;woof woof&quot;;
+    }
+};
+
+int main(){
+    Dog dog1;
+
+    dog1.eat(); // nom nom
+    dog1.bark(); // woof woof
+    
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="headers">Headers</h1>
 <p>Classes, like shown above can get a little messy so for better organization of concerns we should instead use headers with our classes.
 Let&rsquo;s use the above Animal class, and make a Header file for it.</p>
@@ -672,97 +712,103 @@ Let&rsquo;s use the above Animal class, and make a Header file for it.</p>
 and animal.cpp for the class aka the implementation file.</p>
 <p>Use #include &ldquo;name&rdquo; with quotes instead of brackets for self declared header include statements!</p>
 <h3 id="header-file-the-skeleton-of-the-class">Header File (The skeleton of the class)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// animal.h 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        Animal(std<span style="color:#f92672">::</span>string name, <span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">bool</span> alive);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string mName;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mAge:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> mAlive;
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h3 id="class-file-the-implementation-file">Class File (The implementation file)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// animal.cpp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;animal.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>Animal<span style="color:#f92672">::</span>Animal(std<span style="color:#f92672">::</span>string name, <span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">bool</span> alive) {
-</span></span><span style="display:flex;"><span>    mName <span style="color:#f92672">=</span> name;
-</span></span><span style="display:flex;"><span>    mAge <span style="color:#f92672">=</span> age;
-</span></span><span style="display:flex;"><span>    mAlive <span style="color:#f92672">=</span> alive;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Animal<span style="color:#f92672">::</span>eat(){
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;nom nom&#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="main-file">Main File</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// main.cpp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;animal.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    Animal animal1{<span style="color:#e6db74">&#34;Dog&#34;</span>, <span style="color:#ae81ff">4</span>, true};
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    animal1.eat(); <span style="color:#75715e">// nom nom
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
+<pre><code class="language-cpp">// animal.h 
+#pragma once
+
+class Animal {
+    public:
+        Animal(std::string name, int age, bool alive);
+    void eat();
+
+    std::string mName;
+    int mAge:
+    bool mAlive;
+};
+</code></pre>
+<h3 id="class-file-the-implementation-file">Class File (The implementation file)</h3>
+<pre><code class="language-cpp">// animal.cpp
+#include &quot;animal.h&quot;
+
+Animal::Animal(std::string name, int age, bool alive) {
+    mName = name;
+    mAge = age;
+    mAlive = alive;
+}
+
+void Animal::eat(){
+    std::cout &lt;&lt; &quot;nom nom&quot;;
+}
+</code></pre>
+<h3 id="main-file">Main File</h3>
+<pre><code class="language-cpp">// main.cpp
+#include &quot;animal.h&quot;
+
+int main(){
+    Animal animal1{&quot;Dog&quot;, 4, true};
+    
+    animal1.eat(); // nom nom
+
+    return 0;
+}
+</code></pre>
+<hr>
 <h1 id="make-a-class-console-printable">Make a Class Console Printable</h1>
 <h3 id="similar-to-overriding-the-tostring-method-in-c">(Similar to overriding the toString method in c#)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// rectangle.h
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//define class skeleton
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        Rectangle(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getWidth</span>() <span style="color:#66d9ef">const</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHeight</span>() <span style="color:#66d9ef">const</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mWidth;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mHeight;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//set output stream, and use ref to rect
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(std<span style="color:#f92672">::</span>ostream<span style="color:#f92672">&amp;</span> os, <span style="color:#66d9ef">const</span> Rectangle<span style="color:#f92672">&amp;</span> rect);
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// rectangle.cpp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rectangle.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//define the constructor
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Rectangle<span style="color:#f92672">::</span>Rectangle(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height){
-</span></span><span style="display:flex;"><span>    mWidth <span style="color:#f92672">=</span> width;
-</span></span><span style="display:flex;"><span>    mHeight <span style="color:#f92672">=</span> height;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//get width
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Rectangle<span style="color:#f92672">::</span>getWidth(){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mWidth;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//get height
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Rectangle<span style="color:#f92672">::</span>getHeight(){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mHeight;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//class to console method
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(std<span style="color:#f92672">::</span>ostream<span style="color:#f92672">&amp;</span> os, <span style="color:#66d9ef">const</span> Rectangle<span style="color:#f92672">&amp;</span> rect) {
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span>  os <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Rect(w: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> rect.getWidth() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, h: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> rect.getHeight() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;)&#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// main.cpp
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rectangle.h&#34;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Rectangle rect{<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">100</span>};
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> rect; <span style="color:#75715e">// will succesfully print itself in the console :)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<pre><code class="language-cpp">// rectangle.h
+#pragma once
+#include &lt;iostream&gt;
+
+//define class skeleton
+class Rectangle {
+    public:
+        Rectangle(int width, int height);
+        int getWidth() const;
+        int getHeight() const;
+    private:
+        int mWidth;
+        int mHeight;
+};
+//set output stream, and use ref to rect
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Rectangle&amp; rect);
+</code></pre>
+<pre><code class="language-cpp">// rectangle.cpp
+#include &quot;rectangle.h&quot;
+
+//define the constructor
+Rectangle::Rectangle(int width, int height){
+    mWidth = width;
+    mHeight = height;
+}
+
+//get width
+Rectangle::getWidth(){
+    return mWidth;
+}
+
+//get height
+Rectangle::getHeight(){
+    return mHeight;
+}
+
+//class to console method
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Rectangle&amp; rect) {
+   return  os &lt;&lt; &quot;Rect(w: &quot; &lt;&lt; rect.getWidth() &lt;&lt; &quot;, h: &quot; &lt;&lt; rect.getHeight() &lt;&lt; &quot;)&quot;;
+}
+</code></pre>
+<pre><code class="language-cpp">// main.cpp
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &quot;rectangle.h&quot;
+
+int main(){
+
+    Rectangle rect{100,100};
+    std::cout &lt;&lt; rect; // will succesfully print itself in the console :)
+
+    return 0;
+}
+</code></pre>
+
 
 </div>
 

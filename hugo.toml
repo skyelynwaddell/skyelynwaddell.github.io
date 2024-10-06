@@ -12,3 +12,15 @@ paginate = 10
 [taxonomies]
     category = "categories"
     author = "authors"
+
+
+[markup]
+  [markup.highlight]
+    noClasses = false  # Set to false to use classes
+    guessSyntax = true
+    codeFences = false  # Disable Hugo’s automatic syntax highlighting
+    hl_Lines = ""       # Remove any highlighting lines
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = false
+    tabWidth = 4
