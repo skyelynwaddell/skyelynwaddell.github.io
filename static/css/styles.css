@@ -6,6 +6,7 @@ body,html{
     padding:0;
     background-color: hsl(216, 28%, 7%);
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .inner-row{
@@ -123,6 +124,7 @@ body,html{
     width: 100%;
     z-index: 10;
     left:0;
+    margin:0;
 }
 
 .br{

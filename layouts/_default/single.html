@@ -5,39 +5,38 @@
 <div class="md">
 
     <div class="single-header">
-    {{/*  Post Image   */}}
-    <img class="single-image" src={{ .Params.image }} alt="image">
+        {{/*  Post Image   */}}
+        <img class="single-image" src={{ .Params.image }} alt="image">
 
-    <div class="single-details">
-    {{/*  Post Title  */}}
-    <h1>{{ .Params.title }}</h1>
+        <div class="single-details">
+            {{/*  Post Title  */}}
+            <h1>{{ .Params.title }}</h1>
 
-    {{/*  Date & Description  */}}
-    <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time>
-    <h3>{{ .Params.description }}</h3>
-
-
-    {{/*  User avatar  */}}
-    {{/*  <img src={{ .Params.avatar }} alt="avatar">  */}}
-
-    {{/*  Authors  */}}
-    <div class="single-stats">
-    <img src="/svg/people-fill.svg" alt=""> 
-    {{ range (.GetTerms "authors") }}
-    <a href={{ .Permalink }}>{{ .Name }}</a>
-    {{ end }}
-    </div>
+            {{/*  Date & Description  */}}
+            <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+            <h3>{{ .Params.description }}</h3>
 
 
-    {{/*  Categories  */}}
-    <div class="single-stats">
-    <img src="/svg/tags-fill.svg" alt=""> 
-    {{ range (.GetTerms "categories") }}
-    <a href={{ .Permalink }}>{{ .Name }}</a>
-    {{ end }}
-    </div>
+            {{/*  User avatar  */}}
+            {{/*  <img src={{ .Params.avatar }} alt="avatar">  */}}
 
-    </div>
+            {{/*  Authors  */}}
+            <div class="single-stats">
+            <img src="/svg/people-fill.svg" alt=""> 
+            {{ range (.GetTerms "authors") }}
+            <a href={{ .Permalink }}>{{ .Name }}</a>
+            {{ end }}
+        </div>
+
+
+        {{/*  Categories  */}}
+        <div class="single-stats">
+            <img src="/svg/tags-fill.svg" alt=""> 
+            {{ range (.GetTerms "categories") }}
+            <a href={{ .Permalink }}>{{ .Name }}</a>
+            {{ end }}
+        </div>
+
     </div>
 
 
