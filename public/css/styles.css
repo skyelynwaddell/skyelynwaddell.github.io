@@ -153,6 +153,8 @@ pre{
 
 .single-header{
     display: flex;
+    flex-direction: column;
+    margin-right:10px;
 }
 
 .single-tags{
@@ -169,7 +171,6 @@ pre{
 }
 
 .single-details{
-    margin-left: 20px;
     display: flex;
     flex-direction: column;
     margin-bottom:10px;
