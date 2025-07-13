@@ -4,7 +4,8 @@ title = 'Skyesblog'
 
 publishDir = "public"  # Make sure this line is present
 
-paginate = 10
+[pagination] 
+  pagerSize = 10
 
 [params]
     dateFormat = "Jan 2, 2006"

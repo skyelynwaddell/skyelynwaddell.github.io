@@ -1,0 +1,1005 @@
+<script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+        <nav class="navbar bg-body-tertiary nav-top" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/svg/cloud-fog2-fill.svg" alt="Logo" width="30" height="24" class="d-inline-block mainicon align-text-top">
+        Skyesblog
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/authors/skye-waddell/">Blog</a>
+          <a class="nav-link" href="/categories">Categories</a>
+          <a class="nav-link" href="/authors">Authors</a>
+          <a class="nav-link disabled" aria-disabled="true">&copy; Skyesblog 2025</a>
+        </div>
+    </div>
+  </nav>
+
+        <div class="br"></div>
+
+        <div class="main-row">
+            <div class="sidebar">
+ <a href="/">
+    <img class="sidebar-pic" src="https://avatars.githubusercontent.com/u/105599773?v=4" alt="ad">
+    </a>
+    <h2>Skye Waddell</h2>
+    <h5>Fullstack Developer & Creative Artist</h5>
+    <h6 class="text-muted">@skyelynwaddell • they/them</h6>
+
+    <div class="sidebar-items">
+    <a class="btn btn-outline-primary" href="https://github.com/skyelynwaddell"> <img src="/svg/github.svg" class="icon"> Github</a>
+    <a class="btn btn-outline-primary" href="https://www.linkedin.com/in/skyelynwaddell/"> <img src="/svg/linkedin.svg" class="icon"> LinkedIn</a>
+    <div class="explore">
+        <a class="btn btn-outline-primary" href="/">Home</a>
+        <a class="btn btn-outline-primary" href="/authors/skye-waddell/">Blog</a>
+        <a class="btn btn-outline-primary" href="/categories">Categories</a>
+        <a class="btn btn-outline-primary" href="/authors">Authors</a>
+    </div>
+
+</div>
+</div>
+            
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyesblog | 3D Game Development in C</title>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>    
+
+    
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+
+    <script src="/js/prism.js"></script>
+    <link rel="stylesheet" href="/css/prism.css">
+
+</head>
+
+<div class="md">
+
+    <div class="single-header">
+        
+        <img class="single-image" src=/images/c.png alt="image">
+
+        <div class="single-details">
+            
+            <h1>3D Game Development in C</h1>
+
+            
+            <time>Jul 12, 2025</time>
+            <h3>Journey through the creation of 3D game development, tackling a first person shooter engine built entirely in C. Covers topics such as rendering, map &amp; geometry projection, textures, collision detection, lighting &amp; shaders, occlusion culling and more.</h3>
+
+
+            
+            
+
+            
+            <div class="single-stats">
+            <img src="/svg/people-fill.svg" alt=""> 
+            
+            <a href=http://10.0.0.98:1313/authors/skye-waddell/>Skye Waddell</a>
+            
+        </div>
+
+
+        
+        <div class="single-stats">
+            <img src="/svg/tags-fill.svg" alt=""> 
+            
+            <a href=http://10.0.0.98:1313/categories/c/>c</a>
+            
+            <a href=http://10.0.0.98:1313/categories/fps/>fps</a>
+            
+            <a href=http://10.0.0.98:1313/categories/3d/>3d</a>
+            
+            <a href=http://10.0.0.98:1313/categories/raylib/>raylib</a>
+            
+            <a href=http://10.0.0.98:1313/categories/gamedev/>gamedev</a>
+            
+        </div>
+
+    </div>
+
+
+    
+    <h1 id="3d-game-development-in-c-">3D Game Development in C 🎮</h1>
+<p><em>THIS PAGE IS A WORK IN PROGRESS</em></p>
+<figure><img src="/images/image.png"
+    alt="FPS engine preview" width="100%">
+</figure>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#main-game-loop">Main Game Loop</a></li>
+<li><a href="#create-an-fgd-for-our-mapping-software">Create an FGD for our mapping software</a></li>
+<li><a href="#what-is-a-brush">What is a brush?</a></li>
+<li><a href="#setting-up-map--geometry-types">Setting up Map &amp; Geometry Types</a></li>
+<li><a href="#parse-brushes-from-a-map-file">Parse brushes from a .map file</a></li>
+<li><a href="#generate-map-geometry">Generate Map Geometry</a></li>
+<li>Create a Texture Manager &amp; Cache</li>
+<li>Project UV Textures onto map geometry</li>
+<li>3D Player Object</li>
+<li>First Person Camera</li>
+<li>3D collisions</li>
+<li>Parse entities from .map</li>
+<li>Lighting &amp; Shaders</li>
+<li>Occlusion Culling &amp; Optimizations</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>What this book does <code>NOT</code> cover:</p>
+<ul>
+<li>How to use C or a compiler (watch a youtube video)</li>
+<li>Tutorial for raylib graphics library (its pretty easy to setup)</li>
+<li>How to make maps with Trenchbroom</li>
+<li>How to build a graphics library from scratch (we arent reinventing the wheel here)</li>
+</ul>
+<pre><code class="language-c">NOTE
+// If I say create .c file, it means ALSO create a matching .h file
+// If I say create a .h file only, it means it DOESNT need a matching .c file
+</code></pre>
+<p>Since this book is written in C (which many languages have similar syntax to), it should be pretty straight forward to port this code to any programming langauge &mdash; Especially since Raylib has bindings for many languages as well.</p>
+<p>I am going to tell a story of my journey of developing, and learning 3D games&hellip;. It will tie in and all make sense to what I am going to explain and cover in this manual/book.</p>
+<p>I&rsquo;ve always loved games since I was a kid, and it has been my main passion and driving force for learning how to code initially. Games have always brought me joy and I have always been fascinated and completely astonished by the fact people got to create these things for a job.
+Video games have always been a safe get away and escape from reality, but for me the development of these was always so interesting. An unattainable goal of complex wizardy and math I once thought they were &ndash;</p>
+<p>One such achievement I had always set for myself was one day, I wanted to create my own 3d game without the use of an engine.
+After many years of practicing 2D and 3D game development across many engines, and frameworks I felt around a few months ago I might actually have a deep enough understanding of how the 3D game engines worked. A lot of this I can thank to Quake.</p>
+<p>Quake was a game released in 1996 which was a technical masterpiece at the time, with features and graphics that was unseen or heard of at that time.
+During my adventure of 3D game development I was using Godot. It is a fantastic engine, and if you are looking for a more high-level approach to building games I highly recommend it.
+However, during the development I was working on a FPS game since I have always played a lot of these and felt like I would have the most knowledge about this kind of game.
+Building maps out of the Godot nodes and geometry soon grew to be tiring and I felt there had to be a better way&hellip;
+This is when I found FuncGodot and Trenchbroom.</p>
+<p>Funcgodot is a map parsing tool that allows for you to make 3d maps in trenchbroom and then builds them in Godot for you, allowing for a much more easy and fun approach to developing levels.
+Trenchbroom is completely free and opensource and was originally developed for Quake maps, but since Quake is open source you can technically use the map files for any game or engine that can parse them.</p>
+<p>After using these tools for a while, and the learning the ins and outs of how Quake and its maps were built I really started to understand 3D games on a more fundamental level, and finally felt like I was ready to try and tackle creating a 3D game.</p>
+<p>Picking the language&hellip;
+Since Doom and Quake, some of my favorite FPS games ever were written in C, I figured that C would be the perfect language since it has created some amazing FPS games before that are very well optimized even by todays standard.</p>
+<p>The next thing of choice was to be how was I going to render the game, and I had created a few test projects.
+I knew that for rendering I wanted to go with OpenGL since it is my favorite, and will run on a potato even. This is important because I want my games to be able to be played on anything.</p>
+<p>I initially had a C project setup with SDL 2 and OpenGL with a completely bare project&hellip;
+At this time I started trying to draw and render some simple lines and triangles, I think I spent way too much time during this step.
+Having a lot of experience in web development, and javascript I knew that there had to be a solution or giant library/package with all the 3D functions and abstractions to call SDL and OpenGL from so I didn&rsquo;t have to write an entire graphics library as well.</p>
+<p>This is when I found Raylib ~ this is basically just a c header file that contains almost every type, function, and any other useful things you may ever use when it comes to rendering graphics with SDL, GLFW, and OpenGL which was perfect and exactly what I was looking for.</p>
+<p>Here is where we start off and we will start building our 3D First Person Game with C, and raylib (which uses SDL or GLFW with OpenGL).</p>
+<h2 id="getting-started">Getting started</h2>
+<p>Check out my 3D game/engine built in C on github: <a href="https://github.com/skyelynwaddell/skyesrc">skyesrc-engine</a></p>
+<p>For this project we will be using C and raylib.
+Raylib is a C graphics library that contains useful high-level abstractions and functions to interact with SDL or GLFW alongside OpenGL to make our lives easier. No, it doesnt work with Vulkan.</p>
+<p>Get all this stuff&hellip;</p>
+<ul>
+<li><a href="https://gcc.gnu.org/install/download.html">C &amp; GCC Compiler</a></li>
+<li><a href="https://www.raylib.com/">Raylib</a></li>
+<li><a href="https://github.com/raysan5/raylib/blob/master/src/raymath.h">Raymath</a></li>
+<li><a href="https://github.com/raysan5/raygui">RayGUI</a></li>
+<li><a href="https://github.com/raysan5/raylib/blob/master/src/rcamera.h">rcamera</a></li>
+<li><a href="https://github.com/raysan5/raylib/blob/master/examples/shaders/rlights.h">rlights</a></li>
+<li><a href="https://trenchbroom.github.io/">Trenchbroom</a></li>
+</ul>
+<p>For this engine we will be using trenchbroom .map files for our levels and editor as it gives us a nice baseline and 3D editor to work in for our game.
+You will want to learn trenchbroom, as this is how you will build your levels.</p>
+<p><strong>The map parser we will build will only be parsing Valve 220 map format, since it is has better UV texture alignment in comparison to the the Standard quake map format.</strong></p>
+<p>At this point you will want to setup a C project.
+You will want to make sure that all the listed libraries are included and linked in your project and working, see a tutorial or the raylib discord for help setting up a project.</p>
+<p>raylib discord: <a href="https://discord.com/invite/raylib">https://discord.com/invite/raylib</a></p>
+<h2 id="main-game-loop">Main Game Loop</h2>
+<p>I always create some header files initially.
+These 2 files can contain any #define variables, or global variables/functions. These will be very useful.</p>
+<ul>
+<li>global.h &amp; global.c</li>
+<li>utils.h &amp; utils.c</li>
+<li>defs.h</li>
+</ul>
+<p>I define BOOLEAN in my defs incase you see true/false in the code.</p>
+<h4 id="defsh">defs.h</h4>
+<pre><code class="language-c">// defs.h
+#define false 0
+#define true 1
+</code></pre>
+<p>Next I&rsquo;m going to create the &ldquo;gameloop&rdquo; header and definition files.</p>
+<ul>
+<li>init.c</li>
+<li>update.c</li>
+<li>draw.c</li>
+<li>draw_gui.c</li>
+<li>draw_viewmodel.c</li>
+<li>input.c</li>
+<li>cleanup.c</li>
+</ul>
+<p>Each should have a simple function defined for now, matching their filename.</p>
+<p>The next step is to create the gameloop in <code>main.c</code>.
+Here is a pretty bare-bones setup including the above files and functions I had mentioned to create.</p>
+<h4 id="mainc">main.c</h4>
+<pre><code class="language-c">// main.c
+#include &lt;stdio.h&gt;
+#include &quot;raylib.h&quot;
+#include &quot;raygui.h&quot;
+#include &quot;raymath.h&quot;
+
+#include &quot;defs.h&quot;
+#include &quot;global.h&quot;
+
+#include &quot;init.h&quot;
+#include &quot;input.h&quot;
+#include &quot;update.h&quot;
+#include &quot;draw.h&quot;
+#include &quot;draw_viewmodel.h&quot;
+#include &quot;draw_gui.h&quot;
+#include &quot;cleanup.h&quot;
+
+// Program Entry Point
+// -----------------------------
+int main()
+{
+  // Initialization
+  // -----------------------------
+  init();
+
+  // Main Game Loop
+  // -----------------------------
+  while(!WindowShouldClose())
+  {
+    SetConfigFlags(FLAG_MSAA_4X_HINT); // Multi Sampling Anti Aliasing 4X
+    SetExitKey(0); // Disable exit key (ESC)
+
+    input();
+    update();
+
+    // Draw
+    // -----------------------------
+    BeginDrawing();
+      ClearBackground(WHITE);
+      
+      draw();
+      draw_viewmodel();
+      draw_gui();
+
+    EndDrawing();
+  } // draw -------------------------
+
+  // De-Initialization
+  // -----------------------------
+  clean_up();
+  CloseWindow();
+  return 0;
+}
+</code></pre>
+<h2 id="create-an-fgd-for-our-mapping-software">Create an FGD for our mapping software</h2>
+<p>What the hell is an FGD?
+Its a Forge Game Data file with all of our game objects, and such&hellip; Basically our map and game are completely seperate, therefore we can define any objects, wall types (like water, or glass), pickups, npc&rsquo;s etc in here.
+You can design your maps in Trenchbroom, then whatever is defined in the FGD will be allowed to be placed in the room which will be exported in the .map file.
+We can then parse which objects, pickups, etc have been placed in a room and then actually spawn them in our game.</p>
+<p>You can see how a FGD file will be useful.
+For example, the FGD will define that I can have pickup_apple, and pickup_orange items, and then they will be added to the Entity Browser for any Map using that FGD.</p>
+<p>This is why Trenchbroom works for us, Since Quake was so moddable &ndash; Every Map could technically be an entirely different game based on what objects and other entities or brushes were defined in the FGD. Allowing for us to utilize this as a mapping tool for any game.</p>
+<p>For starters you will want to create a custom game for Trenchbroom.
+Its different for all platforms, Ill quickly go over the windows version.</p>
+<p>You goto where Trenchbroom installed, ie. Documents.
+Then you will want to find the <code>/games</code> folder and create a new folder with your game/engine name, and add your own custom GameConfig.cfg file in here.</p>
+<p>Here is a template you can use for the GameConfig.cfg file, modify it to match your game/engine details, change the name.</p>
+<h4 id="gameconfigcfg">GameConfig.cfg</h4>
+<pre><code class="language-c">// GameConfig.cfg
+// place in -&gt; /Trenchbroom/games/my_cool_game/
+{
+	&quot;version&quot;: 8,
+	&quot;name&quot;: &quot;GAME_ENGINE_NAME&quot;,
+	&quot;icon&quot;: &quot;icon.png&quot;,
+	&quot;fileformats&quot;: [
+        { &quot;format&quot;: &quot;Valve&quot; },
+        { &quot;format&quot;: &quot;Standard&quot; }
+    ],
+    &quot;filesystem&quot;: {
+        &quot;searchpath&quot;: &quot;.&quot;,
+        &quot;packageformat&quot;: { &quot;extension&quot;: &quot;.pak&quot;, &quot;format&quot;: &quot;idpak&quot; }
+    },
+	&quot;textures&quot;: {
+		&quot;root&quot;: &quot;textures&quot;,
+		&quot;extensions&quot;: [&quot;.bmp&quot;, &quot;.exr&quot;, &quot;.hdr&quot;, &quot;.jpeg&quot;, &quot;.jpg&quot;, &quot;.png&quot;, &quot;.tga&quot;, &quot;.webp&quot;],
+		&quot;excludes&quot;: [ &quot;*_albedo&quot;, &quot;*_ao&quot;, &quot;*_emission&quot;, &quot;*_height&quot;, &quot;*_metallic&quot;, &quot;*_normal&quot;, &quot;*_orm&quot;, &quot;*_roughness&quot;, &quot;*_sss&quot; ]
+	},
+	&quot;entities&quot;: {
+        &quot;definitions&quot;: [ &quot;gamedata.fgd&quot; ],
+        &quot;defaultcolor&quot;: &quot;0.6 0.6 0.6 1.0&quot;
+    },
+    &quot;tags&quot;: {
+        &quot;brush&quot;: [
+            {
+                &quot;name&quot;: &quot;Detail&quot;,
+                &quot;attribs&quot;: [],
+                &quot;match&quot;: &quot;classname&quot;,
+                &quot;pattern&quot;: &quot;func_detail*&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Trigger&quot;,
+                &quot;attribs&quot;: [ &quot;transparent&quot; ],
+                &quot;match&quot;: &quot;classname&quot;,
+                &quot;pattern&quot;: &quot;trigger*&quot;,
+                &quot;texture&quot;: &quot;trigger&quot; // set this texture when tag is enabled
+            },
+            {
+                &quot;name&quot;: &quot;Func&quot;,
+                &quot;attribs&quot;: [],
+                &quot;match&quot;: &quot;classname&quot;,
+                &quot;pattern&quot;: &quot;func*&quot;
+            }
+        ],
+        &quot;brushface&quot;: [
+            {
+                &quot;name&quot;: &quot;Clip&quot;,
+                &quot;attribs&quot;: [ &quot;transparent&quot; ],
+                &quot;match&quot;: &quot;texture&quot;,
+                &quot;pattern&quot;: &quot;clip&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Skip&quot;,
+                &quot;match&quot;: &quot;texture&quot;,
+                &quot;pattern&quot;: &quot;skip&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Hint&quot;,
+                &quot;attribs&quot;: [ &quot;transparent&quot; ],
+                &quot;match&quot;: &quot;texture&quot;,
+                &quot;pattern&quot;: &quot;hint*&quot;
+            },
+            {
+                &quot;name&quot;: &quot;Liquid&quot;,
+                &quot;attribs&quot;: [ &quot;transparent&quot; ],
+                &quot;match&quot;: &quot;texture&quot;,
+                &quot;pattern&quot;: &quot;\**&quot;
+            }
+        ]
+    },
+    &quot;softMapBounds&quot;:&quot;-4096 -4096 -4096 4096 4096 4096&quot;,
+    &quot;compilationTools&quot;: [
+        { &quot;name&quot;: &quot;qbsp&quot;},
+        { &quot;name&quot;: &quot;vis&quot;},
+        { &quot;name&quot;: &quot;light&quot;}
+    ]
+}
+</code></pre>
+<p>&amp;&amp; Here is a barebones .fgd file you can use to get started:
+You can keep this in your Game Engine directory, and doesnt have to be stored in the trenchbroom games folder.</p>
+<h4 id="gamedatafgd">gamedata.fgd</h4>
+<pre><code class="language-c">// gamedata.fgd
+
+// ############################## //
+// MAP DATA FGD (FORGE GAME DATA) //
+// ############################## //
+
+//
+// worldspawn
+//
+@SolidClass = worldspawn : &quot;World entity&quot;
+[
+	message(string) : &quot;Text on entering the world&quot;
+	worldtype(choices) : &quot;Ambience&quot; : 0 =
+	[
+		0 : &quot;Medieval&quot;
+		1 : &quot;Metal (runic)&quot;
+		2 : &quot;Base&quot;
+	]
+	sounds(integer) : &quot;CD track to play&quot; : 0
+	light(integer) : &quot;Ambient light&quot;
+	_sunlight(integer) : &quot;Sunlight&quot;
+	_sun_mangle(string) : &quot;Sun mangle (Yaw pitch roll)&quot;
+]
+
+@baseclass = brush : &quot;Any kind of brush in the world&quot;
+[
+	sector(integer) : &quot;Sector Group Tag [int]&quot;
+]
+
+@SolidClass base(brush) = brush_default : &quot;All brushes must inherit from this if to be culled&quot; []
+
+//
+// base marker definitions
+//
+@baseclass = Angle [ angle(integer) : &quot;Direction&quot; ]
+
+@baseclass = Appearflags [
+	spawnflags(Flags) =
+	[
+		256 : &quot;Not on Easy&quot; : 0
+		512 : &quot;Not on Normal&quot; : 0
+		1024 : &quot;Not on Hard&quot; : 0
+		2048 : &quot;Not in Deathmatch&quot; : 0
+	]
+]
+
+@baseclass = Targetname [ targetname(target_source) : &quot;Name&quot; ]
+@baseclass = Target [
+	target(target_destination) : &quot;Target&quot;
+	killtarget(target_destination) : &quot;Killtarget&quot;
+]
+
+//
+// player starts, deathmatch, coop, teleport
+//
+@baseclass base(Appearflags) size(-16 -16 -24, 16 16 32)
+	color(0 255 0) model({ &quot;path&quot;: &quot;models/9mm.glb&quot; }) = PlayerClass []
+
+@PointClass base(PlayerClass) = info_player_start : &quot;Player 1 start&quot; []
+@PointClass base(PlayerClass) = info_player_coop : &quot;Player cooperative start&quot; []
+@PointClass base(PlayerClass) = info_player_start2 : &quot;Player episode return point&quot; []
+@PointClass base(PlayerClass) = info_player_deathmatch : &quot;Deathmatch start&quot; []
+@PointClass base(PlayerClass) = testplayerstart : &quot;Testing player start&quot; []
+@PointClass size(-32 -32 0, 32 32 64) base(PlayerClass, Targetname) = info_teleport_destination : &quot;Teleporter destination&quot; []
+@PointClass color(200 150 150) = info_null : &quot;info_null (spotlight target)&quot;
+[
+	targetname(target_source) : &quot;Name&quot;
+]
+
+@PointClass base(Appearflags) = light : &quot;Light&quot; 
+[
+	color(color255) : &quot;Color&quot; : &quot;255 255 255&quot;
+	alpha(float) : &quot;Alpha&quot; : 255.0 : &quot;The transparency of the light color&quot;
+	brightness(float) : &quot;Brightness&quot; : 0.6 : &quot;How bright the light is.&quot; 
+	radius(float) : &quot;Radius&quot; : 40.0 : &quot;How big the light is.&quot;
+	
+]
+</code></pre>
+<p>Here you can see where you can load your custom FGD into Trenchbroom, again this is not a trenchbroom tutorial but you can see where it would be loaded.
+<figure><img src="/images/fgd.png"
+    alt="FPS engine preview" width="50%">
+</figure>
+</p>
+<p>From here you will have to goto Trenchbroom Settings, and Game Configurations and add the Project directory of your game/engine to the correct game in the list (it will be the newly added one recognized by the new GameConfig.cfg file!!!)</p>
+<p>Make sure your textures folder trenchbroom is referencing/using is located in your game/engine project directory&hellip;</p>
+<p>Mess around until you can build a simple room with some textures on the brushes/walls, and export it as a .map file.
+You will need this so we can have a room to walk around in!</p>
+<p>Contact the trenchbroom/quake mapping discord if you need any help with making maps.</p>
+<p>Trenchbroom Tutorials:
+<a href="https://www.youtube.com/watch?v=gONePWocbqA&amp;list=PLgDKRPte5Y0AZ_K_PZbWbgBAEt5xf74aE">https://www.youtube.com/watch?v=gONePWocbqA&amp;list=PLgDKRPte5Y0AZ_K_PZbWbgBAEt5xf74aE</a></p>
+<h2 id="what-is-a-brush">What is a Brush?</h2>
+<p>Once you have built a simple map and exported it as a .map file its time to actually read that data in our C program.</p>
+<p>First we need to understand what a brush is, how we make geometry from them, and we need to define some types/classes for what the map &amp; geometry will need.</p>
+<p>What exactly is a brush you may ask?
+As you were building your geometry in Trenchbroom you may have noticed it was similar to painting as you would click and drag the polygonal geometry out and shape it ~ thus they named them a brush.</p>
+<p>A simple brush in a .map file looks like this:</p>
+<pre><code class="language-c">// brush 0
+{
+( -306 -128 -48 ) ( -306 -127 -48 ) ( -306 -128 -47 ) checkers [ 0 -1 0 0 ] [ 0 0 -1 -32 ] 0 1 1
+( 48 -128 -48 ) ( 48 -128 -47 ) ( 49 -128 -48 ) checkers [ 1 0 0 -48 ] [ 0 0 -1 -32 ] 0 1 1
+( 48 -128 -32 ) ( 49 -128 -32 ) ( 48 -127 -32 ) checkers [ -1 0 0 48 ] [ 0 -1 0 0 ] 0 1 1
+( 176 0 32 ) ( 176 1 32 ) ( 177 0 32 ) checkers [ 1 0 0 -48 ] [ 0 -1 0 0 ] 0 1 1
+( 176 704 -16 ) ( 177 704 -16 ) ( 176 704 -15 ) checkers [ -1 0 0 48 ] [ 0 0 -1 -32 ] 0 1 1
+( 368 0 -16 ) ( 368 0 -15 ) ( 368 1 -16 ) checkers [ 0 1 0 0 ] [ 0 0 -1 -32 ] 0 1 1
+}
+</code></pre>
+<p>Each line here represents a face or side of the brush, aka a BrushFace. Since this brush is 6 lines (meaning it has 6 faces), we can safely assume that it is cube shaped.</p>
+<p>So a Brush, is just a collection of BrushFace&rsquo;s.</p>
+<p>You may be wondering what each of these values does in a BrushFace, I&rsquo;ll explain.
+Each <code>brushface</code> is an Infinite Plane that has 2 directions and a texture.</p>
+<p>Imagine we draw a cube with infinite planes, it would looks something like this.
+I couldn&rsquo;t draw it exactly as it would just look like a giant box still, so the front and back faces dont have their infinite plane being drawn&hellip; just so you can visualize a cube created of planes, where each plane has 2 infinite directions.</p>
+<figure><img src="/images/infinitecube.png"
+    alt="FPS engine preview" width="100%">
+</figure>
+
+<p>The infinite planes, turn ORANGE once they intersect here in this image for visual purposes, the idea is to remove any intersecting orange parts of the infinite planes, and we are left with a Convex Polygon, in this case a simple cube shape.
+It sounds easier than it is.</p>
+<p>Let&rsquo;s look at one line (BrushFace) of the Brush and break it down</p>
+<pre><code class="language-c">( -306 -128 -48 ) ( -306 -127 -48 ) ( -306 -128 -47 ) checkers [ 0 -1 0 0 ] [ 0 0 -1 -32 ] 0 1 1
+
+// lets put each one of these on a new line
+pos1: ( -306 -128 -48 )   // [ x y z ] Origin Point of the plane --- The anchor point / position of the plane
+pos2: ( -306 -127 -48 )   // [ x y z ] with pos_1 defines the first infinite direction of the plane
+pos3: ( -306 -128 -47 )   // [ x y z ] with pos_1 defines the second infinite direction of the plane
+texture name: checkers
+U Coords: [ 0 -1 0 0 ]    // [ Ux Uy Uz Uoffset ]
+V Coords: [ 0 0 -1 -32 ]  // [ Vx Vy Vz Voffset ]
+UV Rotation: 0
+UV XScale: 1
+UV Yscale: 1
+</code></pre>
+<ul>
+<li>pos1 represents the Origin or Position of the Plane in 3d space.</li>
+<li>pos2 is used with pos1 to calculate the first direction of the infinite plane.</li>
+<li>pos3 is used with pos1 to calculate the second direction of the infinite plane.</li>
+<li>The Fourth value, here it is <code>checkers</code>, represents the name of the texture used on that BrushFace, since each face of a brush can have a different texture. The C program would then look for something like: <code>/textures/checkers.png</code></li>
+<li>The fifth and sixth values that look like arrays, are just the UV texture coords.</li>
+<li>The last three values are: UV Rotation, XScale, and YScale of the Texture.</li>
+</ul>
+<h2 id="setting-up-map--geometry-types">Setting up Map &amp; Geometry Types</h2>
+<p>Let&rsquo;s define <code>plane.h</code> and <code>brushface.h</code></p>
+<p>We will eventually need to convert each BrushFace into a Plane for calculations so we can create the class/type.</p>
+<h4 id="planeh">plane.h</h4>
+<pre><code class="language-c">#ifndef PLANE_H
+#define PLANE_H
+
+#include &quot;raylib.h&quot;
+#include &quot;utils.h&quot;
+
+typedef struct {
+    Vector3 normal; // plane normal (a,b,c)
+    float distance; // plane distance from origin
+} Plane;
+
+
+#endif // PLANE_H
+</code></pre>
+<p>Here is the brushface class, it will have some functions we will use later and the type definition for what a BrushFace contains. As you can see it holds every value on one of those brushface lines we previously went over.</p>
+<h4 id="brushfaceh">brushface.h</h4>
+<pre><code class="language-c">// brushface.h
+#ifndef BRUSHFACE_H
+#define BRUSHFACE_H
+
+#include &lt;stdio.h&gt;
+#include &quot;raylib.h&quot;
+#include &quot;raymath.h&quot;
+#include &quot;string.h&quot;
+#include &quot;plane.h&quot;
+
+typedef struct {
+
+    // Defines the position, size, and directions of the infinite plane
+    Vector3 pos_1;    // [ x y z ] Origin Point of the plane --- The anchor point / position of the plane
+    Vector3 pos_2;    // [ x y z ] with pos_1 defines the first infinite direction of the plane
+    Vector3 pos_3;    // [ x y z ] with pos_1 defines the second infinite direction of the plane
+
+    // with all the infinite planes in a brush we can clip all the geometry wherever 
+    // any of the infinite planes intersect with eachother to form the convex polygon.
+    
+    // texture data for a brush face
+    char texture[64]; // texture string name (not including filetype)
+
+    Vector4 uv_s; // [ Ux Uy Uz Uoffset ]
+    Vector4 uv_t; // [ Vx Vy Vz Voffset ]
+
+    int uv_rotation; // texture rotation degrees
+    int u_scale;     // horizontal texture scale
+    int v_scale;     // vertical texture scale
+
+} BrushFace;
+
+void brushface_print(BrushFace b, int face_index);
+Plane brushface_to_plane(BrushFace face);
+
+#endif // BRUSHFACE_H
+</code></pre>
+<p>From here I recommend creating a new folder to store all the map/geometry c files. These ones ill tell you how to fill them out as we go.</p>
+<h3 id="new-c-files-to-be-made">New C Files to be made</h3>
+<ul>
+<li>map.c</li>
+<li>brushtopolygon.c</li>
+</ul>
+<h3 id="new-h-files-to-be-made-dont-need-a-c-file-duh">New H files to be made (dont need a c file duh)</h3>
+<ul>
+<li>brush.h</li>
+<li>polygon.h</li>
+<li>triangle.h</li>
+<li>geometry.h</li>
+</ul>
+<p>We are going to start off in map.c, we need to first load the .map file, so make sure this is accessible in the project folder, have a /maps folder all your maps are in.</p>
+<p>In map.h I define a Map type.
+This map type will contain all the different values and properties a map could have, as well as all the brushes and entities a map has.</p>
+<p>For now a Map will contain a Map Version, an array of Geometry (we will define this after), and the functions that will be used be map.c
+We will add more to this later.
+Define all functions in this map.h in your map.c as well, we will fill them out and need them later.</p>
+<h4 id="maph">map.h</h4>
+<pre><code class="language-c">// map.h
+#ifndef MAP_H
+#define MAP_H
+
+#include &lt;stdio.h&gt;
+#include &quot;brushface.h&quot;
+#include &quot;brush.h&quot;
+#include &quot;geometry.h&quot;
+
+// struct to hold the data stored in .map file
+typedef struct {
+    int mapversion;
+
+    Brush brushes[MAX_BRUSHES];
+    int brush_count;
+
+    Geometry models[MAX_BRUSHES];
+    int model_count;
+} Map; 
+
+extern Map map;
+
+int map_parse(const char* filename);
+void map_create_models();
+void map_clear_models();
+void map_draw();
+void map_draw_models();
+
+#endif // MAP_H
+</code></pre>
+<p>We can add these 2 new defintions to our <code>defs.h</code> files for map</p>
+<h4 id="defsh-1">defs.h</h4>
+<pre><code class="language-c">#define MAX_LINE 1024
+#define MAX_BRUSHES 10000
+</code></pre>
+<p>Let&rsquo;s define the Geometry file and all the other header files that will need to be included. These header files mentioned above are all mostly 2d and 3d shape defintions we can use in calculations.</p>
+<p>First lets make Geometry.h
+This type defines the map geometry model, and its collision box.
+Each brush shape we calculate will be turned into Raylib model.
+Later in the book we will implement a more advanced collision box to the map geometry for collisions.</p>
+<h4 id="geometryh">geometry.h</h4>
+<pre><code class="language-c">// geometry.h
+#ifndef GEOMETRY_H
+#define GEOMETRY_H
+
+#include &quot;raylib.h&quot;
+
+typedef struct {
+    Model model;
+    BoundingBox bounds;
+} Geometry;
+
+#endif // GEOMETRY_H
+</code></pre>
+<h4 id="triangleh">triangle.h</h4>
+<p>Next we can create the triangle header file.
+This is a simple type with a Vector3 we can use
+for triangle calculations later.</p>
+<pre><code class="language-c">// triangle.h
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
+#include &quot;raylib.h&quot;
+
+typedef struct {
+    Vector3 a,b,c;
+} Triangle;
+
+#endif // TRIANGLE_H
+</code></pre>
+<p>Next let&rsquo;s create the brush and polygon files, and some defines.</p>
+<h4 id="defsh-2">defs.h</h4>
+<pre><code class="language-c">// defs.h
+#define MAX_VERTICES_PER_FACE 128
+#define BRUSH_FACE_COUNT 64 // a brush can have up to 64 faces - must be convex
+
+</code></pre>
+<p>Polygon class will basically be here to store all the vertices a brush face could have, we will need these to be able to calculate, and resort the vertices in a proper order.</p>
+<h4 id="polygonh">polygon.h</h4>
+<pre><code class="language-c">// polygon.h
+#ifndef POLYGON_H
+#define POLYGON_H
+
+#include &quot;raylib.h&quot;
+
+typedef struct {
+    Vector3 vertices[MAX_VERTICES_PER_FACE];
+    int vertex_count;
+} Polygon;
+
+#endif // POLYGON_H
+</code></pre>
+<p>And next the brush class will contain the count of brushfaces, the array of brushfaces, and the brushfaces vertices / polygons.</p>
+<h4 id="brushh">brush.h</h4>
+<pre><code class="language-c">// brush.h
+#ifndef BRUSH_H
+#define BRUSH_H
+
+#include &quot;defs.h&quot;
+#include &quot;brushface.h&quot;
+#include &quot;polygon.h&quot;
+
+typedef struct {
+    int brush_face_count;
+    BrushFace brush_faces[BRUSH_FACE_COUNT];
+    Polygon polys[BRUSH_FACE_COUNT];
+} Brush;
+
+
+#endif // BRUSH_H
+</code></pre>
+<p>One more class we will need for our map parser will be the Entity class.
+Since Brushes, can be entities, we will need to define this as well.
+The entity class will have ANY property EVER that a entity COULD have, then depending on the classname of the entity, we will create the correct Object of the right type, and set its properties accordingly.</p>
+<p>Here is a simple Entity class defined with some common properties, every Entity will have a Classname, and Origin property!
+Then you can define the other properties an entity MAY have.</p>
+<h4 id="entityh">entity.h</h4>
+<pre><code class="language-c">// entity.h
+#ifndef ENTITY_H
+#define ENTITY_H
+#include &quot;raylib.h&quot;
+#include &quot;raymath.h&quot;
+
+typedef struct {
+    char classname[64];
+    Vector3 origin;
+
+    // light properties
+    Color color;
+    float brightness;
+    float radius;
+
+} Entity;
+
+#endif // ENTITY_H
+</code></pre>
+<h2 id="parse-brushes-from-a-map-file">Parse brushes from a .map file</h2>
+<p>So now we have some of our types/classes and an understanding of brushes.
+Now we need to code a parser that can read .map files, and extract each brush into an object/struct we can use.</p>
+<p>In your map.c file you will want to create a Map map object, and create a <code>parse_map</code> function.
+This function will need a few other functions to work, we will cover those after.
+This will parse the map file, and figures out if it is parsing a Brush, Entity, or Property.</p>
+<p>If it is in a brush it will store all the brushfaces in the Current Brush,
+then once all of them have been found, we will need to resort the vertices of the brush so that it looks how we expect
+we will convert the brushes into polygons first, then we have to convert each brush face into a plane, then we can resort the vertices finally.
+Once all of this has been done we will have a Brush object/struct that will contain all the neccesary properties/values to be able to convert them into game models with raylib.</p>
+<p>If it is an entity we will add all the properties to the Current Entity, then depending on the classname of the Entity, we can do specific things. For example if it were &ldquo;info_player_start&rdquo; - we know thats the player object and we can set the properties of the spawn location for the player etc.</p>
+<p>Add to your utils c file a new helper function for map parser</p>
+<h4 id="utilsc">utils.c</h4>
+<pre><code class="language-c">// utils.c
+/*
+string_equals
+string[char* string] - The first string to be compared
+string[char* string_to_compare_to] - the second string that is compared to the first string
+-- compares two strings to see if they match
+*/
+int string_equals(char* string, char* string_to_compare_to)
+{
+    if (strcmp(string, string_to_compare_to) == 0) return 1;
+    return 0;
+}
+</code></pre>
+<h4 id="mapc">map.c</h4>
+<pre><code class="language-c">// map.c
+
+Map map;
+
+/*
+parse_map
+filename[const char*] -- the filename of the map to be loaded ie. &quot;myamazingmap.map&quot;
+-- Stores the data about the currently loaded map.
+*/
+int map_parse(const char* filename)
+{
+    map.model_count = 0;
+
+    printf(&quot;\n&quot;);
+    printf(&quot;### LOADING MAP FILE ### \n&quot;);
+    char fullpath[256];
+
+    // add maps/ filepath to the filename
+    snprintf(fullpath, sizeof(fullpath), &quot;maps/%s&quot;, filename);
+
+    FILE* file = fopen(fullpath, &quot;r&quot;);
+    if (!file)
+    {
+        perror(&quot;Failed to open .map file! \n&quot;);
+        printf(&quot;Tried searching in: %s \n&quot;, fullpath);
+        return false;
+    }
+
+    printf(&quot;    Successfully opened map: %s \n \n&quot;, fullpath);
+
+    printf(&quot;-----------------------------\n&quot;);
+    printf(&quot;### MAP PROPERTIES ### \n&quot;);
+
+    char line[MAX_LINE];
+    int in_entity = false;
+    int in_brush = false;
+    int current_entity_has_brush = false;
+
+    Brush current_brush = {0};
+    int current_brushface_index = 0;
+
+    Entity current_entity = {0};
+    int current_entity_index = 0;
+
+    // Loop through all text in the .map file
+    while (fgets(line, sizeof(line), file))
+    {
+        char* trimmed = line;
+
+        // trim leading whitespaces
+        while(*trimmed == ' ' || *trimmed == '\t') trimmed++;
+
+        //skip comments and empty lines
+        if (trimmed[0] == '/' &amp;&amp; trimmed[1] == '/') continue;
+        if (trimmed[0] == '\n' || trimmed[0] == '\0') continue;
+
+        /*
+        Object Start {
+        ----------------------------------
+        */
+        if (string_equals(trimmed, &quot;{\n&quot;))
+        {
+            if (in_entity &amp;&amp; !in_brush)
+            {
+                // Brush Start
+                in_brush = true;
+                current_brushface_index = 0; // restart brush 
+                memset(&amp;current_brush, 0, sizeof(Brush)); //clear brush struct
+            }
+            else if (!in_entity)
+            {
+                // Entity Start
+                in_entity = true;
+                current_entity_index = 0; // restart entity
+                memset(&amp;current_entity, 0, sizeof(Entity));
+            }
+            continue;
+        }
+        /*
+        ----------------------------------
+        */
+
+
+        /*
+        Object End }
+        ----------------------------------
+        */
+        if (string_equals(trimmed, &quot;}\n&quot;))
+        {
+            if (in_brush)
+            {
+                if (map.brush_count &lt; MAX_BRUSHES) 
+                    map.brushes[map.brush_count++] = current_brush;
+                in_brush = false;
+            }
+            
+            else if (in_entity)
+            {
+                // TODO : We will come back here
+                in_entity = false;
+            }
+            continue;
+        }
+        /*
+        ----------------------------------
+        */
+
+
+        /*
+        Parse Entity
+        ----------------------------------
+        */
+        if (in_entity &amp;&amp; !in_brush)
+        {
+            char key[128], value[128];
+
+            if (sscanf(trimmed, &quot;\&quot;%127[^\&quot;]\&quot; \&quot;%127[^\&quot;]\&quot;&quot;, key, value) == 2) 
+            {
+                if (strstr(key, &quot;classname&quot;) == 0)
+                    printf(&quot;  Property: %s = %s\n&quot;, key, value);
+                else
+                {
+                    printf(&quot;-----------------------------\n\n&quot;);
+                    printf(&quot;-----------------------------\n&quot;);
+                    printf(&quot;### Entity: %s = %s ###\n&quot;, key, value);
+                }
+                    
+
+                /*
+                Map Version
+                ----------------------------------
+                */
+                if (string_equals(key, &quot;mapversion&quot;))
+                {
+                    map.mapversion = atoi(value);
+                    if (map.mapversion != 220)
+                    {
+                        printf(&quot;Only support for valve 220 .map files currently...&quot;);
+                        CloseWindow();
+                    }
+                }
+                /*
+                ----------------------------------
+                */
+
+
+                /*
+                Set Current Entity Properties
+                ----------------------------------
+                */
+                    // ### mandatory properties ###
+
+                    // classname
+                    if (string_equals(key, &quot;classname&quot;))
+                        strcpy(current_entity.classname, value);
+
+                    // origin
+                    if (string_equals(key, &quot;origin&quot;))
+                        sscanf(value, &quot;%f %f %f&quot;, &amp;current_entity.origin.x, &amp;current_entity.origin.z, &amp;current_entity.origin.y);
+
+                /*
+                ----------------------------------
+                */
+            }
+        }
+        /*
+        ----------------------------------
+        */
+
+
+        /*
+        Parse Brush Face
+        ----------------------------------
+        */
+        if (in_brush)
+        {
+            BrushFace brushface = {0};
+            char texture_name[64];
+
+            int matched = sscanf(trimmed,
+                &quot;( %f %f %f ) ( %f %f %f ) ( %f %f %f ) %63s [ %f %f %f %f ] [ %f %f %f %f ] %i %i %i&quot;,
+                &amp;brushface.pos_1.x, &amp;brushface.pos_1.y, &amp;brushface.pos_1.z,
+                &amp;brushface.pos_2.x, &amp;brushface.pos_2.y, &amp;brushface.pos_2.z,
+                &amp;brushface.pos_3.x, &amp;brushface.pos_3.y, &amp;brushface.pos_3.z,
+                texture_name,
+                &amp;brushface.uv_s.x, &amp;brushface.uv_s.y, &amp;brushface.uv_s.z, &amp;brushface.uv_s.w,
+                &amp;brushface.uv_t.x, &amp;brushface.uv_t.y, &amp;brushface.uv_t.z, &amp;brushface.uv_t.w,
+                &amp;brushface.uv_rotation, &amp;brushface.u_scale, &amp;brushface.v_scale
+            );
+
+            int SUCCESS = 21;
+            if (matched == SUCCESS)
+            {
+                // success
+                // get texture name
+                strncpy(brushface.texture, texture_name, sizeof(brushface.texture));
+                brushface.texture[sizeof(brushface.texture) - 1] = '\0';
+
+                if (current_brushface_index &lt; BRUSH_FACE_COUNT)
+                {
+                    current_brush.brush_faces[current_brushface_index++] = brushface;
+                    current_brush.brush_face_count = current_brushface_index;
+                }
+            } 
+            else 
+            {
+                // failed
+                printf(&quot;!!! Failed to parse brush face line: %s (matched %d)\n&quot;, trimmed, matched);
+            }
+        }
+        /*
+        ----------------------------------
+        */
+    }
+    printf(&quot;-----------------------------\n\n&quot;);
+    printf(&quot;### MAP OBJECTS CREATED ### \n&quot;);
+    printf(&quot;%i brushes. \n&quot;, map.brush_count);
+    printf(&quot;\n&quot;);
+
+
+    fclose(file);
+    return true;
+}
+</code></pre>
+<p>We have now successfully parsed the map data!</p>
+<p>If you add <code>map_parse(&quot;test.map&quot;);</code> (or whatever you named your map file to&hellip;)
+to your init() function you should have a very basic .map parser for your game.</p>
+<p>In the terminal you should see the properties about the various brushes/entities appearing.</p>
+<p>The next step is to create the various helper function we will need to turn this data we parsed into actual visible geometry.</p>
+<p>We will need to make these functions next in this order:</p>
+<ul>
+<li>polygon_generate_from_brush()</li>
+<li>brushface_to_plane()</li>
+<li>polygon_sort_vertices()</li>
+</ul>
+<p>These are the functions that will be doing most of the geometry math and making brushes into data we can turn into raylib models later.</p>
+<h2 id="generate-map-geometry">Generate Map Geometry</h2>
+<h3 id="to-be-continued">TO BE CONTINUED&hellip;</h3>
+
+
+</div>
+
+        </div>
+
+        <div class="br"></div>
+
+        <footer class="navbar bg-body-tertiary footer">
+  &copy; Skyesblog 2025
+</footer>
+
+</body>
+</html>

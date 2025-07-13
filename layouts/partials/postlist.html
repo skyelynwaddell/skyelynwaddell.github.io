@@ -13,7 +13,7 @@
     <div class="post">
         <!-- Post image -->
         <a href="{{ .Permalink }}">
-            <img class="post-image" src="{{ .Params.image }}" alt="{{ .Params.title }}">
+            <img style="width: 200px; height: 200px;" class="post-image" src="{{ .Params.image }}" alt="{{ .Params.title }}">
         </a>
 
         <div class="post-contents">
@@ -31,18 +31,24 @@
             <!-- Post Authors -->
             <div class="post-tags">
                 <img src="/svg/people-fill.svg" alt="Authors">
+                <div style="width:100%;">
                 {{ range (.GetTerms "authors") }}
-                    <a class="btn btn-primary" href="{{ .Permalink }}">{{ .Name }}</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="{{ .Permalink }}">{{ .Name }}</a>
                 {{ end }}
+                </div>
+                
             </div>
 
             <!-- Post Categories -->
             <div class="post-tags">
                 <img src="/svg/tags-fill.svg" alt="Categories">
+                <div style="width:100%;">
                 {{ range (.GetTerms "categories") }}
-                    <a class="btn btn-primary" href="{{ .Permalink }}">{{ .Name }}</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="{{ .Permalink }}">{{ .Name }}</a>
                 {{ end }}
+                </div>
             </div>
+            <hr>
         </div>
     </div>
     {{ end }}

@@ -70,11 +70,15 @@ body,html{
 }
 
 .post-tags{
+    width:100%;
     display: flex;
     flex-direction: row;
     gap:10px;
-    margin: 10px 0;
+    margin: 5px 0;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.111);
+    padding:10px;
+    border-radius: 10px;
     
 }
 
@@ -162,12 +166,10 @@ pre{
 }
 
 .single-image{
-    width: 100%;
-    height: 100%;
-    max-width:200px;
-    max-height:200px;
+    max-width: 100px;
+    max-height: 100px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin:10px;
 }
 
 .single-details{
