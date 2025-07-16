@@ -1459,8 +1459,6 @@ void map_create_models()
 
             if (poly->vertex_count < 3) continue;
 
-            Texture2D texture = texture_get_cached(face->texture);
-
             // Centroid calculation (raw)
             Vector3 centroid = {0};
             for (int i = 0; i < poly->vertex_count; i++) 
