@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on Skyesblog</title>
-    <link>http://10.0.0.98:1313/authors/</link>
+    <link>http://localhost:1313/authors/</link>
     <description>Recent content in Authors on Skyesblog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 12 Jul 2025 17:17:06 -0600</lastBuildDate>
-    <atom:link href="http://10.0.0.98:1313/authors/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/authors/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Skye Waddell</title>
-      <link>http://10.0.0.98:1313/authors/skye-waddell/</link>
+      <link>http://localhost:1313/authors/skye-waddell/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://10.0.0.98:1313/authors/skye-waddell/</guid>
+      <guid>http://localhost:1313/authors/skye-waddell/</guid>
       <description></description>
     </item>
     <item>
       <title>BroCode</title>
-      <link>http://10.0.0.98:1313/authors/brocode/</link>
+      <link>http://localhost:1313/authors/brocode/</link>
       <pubDate>Sat, 05 Oct 2024 12:17:06 -0600</pubDate>
-      <guid>http://10.0.0.98:1313/authors/brocode/</guid>
+      <guid>http://localhost:1313/authors/brocode/</guid>
       <description></description>
     </item>
   </channel>

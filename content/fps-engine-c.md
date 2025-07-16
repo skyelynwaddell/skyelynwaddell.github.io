@@ -1,8 +1,8 @@
 +++
-title = "3D Game Development in C"
+title = "3D FPS Game Development in C & .MAP files"
 date = 2025-07-12T17:17:06-06:00
 draft = false
-description = "Journey through the creation of 3D game development, tackling a first person shooter engine built entirely in C. Covers topics such as rendering, map & geometry projection, textures, collision detection, lighting & shaders, occlusion culling and more."
+description = "Journey through the creation of 3D game development, tackling a first person shooter engine built entirely in C. Covers topics such as rendering, map & geometry projection, parsing and understanding .MAP files, textures, collision detection, lighting & shaders, occlusion culling and more. This engine uses the same techniques, mapping files, and ideologies as classic 90's shooters such as Quake, and HalfLife."
 image = "/images/c.png"
 categories = ["c", "fps", "3d", "raylib", "gamedev"]
 authors = ["Skye Waddell"]
@@ -23,8 +23,10 @@ avatar = "/images/c.png"
 - [Setting up Map & Geometry Types](#setting-up-map--geometry-types)
 - [Parse brushes from a .map file](#parse-brushes-from-a-map-file)
 - [Generate Map Geometry](#generate-map-geometry)
-- Create a Texture Manager & Cache
-- Project UV Textures onto map geometry
+- [Resorting Map Geometry Polygon Vertices](#resorting-map-geometry-polygon-vertices)
+- [Turning Map Brushes into Raylib Models](#turning-map-brushes-into-raylib-models)
+- [Create a Texture Manager & Cache](#create-a-texture-manager--cache)
+- [Project UV Textures onto Map Geometry](#project-uv-textures-onto-map-geometry)
 - 3D Player Object
 - First Person Camera
 - 3D collisions
@@ -113,11 +115,35 @@ These 2 files can contain any #define variables, or global variables/functions. 
   - defs.h
 
 I define BOOLEAN in my defs incase you see true/false in the code.
+Here's all the defines that will be used in this project, might as well just add them so I don't forget which ones.
 #### defs.h
 ```c
 // defs.h
 #define false 0
 #define true 1
+
+// game settings
+#define PLATFORM_DESKTOP
+#define GAME_TITLE "skyesrc"
+#define FPS 2000 // max fps
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+
+// brush & map geometry defs
+#define BRUSH_FACE_COUNT 64 // a brush can have up to 64 faces - must be convex
+#define MAX_COLUMNS 20
+#define MAX_TEXTURES 10000
+#define MAX_POLY_VERTS 64
+#define MAX_LINE 1024
+#define MAX_BRUSHES 10000
+#define MAX_POLYGONS 10000
+#define MAX_VERTICES_PER_FACE 128
+
+// level settings
+#define MAX_ENTITIES 1000 // Maximum entities can be in a room
+#define MAX_LIGHTS 255 // Maximum lightobjects can be in a room
+#define PLAYER_SPAWN_GAP 20 // how high to increase the player spawn gap so isnt stuck in floor
+#define MAX_DARK 0.2 // How dark the room can get without lighting (0 = BLACK)
 ```
 
 Next I'm going to create the "gameloop" header and definition files.
@@ -158,13 +184,13 @@ int main()
 {
   // Initialization
   // -----------------------------
-  init();
+    SetConfigFlags(FLAG_MSAA_4X_HINT); // Multi Sampling Anti Aliasing 4X
+    init();
 
   // Main Game Loop
   // -----------------------------
   while(!WindowShouldClose())
   {
-    SetConfigFlags(FLAG_MSAA_4X_HINT); // Multi Sampling Anti Aliasing 4X
     SetExitKey(0); // Disable exit key (ESC)
 
     input();
@@ -348,8 +374,7 @@ You can keep this in your Game Engine directory, and doesnt have to be stored in
 //
 // player starts, deathmatch, coop, teleport
 //
-@baseclass base(Appearflags) size(-16 -16 -24, 16 16 32)
-	color(0 255 0) model({ "path": "models/9mm.glb" }) = PlayerClass []
+@baseclass base(Appearflags) size(-16 -16 -24, 16 16 32) color(0 255 0) = PlayerClass []
 
 @PointClass base(PlayerClass) = info_player_start : "Player 1 start" []
 @PointClass base(PlayerClass) = info_player_coop : "Player cooperative start" []
@@ -502,7 +527,6 @@ typedef struct {
 
 } BrushFace;
 
-void brushface_print(BrushFace b, int face_index);
 Plane brushface_to_plane(BrushFace face);
 
 #endif // BRUSHFACE_H
@@ -560,14 +584,6 @@ void map_draw_models();
 #endif // MAP_H
 ```
 
-We can add these 2 new defintions to our `defs.h` files for map
-#### defs.h
-```c
-#define MAX_LINE 1024
-#define MAX_BRUSHES 10000
-```
-
-
 Let's define the Geometry file and all the other header files that will need to be included. These header files mentioned above are all mostly 2d and 3d shape defintions we can use in calculations.
 
 First lets make Geometry.h
@@ -608,15 +624,8 @@ typedef struct {
 #endif // TRIANGLE_H
 ```
 
-Next let's create the brush and polygon files, and some defines.
+Next let's create the brush and polygon files.
 
-#### defs.h
-```c
-// defs.h
-#define MAX_VERTICES_PER_FACE 128
-#define BRUSH_FACE_COUNT 64 // a brush can have up to 64 faces - must be convex
-
-```
 
 Polygon class will basically be here to store all the vertices a brush face could have, we will need these to be able to calculate, and resort the vertices in a proper order.
 #### polygon.h
@@ -960,4 +969,610 @@ We will need to make these functions next in this order:
 These are the functions that will be doing most of the geometry math and making brushes into data we can turn into raylib models later.
 
 ## Generate Map Geometry
+So the worst part and trickiest part I faced was having everything sideways, or the textures not projecting in correct directions.
+You may have noticed in the map parser when we got the Origin value the Y and Z values are swapped... This is because Raylib and Trenchbroom do not use the same X Y Z axis.
+
+Basically to have the same coordinents this is the formula I came up with to make it the same. This will transform the `pos` vector into the correct way, in the correct positions.
+
+NOTE -- This must be done AFTER texture calculations are done, or else your textures will be all sideways and you won't know why. (it happened to me was stuck for days couldn't figure out why my texture projection calculations weren't working....)
+
+Add this to your `utils.c`
+#### utils.c
+```c
+/*
+convert_trenchbroom_to_raylib_axis
+-- raylib and trenchbroom dont use the same xyz axis, so we have to convert this here
+-- so our stuff isnt sideways :P --- We will need this when we get to texture projection
+*/
+Vector3 trench_to_raylib_origin(Vector3 v)
+{
+    float s = 0.1; // scale
+    Vector3 newpos = (Vector3) { v.x*s, v.y*s, -v.z*s };
+    return newpos;
+}
+```
+
+At the end of our map_parse() function, after we have parsed the data.
+We will want to loop over all of our brushes and generate the polygons/vertices from the brushes
+#### map.c
+```c
+// map_parse()
+......................
+......................
+// after parsing logic
+
+    for (int i=0; i < map.brush_count; i++)
+    {
+        polygon_generate_from_brush(&map.brushes[i]);
+        
+    }
+    fclose(file);
+    return true;
+}
+```
+I am referencing this document for the map generation as it has all of the logic I go through, read this paper as it was super helpful and insightful: https://github.com/stefanha/map-files/blob/master/MAPFiles.pdf
+
+So this is what we have added to our map file, and let's break down and define polygon_generate_from_brush()
+
+This function is going to do the intersecting logic of 3 infinite planes.
+
+This is the general formula for checking.
+![Intersection of 3 Planes Forumla](/images/brushtopolygon_formula.png)
+```c
+P = [ -d1(n2 × n3) - d2(n3 × n1) - d3(n1 × n2) ] / (n1 • (n2 × n3))
+```
+```c
+/*
+polygon_generate_from_brush formula
+----------------------------------
+Generates the polygon faces of a convex brush using plane intersection.
+
+Each brush face defines a plane. This function:
+1. Tries all combinations of 3 different planes.
+2. Calculates the intersection point of the 3 planes.
+3. Validates the point lies inside the convex brush volume.
+4. If valid, assigns the point as a vertex to the polygons
+   corresponding to those planes (faces).
+
+Steps:
+- Clear all polygon vertex counts to start fresh.
+- For each combination of 3 faces (i, j, k):
+    - Convert faces i, j, k to planes.
+    - Try to compute intersection point of those 3 planes.
+    - If intersection fails (planes are parallel or coplanar), skip.
+    - Otherwise, test if the intersection point is inside the brush:
+        - For each brush face (converted to a plane):
+            - If the point is outside any plane, it is rejected.
+    - If the point is inside the brush:
+        - Add the point to polygons i, j, k if not already present,
+          and if vertex limit hasn't been reached.
+
+Notes:
+- The brush is assumed to be convex.
+- This generates unsorted, raw vertex lists per face.
+- Vertices must later be sorted and unwinded.
+- !!! The default winding order for backface culling using raylib is Counter Clockwise ↪️
+  before building renderable geometry.
+*/
+
+Brush To Polygon Formula --- Not actual code.
+
+// brush = object with all the brush array and data
+Faces = brush.faces[]
+Polys = brush.polys[]
+
+// First reset all of the Vertex Counts in Polys
+for i=0; i < Faces.length; i++
+    Polys[i].vertex_count = 0;
+
+// Generate the Polygon
+for i = 0; i <= NumberOfFaces - 3; i++ {
+    for j = i + 1; j <= NumberOfFaces - 2; j++ {
+        for k = j + 1; k <= NumberOfFaces - 1; k++ {
+
+            // Turn brushfaces into planes
+            plane_i = brushface_to_plane(Faces[i]);
+            plane_j = brushface_to_plane(Faces[j])
+            plane_k = brushface_to_plane(Faces[k])
+
+            // Compute intersection of planes i, j, k
+            Vector3 p;
+                if (polygon_get_intersection(
+                    plane_i.normal, plane_j.normal, plane_k.normal,
+                    plane_i.distance, plane_j.distance, plane_k.distance, p
+                ) == false) continue; // failed
+
+
+            // Check if the point lies inside all other planes -- create a test plane
+            bool legal = true;
+            for m = 0; m < NumberOfFaces; m++ 
+            {
+                test_plane = brushface_to_plane(Faces[m])
+                if (DotProduct(Faces[m].normal, p) + test_plane.distance < -0.001f)
+                {
+                    legal = false; // point is outside the brush
+                    break;
+                }
+            }
+
+            // Add vertex to each corresponding polygon
+            if (legal) {
+                // checks for i
+                if polygon_has_vertex(Polys[i], p) == false
+                    Polys[i].vertices[Polys[i].vertex_count++] = p;
+
+                // checks for j
+                if polygon_has_vertex(Polys[j], p) == false
+                    Polys[j].vertices[Polys[j].vertex_count++] = p;
+
+                // checks for k
+                if polygon_has_vertex(Polys[k], p) == false
+                    Polys[k].vertices[Polys[k].vertex_count++] = p;
+            }
+        }
+    }
+}
+```
+So thats the general formula and idea you can adapt, that function gives you the idea of how any language could set it up.
+As you can see there will be a few needed functions including `brushface_to_plane`, `polygon_has_vertex` and `polygon_get_intersection` we will have to implement for this formula to work, so lets do that first.
+
+The first function we will need is to convert the BrushFace's into Planes so we can do our linear algebra with them!
+#### brushface_to_plane
+```c
+--------------------------
+brush_face_to_plane
+face [BrushFace] - the passed in BrushFace to be calculated to a plane
+- turns a BrushFace type into a plane
+*/
+Plane brushface_to_plane(BrushFace face)
+{
+    Vector3 edge1 = Vector3Subtract(face.pos_2, face.pos_1);
+    Vector3 edge2 = Vector3Subtract(face.pos_3, face.pos_1);
+    Vector3 normal = Vector3Normalize(Vector3CrossProduct(edge1,edge2));
+    double distance = -Vector3DotProduct(normal, face.pos_1);
+    return (Plane) { normal, distance };
+}
+```
+A brushface contains 3 points, defining a triangle in 3d space -- the bare minimum to define a unique plane
+
+- `edge1` is the vector from `pos1` to `pos2`
+- `edge2` is the vector from `pos` to `pos3`
+
+These 2 edges lie on the surface of the face.
+
+normal is the cross product of 2 edges, and then you normalize it to have unit length.
+This gives the direction of the plane.
+
+Then we compute the distance from the origin with the -Vector3DotProduct of the normal and pos1
+
+Then we return the plane (containing a vector3 (the normal), and the distance as a double/float)
+
+Here is the formula for the Plane Intersection function.
+```c
+/*
+polygon_get_intersection
+- gets the intersecting points from a polygon to clip them
+TODO : Use DOUBLE instead of FLOAT for all these calculations for them to be more precise
+*/
+bool polygon_get_intersection(
+    Vector3 n1,
+    Vector3 n2,
+    Vector3 n3,
+    double d1,
+    double d2,
+    double d3,
+    Vector3* out
+)
+{
+    Vector3 c1 = Vector3CrossProduct(n2, n3);
+    Vector3 c2 = Vector3CrossProduct(n3, n1);
+    Vector3 c3 = Vector3CrossProduct(n1, n2);
+
+    float denom = Vector3DotProduct(n1, c1);
+    if (denom == 0.0f) return false;
+
+    Vector3 term1 = Vector3Scale(c1, -d1);
+    Vector3 term2 = Vector3Scale(c2, -d2);
+    Vector3 term3 = Vector3Scale(c3, -d3);
+
+    Vector3 sum = Vector3Add(Vector3Add(term1, term2), term3);
+    *out = Vector3Scale(sum, 1.0f / denom);
+    return true;
+}
+```
+Let's break this down for you to understand what is happening here.
+
+- `n1` `n2` `n3` are the normals of the 3 planes
+- `d1` `d2` `d3` are distances from the origin
+- planes must be in form `n • X + d = 0`
+- *p where the intersection point is stored
+- returns true if a valid intersection exists
+
+First we get the denominator from the 3 normals, the scalar triple product.
+
+Denom formula is : `Vector3Dot(n1, Vector3Cross(n2,n3))`
+
+if denom is 0, the planes are `parallel`, `coplanar`, or `intersect along a line NOT at a point`...
+
+...which will return false
+
+Then we compute the Intersection Point.
+```c
+*p = ( 
+    -d1 * (n2 × n3)
+    -d2 * (n3 × n1)
+    -d3 * (n1 × n2)
+) / denom;
+```
+
+Lastly for `polygon_generate_from_brush` function to work we will need to implement `polygon_has_vertex`.
+
+#### polygon_has_vertex
+```c
+/*
+polygon_has_vertex
+-- checks if the polygon already has vertex so we can check which polygons need texturing.
+*/
+bool polygon_has_vertex(Polygon *poly, Vector3 v)
+{
+    for (int i = 0; i < poly->vertex_count; i++)
+    {
+        if (Vector3Length(Vector3Subtract(poly->vertices[i], v)) < 0.001f)
+            return true;
+    }
+    return false;
+}
+```
+This function will check if the vertice (v) is within the poly, which is just an array of vertices.
+
+For each vertex in the polygon:
+- substracts given vertex (v) from it
+- gets distance between the 2 points
+- if distance is less than 0.001 - considers to be equal (a little bit of fuzzy logic)
+- if match found - return true
+
+Now we can put this all together in polygon_generate_from_brush function
+
+### brush_to_polygon
+```c
+/*
+polygon_generate_from_brush
+- generates a polygon from a brush type
+*/
+void polygon_generate_from_brush(Brush *brush)
+{
+    printf("Setting vertex counts to 0...\n");
+    for (int i=0; i < brush->brush_face_count; i++)
+    {
+        brush->polys[i].vertex_count = 0;
+    }
+
+    for (int i=0; i < brush->brush_face_count - 2; i++){
+        for (int j = i+1; j < brush->brush_face_count -1; j++){
+            for (int k = j+1; k < brush->brush_face_count; k++){
+                printf("Generating plane: ");
+
+                //create planes from brush faces
+                Plane plane_i = brushface_to_plane(brush->brush_faces[i]);
+                Plane plane_j = brushface_to_plane(brush->brush_faces[j]);
+                Plane plane_k = brushface_to_plane(brush->brush_faces[k]);
+
+                //check for intersecting planes in the polygon
+                Vector3 p;
+                if (polygon_get_intersection(
+                    plane_i.normal, plane_j.normal, plane_k.normal,
+                    plane_i.distance, plane_j.distance, plane_k.distance, &p
+                ) == false) 
+                {
+                    printf("FAILED.\n");
+
+                    continue;
+                }
+
+                //check inside all brush planes
+                bool legal = true;
+                for (int m=0; m < brush->brush_face_count; m++)
+                {
+                    Plane test_plane = brushface_to_plane(brush->brush_faces[m]);
+                    if (Vector3DotProduct(test_plane.normal, p) + test_plane.distance < -0.001f)
+                    {
+                        //point is outside reject it
+                        printf("FAILED.\n");
+
+                        legal = false;
+                        break;
+                    }
+                }
+
+                // this generation of polygon is valid
+                if (legal)
+                {
+                    int success = false; // checks if the plane creating was success
+
+                    ///checks for i
+                    if (!polygon_has_vertex(&brush->polys[i],p) && 
+                    (brush->polys[i].vertex_count < MAX_VERTICES_PER_FACE))
+                    {
+                        success = true;
+                        brush->polys[i].vertices[brush->polys[i].vertex_count++] = p;
+                    }
+
+                    ///checks for j
+                    if (!polygon_has_vertex(&brush->polys[j],p) && 
+                    brush->polys[j].vertex_count < MAX_VERTICES_PER_FACE)
+                    {
+                        success = true;
+                        brush->polys[j].vertices[brush->polys[j].vertex_count++] = p;
+                    }
+
+                    ///checks for k
+                    if (!polygon_has_vertex(&brush->polys[k],p) && 
+                    brush->polys[k].vertex_count < MAX_VERTICES_PER_FACE)
+                    {
+                        success = true;
+                        brush->polys[k].vertices[brush->polys[k].vertex_count++] = p;
+                    }
+
+                    /// print if the creation was successful or not
+                    if (success == true) printf("SUCCESS.\n");
+                    else printf("FAILED.\n");
+                }
+            }
+        }
+    }
+}
+```
+## Resorting Map Geometry Polygon Vertices
+At this point we have successfully did most of the work for a lot of the math. The last few tasks of map geometry are ahead of us.
+
+We need to implement this function `polygon_sort_vertices`
+#### polygon_sort_vertices
+```c
+/*
+polygon_sort_vertices
+-- sorts all the maps vertices in polygons, so shapes arent all messed up and actually 
+represent what they need to look like
+*/
+void polygon_sort_vertices(Polygon* poly, Vector3 normal)
+{
+    if (poly->vertex_count < 3) return; // nothing to sort
+
+    //calculate centroid
+    Vector3 centroid = { 0, 0, 0 };
+    for (int i=0; i<poly->vertex_count; i++)
+    {
+        centroid = Vector3Add(centroid, poly->vertices[i]);
+    }
+
+    centroid = Vector3Scale(centroid, 1.0f / poly->vertex_count);
+
+    //compute polygon normal
+    Vector3 edge1 = Vector3Subtract(poly->vertices[1], poly->vertices[0]);
+    Vector3 ref_vec = Vector3Normalize(edge1);
+
+    //temporarily store angles of each vertex relative to centroid and ref_vec
+    typedef struct {
+        float angle;
+        Vector3 vertex;
+    } AngleVertex;
+
+    AngleVertex arr[MAX_VERTICES_PER_FACE];
+
+    for (int i=0; i< poly->vertex_count; i++)
+    {
+        Vector3 dir = Vector3Subtract(poly->vertices[i], centroid);
+
+        float dist_to_normal = Vector3DotProduct(dir, normal);
+        Vector3 proj = Vector3Subtract(dir, Vector3Scale(normal, dist_to_normal));
+        proj = Vector3Normalize(proj);
+
+        // compute angle between refVec and proj using atan2
+        // atan2 returns angle from refVec to proj in range [-pi, pi]
+        Vector3 cross = Vector3CrossProduct(ref_vec, proj);
+        float dot = Vector3DotProduct(ref_vec, proj);
+        float angle = atan2f(Vector3DotProduct(cross, normal), dot);
+
+        arr[i].angle = angle;
+        arr[i].vertex = poly->vertices[i];
+    }
+
+    // sort vertices by angle ascending
+    // simple insertion sort
+    for (int i = 1; i < poly->vertex_count; i++)
+    {
+        AngleVertex key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j].angle > key.angle)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+
+    // copy sorted vertices back to polygon
+    for (int i = 0; i < poly->vertex_count; i++)
+    {
+        poly->vertices[i] = arr[i].vertex;
+    }
+}
+```
+First we simply check if the polygon is less than 3 vertices, because then it would be an illegal polygon.
+
+Next we calculate the centroid (the geometric center of the shape).
+The centroid is the "average" position of all the vertices in a polygon. It's calculated by summing all vertex postitions then dividing by the total number of vertices.
+
+Next it creates a reference line from the center to one of the vertices. 
+
+For every other vertex it calculates its angle to the starting line. It uses the normal (the up direction of the polygons surface) to make sure angles are measured correctly.
+
+Then it sorts all vertices based on caclulated angles putting them in a increasing order, and finally rearranges the polygons actual vertices to match this new sorted order.
+Without doing this your geometry will look like some crazy inverted shape.
+
+Finalizing the .map loop here now. We can add our new vertex sorting method.
+#### map.c
+```c
+// map_parse()
+.......
+.......
+// map parsing logic
+
+    for (int i=0; i < map.brush_count; i++)
+    {
+        printf("Generating Polygon: %i \n", i);
+        polygon_generate_from_brush(&map.brushes[i]);
+        
+        // loop over all faces in brush
+        for (int j= 0; j < map.brushes[i].brush_face_count; j++)
+        {
+            Plane plane = brushface_to_plane(map.brushes[i].brush_faces[j]);
+            polygon_sort_vertices(&map.brushes[i].polys[j], (Vector3){ plane.normal.x, plane.normal.y, plane.normal.z });
+        }
+    }
+
+    fclose(file);
+    return true;
+```
+
+## Turning Map Brushes into Raylib Models
+The last step of our adventure in the map geometry projection, is to transform all the calulcated brushes into raylib model types, and render them in the world.
+We will start working on the final function that will be included in `map_parse()`, which is the `map_create_models()` function.
+#### map_create_models()
+```c
+/*
+map_create_models
+-- creates a model from a polygonal brush
+*/
+void map_create_models()
+{
+    printf("Converting polygons into models... \n");
+    printf("\n### LOADING UV TEXTURES ### \n");
+
+    for (int i = 0; i < map.brush_count; i++)
+    {
+        Brush *brush = &map.brushes[i];
+
+        for (int j = 0; j < brush->brush_face_count; j++)
+        {
+            BrushFace *face = &brush->brush_faces[j];
+            Polygon *poly = &brush->polys[j];
+
+            if (poly->vertex_count < 3) continue;
+
+            Texture2D texture = texture_get_cached(face->texture);
+
+            // Centroid calculation (raw)
+            Vector3 centroid = {0};
+            for (int i = 0; i < poly->vertex_count; i++) 
+                centroid = Vector3Add(centroid, poly->vertices[i]);
+            
+            centroid = Vector3Scale(centroid, 1.0f / poly->vertex_count);
+
+            int triangle_count = poly->vertex_count;
+            Mesh mesh = {0};
+            mesh.vertexCount = triangle_count * 3;
+            mesh.triangleCount = triangle_count;
+
+            mesh.vertices = (float *)MemAlloc(mesh.vertexCount * 3 * sizeof(float));
+            mesh.texcoords = (float *)MemAlloc(mesh.vertexCount * 2 * sizeof(float));
+
+            int index = 0;
+            for (int i = 0; i < triangle_count; i++) {
+                Vector3 verts[3] = {
+                    poly->vertices[(i + 1) % poly->vertex_count],
+                    poly->vertices[i],
+                    centroid
+                };
+
+                Vector2 uvs[3];
+
+                for (int v = 0; v < 3; v++) {
+                    // Coordinate conversion: (x, y, z) → (x, z, -y)
+                    Vector3 p = verts[v];
+                    Vector3 pos = trench_to_raylib_origin((Vector3){p.x,p.z,p.y});
+
+                    // Store vertex
+                    mesh.vertices[index * 3 + 0] = pos.x;
+                    mesh.vertices[index * 3 + 1] = pos.y;
+                    mesh.vertices[index * 3 + 2] = pos.z;
+
+                    mesh.texcoords[index * 2 + 0] = uvs[v].x;
+                    mesh.texcoords[index * 2 + 1] = uvs[v].y;
+
+                    index++;
+                }
+            }
+
+            UploadMesh(&mesh, false);
+            Model model = LoadModelFromMesh(mesh);
+
+            Geometry geometry;
+            geometry.model = model;
+            map.models[map.model_count++] = geometry;            
+        }
+    }
+    printf("\nMap was successfully generated! \n \n");
+}
+```
+This was a very important step because now, we will actually be able to see something!
+Now our maps models array contains all of the models we just generated and we simply just have to loop over all of them and call the draw function!
+
+Let's add this `map_create_models()` to the end of our `map_parse()` function which will finally conclude that function.
+```c
+// map_parse()
+.......
+.......
+// map parsing logic
+
+    for (int i=0; i < map.brush_count; i++)
+    {
+        printf("Generating Polygon: %i \n", i);
+        polygon_generate_from_brush(&map.brushes[i]);
+        
+        // loop over all faces in brush
+        for (int j= 0; j < map.brushes[i].brush_face_count; j++)
+            ....
+        
+    }
+
+    fclose(file);
+    map_create_models(); // <---- Put this here now 
+    return true;
+
+```
+
+We can simply define `map_draw_models()`
+#### map_draw_models()
+```c
+/*
+map_draw_models
+-- draws each model in the model array
+*/
+void map_draw_models()
+{
+    for (int i = 0; i < map.model_count; i++)
+    {
+        Geometry *geo = &map.models[i];
+        DrawModel(geo->model, (Vector3){0}, 1.0f, WHITE);
+    }
+}
+```
+
+Now in our `draw` function we can call `map_draw_models()`
+#### draw.c
+```c
+/*
+draw
+-- any calls to render -things- into the 3D world should be placed here
+*/
+void draw()
+{
+    map_draw();
+}
+```
+
+## Create a Texture Manager & Cache
+## Project UV Textures onto Map Geometry
+
+
 ### TO BE CONTINUED...
