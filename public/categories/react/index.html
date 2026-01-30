@@ -1,4 +1,4 @@
-<body class="theme-blue">
+<body class="">
         <nav class="navbar bg-body-tertiary nav-top" id="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
@@ -41,6 +41,25 @@
     </div>
 
     <div class="box">
+    <label for="theme">Theme:</label>
+
+        <select name="theme" id="theme" onchange="changeTheme(this.value)">
+            <option value="">🌸 Cute Pink</option>
+            <option value="blue">💙 Skye Blue</option>
+            <option value="mint">🍏 Apple Green</option>
+            <option value="lavender">🪻 Lavender Purple</option>
+            <option value="peach">🍑 Chill Peach</option>
+        </select>
+    </div>
+
+
+    <div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div><script src="https://status.cafe/current-status.js?name=skye97" defer></script>
+
+    <div class="guestbook">
+        <iframe class="guestbook-iframe" src="https://skye97.atabook.org/"></iframe> 
+    </div>
+
+    <div class="box">
   <div class="scroll">
     <div class="scroll-track">
       <img src="https://blob.gifcities.org/gifcities/BXQMF6ITLYC6HGBXUWYVITM2EMQHNAHS.gif" class="giffy">
@@ -65,6 +84,22 @@
 
 
 </div>
+
+<script>
+    const STORAGE_KEY = 'theme';
+
+    function changeTheme(theme) {
+        localStorage.setItem(STORAGE_KEY, theme);
+        document.body.className = theme ? `theme-${theme}` : '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem(STORAGE_KEY);
+        document.body.className = savedTheme ? `theme-${savedTheme}` : '';
+        document.getElementById('theme').value = savedTheme || '';
+    });
+</script>
+
 </div>
             
 
