@@ -1,4 +1,4 @@
-<script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+<body class="">
         <nav class="navbar bg-body-tertiary nav-top" id="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
@@ -14,7 +14,7 @@
           <a class="nav-link" href="/authors/skye-waddell/">Blog</a>
           <a class="nav-link" href="/categories">Categories</a>
           <a class="nav-link" href="/authors">Authors</a>
-          <a class="nav-link disabled" aria-disabled="true">&copy; Skyesblog 2025</a>
+          <a class="nav-link disabled" aria-disabled="true">&copy; Skyesblog 2026</a>
         </div>
     </div>
   </nav>
@@ -28,19 +28,78 @@
     </a>
     <h2>Skye Waddell</h2>
     <h5>Fullstack Developer & Creative Artist</h5>
-    <h6 class="text-muted">@skyelynwaddell • they/them</h6>
+    <h6 class="text-muted"> <img src="/images/favbubble.gif" class="gifico">  @skyelynwaddell • they/them</h6>
 
     <div class="sidebar-items">
     <a class="btn btn-outline-primary" href="https://github.com/skyelynwaddell"> <img src="/svg/github.svg" class="icon"> Github</a>
     <a class="btn btn-outline-primary" href="https://www.linkedin.com/in/skyelynwaddell/"> <img src="/svg/linkedin.svg" class="icon"> LinkedIn</a>
     <div class="explore">
-        <a class="btn btn-outline-primary" href="/">Home</a>
-        <a class="btn btn-outline-primary" href="/authors/skye-waddell/">Blog</a>
-        <a class="btn btn-outline-primary" href="/categories">Categories</a>
-        <a class="btn btn-outline-primary" href="/authors">Authors</a>
+        <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Home</a>
+        <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Blog</a>
+        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Categories</a>
+        <a class="btn btn-outline-primary" href="/authors"> <img src="/images/arrow.gif" class="gifico">  Authors</a>
     </div>
 
+    <div class="box">
+    <label for="theme">Theme:</label>
+
+        <select name="theme" id="theme" onchange="changeTheme(this.value)">
+            <option value="">🌸 Cute Pink</option>
+            <option value="blue">💙 Skye Blue</option>
+            <option value="mint">🍏 Apple Green</option>
+            <option value="lavender">🪻 Lavender Purple</option>
+            <option value="peach">🍑 Chill Peach</option>
+        </select>
+    </div>
+
+
+    <div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div><script src="https://status.cafe/current-status.js?name=skye97" defer></script>
+
+    <div class="guestbook">
+        <iframe class="guestbook-iframe" src="https://skye97.atabook.org/"></iframe> 
+    </div>
+
+    <div class="box">
+  <div class="scroll">
+    <div class="scroll-track">
+      <img src="https://blob.gifcities.org/gifcities/BXQMF6ITLYC6HGBXUWYVITM2EMQHNAHS.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/P6FSCFGYFZR4EZOUMHWZQCGY3CB3OKB4.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/45OWWL5MQXVJLL72BBJJCJ4NSQOWVCYQ.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/4MPTHTB4TZAQZQARBAI3Z4PTTOHO5726.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/HXLF22T7JKTSG5RI4LZIYUFCKZKE4QSF.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/UEHPCFY63FE5IW2KVYVO6YCYY4GE42AS.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/QDF7YQ5GSRH36XIW77DOEVKP7KX4WJRH.gif" class="giffy">
+
+      
+      <img src="https://blob.gifcities.org/gifcities/BXQMF6ITLYC6HGBXUWYVITM2EMQHNAHS.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/P6FSCFGYFZR4EZOUMHWZQCGY3CB3OKB4.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/45OWWL5MQXVJLL72BBJJCJ4NSQOWVCYQ.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/4MPTHTB4TZAQZQARBAI3Z4PTTOHO5726.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/HXLF22T7JKTSG5RI4LZIYUFCKZKE4QSF.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/UEHPCFY63FE5IW2KVYVO6YCYY4GE42AS.gif" class="giffy">
+      <img src="https://blob.gifcities.org/gifcities/QDF7YQ5GSRH36XIW77DOEVKP7KX4WJRH.gif" class="giffy">
+    </div>
+  </div>
 </div>
+
+
+</div>
+
+<script>
+    const STORAGE_KEY = 'theme';
+
+    function changeTheme(theme) {
+        localStorage.setItem(STORAGE_KEY, theme);
+        document.body.className = theme ? `theme-${theme}` : '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem(STORAGE_KEY);
+        document.body.className = savedTheme ? `theme-${savedTheme}` : '';
+        document.getElementById('theme').value = savedTheme || '';
+    });
+</script>
+
 </div>
             
 
@@ -57,14 +116,19 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/bootstrap.js"></script>    
 
-    
-    <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/script.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
 
     <script src="/js/prism.js"></script>
     <link rel="stylesheet" href="/css/prism.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
+
+    
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js"></script>
 
 </head>
 
@@ -85,7 +149,7 @@
         <div class="br"></div>
 
         <footer class="navbar bg-body-tertiary footer">
-  &copy; Skyesblog 2025
+  &copy; Skyesblog 2026
 </footer>
 
 </body>

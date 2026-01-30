@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sdl on Skyesblog</title>
-    <link>http://localhost:1313/categories/sdl/</link>
+    <link>https://skyelynwaddell.github.io/categories/sdl/</link>
     <description>Recent content in Sdl on Skyesblog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 04 Oct 2024 16:44:00 -0600</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/sdl/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://skyelynwaddell.github.io/categories/sdl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C&#43;&#43; Notes</title>
-      <link>http://localhost:1313/cpp-notes/</link>
+      <link>https://skyelynwaddell.github.io/cpp-notes/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
-      <guid>http://localhost:1313/cpp-notes/</guid>
-      <description>&lt;h1 id=&#34;c-notes&#34;&gt;C++ Notes&lt;/h1&gt;&#xA;&lt;h1 id=&#34;iostream&#34;&gt;iostream&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;!-- raw HTML omitted --&gt; library provides objects which can read user input and output data to the console or to a file.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;&#xA;&#xA;cerr //output stream for error messages&#xA;clog //output stream to log program info&#xA;cin  //input stream that reads keyboard input from the console&#xA;cout //output stream which writes output to console&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;fstream&#34;&gt;fstream&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;!-- raw HTML omitted --&gt; library provides classes for reading and writing into files or data streams.&lt;/p&gt;</description>
+      <guid>https://skyelynwaddell.github.io/cpp-notes/</guid>
+      <description>&lt;h1 id=&#34;c-notes&#34;&gt;C++ Notes&lt;/h1&gt;&#xA;&lt;h1 id=&#34;iostream&#34;&gt;iostream&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;!-- raw HTML omitted --&gt; library provides objects which can read user input and output data to the console or to a file.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;&#xD;&#xA;&#xD;&#xA;cerr //output stream for error messages&#xD;&#xA;clog //output stream to log program info&#xD;&#xA;cin  //input stream that reads keyboard input from the console&#xD;&#xA;cout //output stream which writes output to console&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;fstream&#34;&gt;fstream&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;!-- raw HTML omitted --&gt; library provides classes for reading and writing into files or data streams.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,12 +1,120 @@
-html {
+:root {
+    --bg-main: rgb(236, 209, 229);
+    --bg-panel: rgb(229, 186, 219);
+    --bg-panel-alt: rgb(226, 166, 213);
+    --bg-footer: rgb(241, 200, 232);
+
+    --text-main: rgb(205, 65, 172);
+    --border-main: white;
+
+    --btn-bg: hsl(314, 45%, 81%);
+    --btn-bg-hover: rgb(255, 218, 246);
+    --btn-border: hsl(315, 49%, 64%);
 }
+
+.theme-blue {
+    --bg-main: rgb(220, 235, 250) !important;
+    --bg-panel: rgb(200, 220, 245) !important;
+    --bg-panel-alt: rgb(190, 210, 235) !important;
+    --bg-footer: rgb(210, 230, 250);
+
+    --text-main: rgb(60, 120, 190);
+
+    --btn-bg: rgb(190, 215, 245);
+    --btn-bg-hover: rgb(220, 235, 255);
+    --btn-border: rgb(120, 170, 220);
+}
+
+.theme-mint {
+    --bg-main: rgb(224, 242, 232);
+    --bg-panel: rgb(204, 230, 216);
+    --bg-panel-alt: rgb(186, 218, 202);
+    --bg-footer: rgb(214, 236, 224);
+
+    --text-main: rgb(60, 140, 105);
+
+    --btn-bg: rgb(198, 224, 210);
+    --btn-bg-hover: rgb(220, 245, 232);
+    --btn-border: rgb(120, 180, 150);
+}
+
+.theme-lavender {
+    --bg-main: rgb(230, 225, 245);
+    --bg-panel: rgb(212, 204, 235);
+    --bg-panel-alt: rgb(196, 186, 225);
+    --bg-footer: rgb(220, 214, 240);
+
+    --text-main: rgb(95, 75, 150);
+
+    --btn-bg: rgb(205, 195, 235);
+    --btn-bg-hover: rgb(228, 220, 255);
+    --btn-border: rgb(150, 130, 200);
+}
+
+.theme-peach {
+    --bg-main: rgb(255, 232, 220);
+    --bg-panel: rgb(245, 210, 195);
+    --bg-panel-alt: rgb(235, 190, 175);
+    --bg-footer: rgb(250, 222, 210);
+
+    --text-main: rgb(180, 90, 65);
+
+    --btn-bg: rgb(240, 200, 185);
+    --btn-bg-hover: rgb(255, 225, 215);
+    --btn-border: rgb(210, 130, 105);
+}
+
 body,html{
     left:0;
     margin:0;
     padding:0;
-    background-color: hsl(216, 28%, 7%);
+    background-image: url('/images/bg_bunny.png') !important;
+    background-repeat: repeat;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    text-shadow: none;
+}
+
+
+h1,h2,h3,h4,h5,h6,p,div,.text-muted,.btn{
+    font-family: "Coming Soon", cursive;
+    font-weight: 400;
+    font-style: normal;
+
+}
+h1,h2,h3,h4,h5,h6,.btn,a,.gifico, label{
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
+    text-shadow: 1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff,
+    0px 1px 0 #fff,
+    0px -1px 0 #fff,
+    -1px 0px 0 #fff,
+    1px 0px 0 #fff,
+    2px 2px 0 #fff,
+    -2px 2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px -2px 0 #fff,
+    0px 2px 0 #fff,
+    0px -2px 0 #fff,
+    -2px 0px 0 #fff,
+    2px 0px 0 #fff,
+    1px 2px 0 #fff,
+    -1px 2px 0 #fff,
+    1px -2px 0 #fff,
+    -1px -2px 0 #fff,
+    2px 1px 0 #fff,
+    -2px 1px 0 #fff,
+    2px -1px 0 #fff,
+    -2px -1px 0 #fff;
+}
+
+.giffy{
+    max-width: 100px;
 }
 
 .inner-row{
@@ -17,12 +125,15 @@ body,html{
     padding:20px;
     margin-top:10px;
     margin-bottom:10px;
-    border-radius: 5px;
+    border-radius: 0;
+    background-color: rgb(229, 186, 219) !important;
+    border-color:white !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 .sidebar{
-    border-radius: 10px;
+    border-radius: 0px;
     margin-bottom:10px;
     justify-content: center;
     text-align: center;
@@ -53,6 +164,7 @@ body,html{
     display: flex;
     margin-top:20px;
     margin-right:20px;
+    
 }
 
 .post-image{
@@ -76,9 +188,9 @@ body,html{
     gap:10px;
     margin: 5px 0;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.111);
+    background-color: rgba(255, 255, 255, 0.264);
     padding:10px;
-    border-radius: 10px;
+    border-radius: 0;
     
 }
 
@@ -95,8 +207,11 @@ body,html{
     border-style: solid;
     border-width:2px;
     padding:10px;
-    border-radius: 5px;
+    border-radius:  0;
     gap:10px;
+    background-color: rgb(226, 166, 213) !important;
+    border-color: white !important;
+    
 }
 
 .md {
@@ -104,19 +219,15 @@ body,html{
     border-style: solid;
     border-width: 2px;
     border-color:white;
-    border-radius: 5px;
-    max-width:100%;
+    border-radius: 0;
     min-width:calc(100% - 400px);
-
+    background-color: rgb(229, 186, 219) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
 .icon {
     filter: invert(100%);
-}
-
-.mainicon{
-    filter: invert(31%) sepia(91%) saturate(2926%) hue-rotate(295deg) brightness(98%) contrast(87%);
 }
 
 .footer{
@@ -129,10 +240,20 @@ body,html{
     z-index: 10;
     left:0;
     margin:0;
+    background-color: rgb(241, 200, 232) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .br{
     height:70px;
+    
+}
+
+hr{
+    color:white !important;
+    border-color:white !important;
+    background-color: white !important;
+    width: 100%;
 }
 
 
@@ -144,7 +265,7 @@ body,html{
 
 pre{
     padding:10px;
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .title{
@@ -188,6 +309,7 @@ pre{
     padding:10px;
     border-radius: 5px;
     border-style: solid;
+    background-color: var(--btn-bg) !important;
     
 }
 
@@ -221,7 +343,7 @@ pre{
         flex-direction: column;
     }
 
-
+ 
   }
 
 @media only screen and (min-width: 1200px) {
@@ -231,6 +353,11 @@ pre{
         justify-content: space-between; /* Ensure even spacing */
         box-sizing: border-box;
     }
+
+       .md{
+        min-width:calc(100% - 500px);
+    }
+
 
     .main-row{
         padding-right:10px;
@@ -256,5 +383,111 @@ pre{
     width:100%;
     z-index: 2;
     overflow: hidden;
-    background-color: #333;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+
+.btn,.box{
+    border-width: 2px;
+    border-radius: 0;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.box{
+    border-radius: 0;
+    padding:10px;
+    border-width:2px !important;
+    border-style:solid;
+}
+
+.scroll {
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 15s linear infinite;
+}
+
+/* animation */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+body, html {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+}
+
+.inner-row,
+.md {
+    background-color: var(--bg-panel) !important;
+    border-color: var(--border-main) !important;
+}
+
+.explore {
+    background-color: var(--bg-panel-alt) !important;
+}
+
+.footer,
+#navbar {
+    background-color: var(--bg-footer) !important;
+}
+
+h1,h2,h3,h4,h5,h6,p,div,.text-muted,.btn,
+a,.gifico {
+    color: var(--text-main) !important;
+}
+
+.guestbook {
+    background-color: var(--btn-bg) !important;
+    border-color: var(--btn-border) !important;
+    border-style:solid;
+    position: relative;
+    height: 480px;        /* visible area */
+    overflow-y: auto;    /* scrolling happens here */
+    overflow-x: hidden;
+}
+
+.guestbook-iframe {
+    background-color: var(--btn-bg) !important;
+    position: relative;
+    top: -125px;         /* hides top half */
+    width: 100%;
+    height: 1000px;      /* must be taller than container */
+    border: none;
+}
+
+
+
+.btn,.box {
+    background-color: var(--btn-bg) !important;
+    border-color: var(--btn-border) !important;
+}
+
+.btn:hover {
+    background-color: var(--btn-bg-hover) !important;
+}
+
+#statuscafe {
+    padding: .5em;
+    color: var(--text-main) !important;
+    background-color: var(--btn-bg) !important;
+    border-color: var(--btn-border) !important;
+    border-width:2px;
+    border-style: solid;
+
+}
+#statuscafe-username {
+    margin-bottom: .5em;
+}
+#statuscafe-content {
+    margin: 0 1em 0.5em 1em;
+}
