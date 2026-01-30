@@ -200,6 +200,51 @@ h1,h2,h3,h4,h5,h6,.btn,a,.gifico, label{
     text-align: center;
 }
 
+.retrobar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    border-style: solid;
+    justify-content: space-evenly;
+    width:100%;
+
+}
+
+.retroboxcontainer{
+    display:flex;
+    flex-direction: row;
+}
+
+.retrobox{
+    border-style: solid;
+    border-color: var(--btn-border) !important;
+    padding:5px;
+    height:100%;
+    cursor:pointer;
+}
+.retrobox:hover{
+    background-color: var(--btn-border) !important;
+}
+
+.retrocontent{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    padding:0;
+    margin:0;
+    padding-left:5px;
+    gap:4px;
+
+}
+.retrocontent2{
+    display:flex;
+    justify-items: flex-end;
+    flex-direction: row;
+    height:100%;
+    padding:0;
+    margin:0;
+}
 
 .explore{
     display: flex;
@@ -208,17 +253,16 @@ h1,h2,h3,h4,h5,h6,.btn,a,.gifico, label{
     border-width:2px;
     padding:10px;
     border-radius:  0;
-    gap:10px;
+    border-width:4px;
     background-color: rgb(226, 166, 213) !important;
-    border-color: white !important;
-    
+    border-color: var(--btn-border) !important;
 }
 
 .md {
+    border-color: var(--btn-border) !important;
     padding:10px;
     border-style: solid;
     border-width: 2px;
-    border-color:white;
     border-radius: 0;
     min-width:calc(100% - 400px);
     background-color: rgb(229, 186, 219) !important;
@@ -280,10 +324,6 @@ pre{
     display: flex;
     flex-direction: column;
     margin-right:10px;
-}
-
-.single-tags{
-
 }
 
 .single-image{
@@ -428,8 +468,9 @@ body, html {
 
 .inner-row,
 .md {
+    border-width: 4px;
     background-color: var(--bg-panel) !important;
-    border-color: var(--border-main) !important;
+    border-color: var(--btn-border) !important;
 }
 
 .explore {
@@ -444,6 +485,10 @@ body, html {
 h1,h2,h3,h4,h5,h6,p,div,.text-muted,.btn,
 a,.gifico {
     color: var(--text-main) !important;
+}
+
+.gifico{
+   width: 30px;
 }
 
 .guestbook {
@@ -468,6 +513,7 @@ a,.gifico {
 
 
 .btn,.box {
+    border-width: 4px !important;
     background-color: var(--btn-bg) !important;
     border-color: var(--btn-border) !important;
 }
@@ -481,8 +527,8 @@ a,.gifico {
     color: var(--text-main) !important;
     background-color: var(--btn-bg) !important;
     border-color: var(--btn-border) !important;
-    border-width:2px;
     border-style: solid;
+    border-width: 4px;
 
 }
 #statuscafe-username {
