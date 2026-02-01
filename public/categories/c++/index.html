@@ -33,31 +33,49 @@
     <div class="sidebar-items">
     <a class="btn btn-outline-primary" href="https://github.com/skyelynwaddell"> <img src="/svg/github.svg" class="icon"> Github</a>
     <a class="btn btn-outline-primary" href="https://www.linkedin.com/in/skyelynwaddell/"> <img src="/svg/linkedin.svg" class="icon"> LinkedIn</a>
+    
     <div class="explore">
+        
         <div class="retrobar">
-            <h4 class="retrocontent">
-                <img src="/images/favbubble.gif" class="gifico" alt="" srcset="">
-                Navigation
-            </h4>
-            <h4 class="retrocontent2">
-                    <div class="retrobox">_</div>
-                    <div class="retrobox">&#9633</div>
-                    <div class="retrobox">X</div>
-            </h4>
-        </div>
+  <h4 class="retrocontent">
+    <img src="/images/favbubble.gif" class="gifico" alt srcset>
+    Navigation
+  </h4>
+  <h4 class="retrocontent2">
+    <div class="retrobox">_</div>
+    <div class="retrobox">&#9633</div>
+    <div class="retrobox close">X</div>
+  </h4>
+</div>
         <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Home</a>
         <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Blog</a>
         <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Categories</a>
         <a class="btn btn-outline-primary" href="/authors"> <img src="/images/arrow.gif" class="gifico">  Authors</a>
+    
+        
+        <div class="retrobar">
+  <h4 class="retrocontent">
+    <img src="/images/favbubble.gif" class="gifico" alt srcset>
+    Creations
+  </h4>
+  <h4 class="retrocontent2">
+    <div class="retrobox">_</div>
+    <div class="retrobox">&#9633</div>
+    <div class="retrobox close">X</div>
+  </h4>
+</div>
+        <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Games</a>
+        <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Art</a>
+        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Music</a>
+        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Videos</a>
     </div>
 
     <div class="box">
     <label for="theme">Theme:</label>
-
         <select name="theme" id="theme" onchange="changeTheme(this.value)">
             <option value="">🌸 Cute Pink</option>
             <option value="blue">💙 Skye Blue</option>
-            <option value="mint">🍏 Apple Green</option>
+            <option value="mint">🟢 Mint Green</option>
             <option value="lavender">🪻 Lavender Purple</option>
             <option value="peach">🍑 Chill Peach</option>
         </select>
@@ -112,7 +130,256 @@
 </script>
 
 </div>
-            
+            <div style="display: flex; flex-direction:column; gap:5px; width:100%;">
+                <script>
+  window.STORAGE_KEY = 'petgame';
+
+  
+  window.PETSTAGE_EGG  = 0;
+  window.PETSTAGE_BABY = 1;
+  window.PETSTAGE_TEEN = 2;
+  let petStage = window.PETSTAGE_EGG;
+
+  
+  const BUTTON_FOOD     = 0;
+  const BUTTON_LIGHT    = 1;
+  const BUTTON_PLAY     = 2;
+  const BUTTON_HEAL     = 3;
+  const BUTTON_CLEAN    = 4;
+  const BUTTON_STATS    = 5;
+  const BUTTON_YELL     = 6;
+  const BUTTON_HAPPYSAD = 7;
+  const BUTTONS_MAX     = 8;
+  window.selectedButton = BUTTON_HAPPYSAD;
+
+  
+  const GAMESTATE_MAIN        = 0;
+  const GAMESTATE_CLOCK       = 1;
+  const GAMESTATE_FOOD_MENU   = 2;
+  const GAMESTATE_EATING_FOOD = 3;
+  const GAMESTATE_LIGHT_MENU  = 4;
+  const GAMESTATE_GAME_MENU   = 5;
+  const GAMESTATE_HEAL        = 6;
+  const GAMESTATE_CLEAN       = 7;
+  const GAMESTATE_STATS_1     = 8;  
+  const GAMESTATE_STATS_2     = 9;  
+  const GAMESTATE_STATS_3     = 10; 
+  const GAMESTATE_STATS_4     = 11; 
+  const GAMESTATE_YELL        = 12;
+  var gamestate = GAMESTATE_MAIN;
+
+  
+  var is_sleeping       = false;
+  var lights_are_on     = true;
+  var needs_discipline  = false;
+
+  
+  var happiness         = 0;
+  var hunger            = 0;
+  var weight            = 0;
+  var totalSnacksGiven  = 0;
+
+  
+  const MS_PER_DAY = 86400000;
+  var petBirthday = Date.now();
+
+  
+  
+  
+  window.SetPetStage = function(newStage) {
+    petStage = (newStage !== undefined && newStage !== null) ? parseInt(newStage) : window.PETSTAGE_EGG;
+    
+    const display = document.getElementById("display");
+    if (!display) {
+      console.error("GAME :: Display element not found!");
+      return;
+    }
+
+    let imgPath = "";
+    switch(petStage) {
+      case window.PETSTAGE_EGG:
+        imgPath = "/images/pet_egg.gif";
+        break;
+      case window.PETSTAGE_BABY:
+        imgPath = "/images/pet_baby.gif";
+        break;
+      case window.PETSTAGE_TEEN:
+        imgPath = "/images/pet_teen.gif";
+        break;
+      default:
+        imgPath = "/images/pet_egg.gif";
+        break;
+    }
+
+    display.innerHTML = `<img class="pet-sprite" src="${imgPath}">`;
+    console.log("GAME :: Stage set to", petStage);
+  };
+
+
+  
+  
+  function getPetAge(){
+    const now = Date.now();
+    const elapsedMS = now - window.petBirthday;
+    const daysOld = Math.floor(elapsedMS / MS_PER_DAY);
+
+    return daysOld;
+  }
+
+
+  
+  
+  function updateAgeDisplay() {
+    const daysOld = getPetAge();
+
+    const counterEl = document.getElementById("lifetime-count");
+    if (counterEl) counterEl.innerText = `Age: ${daysOld}`;
+  }
+
+
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      console.log("GAME :: Initializing...");
+      const rawData = localStorage.getItem(window.STORAGE_KEY);
+      
+      if (rawData) {
+          const saveData = JSON.parse(rawData);
+          window.SetPetStage(saveData.petStage);
+          window.petBirthday = saveData.petBirthday || Date.now()
+      } else {
+          window.petBirthday = Date.now()
+          window.SetPetStage(window.PETSTAGE_EGG);
+      }
+
+      updateAgeDisplay()
+      setInterval(updateAgeDisplay, 60000);
+  });
+
+
+  
+  window.addEventListener('pagehide', () => {
+      localStorage.setItem(window.STORAGE_KEY, JSON.stringify({ 
+        petStage,
+        petBirthday,
+      }));
+  });
+
+
+  
+  
+  function UpdateButtons(){
+    const buttons = [
+        "button-food",
+        "button-light",
+        "button-play",
+        "button-heal",
+        "button-clean",
+        "button-stats",
+        "button-yell",
+        "button-happysad"
+      ];
+
+      buttons.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = "petbutton-container"; 
+      });
+
+      if (window.selectedButton >= BUTTON_HAPPYSAD) return;
+
+      const activeId = buttons[window.selectedButton];
+      const activeEl = document.getElementById(activeId);
+      
+      if (activeEl) {
+        activeEl.className = "petbutton-container button-selected";
+      }
+  }
+
+
+  
+  
+  function Button1() {
+    switch (window.gamestate) {
+      case GAMESTATE_MAIN:
+      default:
+        window.selectedButton = (window.selectedButton + 1) % BUTTONS_MAX;
+        UpdateButtons();
+
+        break;
+    }
+  }
+
+
+  
+  
+  function Button2(){
+    switch(window.gamestate){
+      default:
+      case GAMESTATE_MAIN:
+        if (window.selectedButton === BUTTON_HAPPYSAD)
+        {
+          
+
+          return;
+        }
+
+        
+
+      break;
+    }
+  }
+
+
+  
+  
+  function Button3(){
+    switch(gamestate){
+    default:
+    case GAMESTATE_MAIN:
+      if (window.selectedButton !== BUTTON_HAPPYSAD)
+      {
+        window.selectedButton = BUTTON_HAPPYSAD;
+        UpdateButtons();
+      }
+
+    break;
+    }
+  }
+
+</script>
+
+<div class="game-banner">
+<div class="game">
+  <h5>ChibiPet</h5>
+
+  <div class="game-container">
+    <div class="gamebuttons">
+      <p id="button-food" class="petbutton-container"><img class="petbutton" src="/images/pet_fork.png"></p>
+      <p id="button-light" class="petbutton-container"><img class="petbutton" src="/images/pet_light.png"></p>
+      <p id="button-play" class="petbutton-container"><img class="petbutton" src="/images/pet_play.png"></p>
+      <p id="button-heal" class="petbutton-container"><img class="petbutton" src="/images/pet_heal.png"></p>
+    </div>
+
+    <div id="display"></div>
+    
+    <div class="gamebuttons">
+      <p id="button-clean" class="petbutton-container"><img class="petbutton" src="/images/pet_chick.png"></p>
+      <p id="button-stats" class="petbutton-container"><img class="petbutton" src="/images/pet_stats.png"></p>
+      <p id="button-yell" class="petbutton-container"><img class="petbutton" src="/images/pet_yell.png"></p>
+      <p id="button-happysad" class="petbutton-container"><img class="petbutton" src="/images/pet_happy_sad.png"></p>
+    </div>
+  </div>
+
+  <div class="buttonrow">
+    <button onclick="Button1();" class="circle-button"></button>
+    <button onclick="Button2();" class="circle-button"></button>
+    <button onclick="Button3();" class="circle-button"></button>
+  </div>
+  
+
+</div>
+</div>
+
+                
 
 
 <!DOCTYPE html>
@@ -121,6 +388,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyesblog | c&#43;&#43;</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -156,13 +425,13 @@
     
     <div class="post">
         
-        <a href="https://skyelynwaddell.github.io/cpp-notes/">
+        <a href="http://localhost:1313/cpp-notes/">
             <img style="width: 200px; height: 200px;" class="post-image" src="/images/cpp-logo.webp" alt="C&#43;&#43; Notes">
         </a>
 
         <div class="post-contents">
             
-            <a href="https://skyelynwaddell.github.io/cpp-notes/">
+            <a href="http://localhost:1313/cpp-notes/">
                 <h1>C&#43;&#43; Notes</h1>
             </a>
 
@@ -177,7 +446,7 @@
                 <img src="/svg/people-fill.svg" alt="Authors">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="https://skyelynwaddell.github.io/authors/skye-waddell/">Skye Waddell</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/skye-waddell/">Skye Waddell</a>
                 
                 </div>
                 
@@ -188,9 +457,9 @@
                 <img src="/svg/tags-fill.svg" alt="Categories">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="https://skyelynwaddell.github.io/categories/c&#43;&#43;/">c&#43;&#43;</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/c&#43;&#43;/">c&#43;&#43;</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="https://skyelynwaddell.github.io/categories/sdl/">sdl</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/sdl/">sdl</a>
                 
                 </div>
             </div>
@@ -209,6 +478,7 @@
 
 
 
+            </div>
         </div>
 
         <div class="br"></div>

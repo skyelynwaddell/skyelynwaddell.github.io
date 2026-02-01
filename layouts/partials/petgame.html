@@ -1,0 +1,384 @@
+<script>
+  window.STORAGE_KEY = 'petgame';
+
+  // PET STAGE
+  const PETSTAGE_EGG  = 0;
+  const PETSTAGE_BABY = 1;
+  const PETSTAGE_TEEN = 2;
+  window.petStage = PETSTAGE_EGG;
+
+  // BUTTONS
+  const BUTTON_FOOD     = 0;
+  const BUTTON_LIGHT    = 1;
+  const BUTTON_PLAY     = 2;
+  const BUTTON_HEAL     = 3;
+  const BUTTON_CLEAN    = 4;
+  const BUTTON_STATS    = 5;
+  const BUTTON_YELL     = 6;
+  const BUTTON_HAPPYSAD = 7;
+  const BUTTONS_MAX     = 8;
+  window.selectedButton = BUTTON_HAPPYSAD;
+
+  // GAME STATE
+  const GAMESTATE_MAIN        = 0;
+  const GAMESTATE_CLOCK       = 1;
+  const GAMESTATE_FOOD_MENU   = 2;
+  const GAMESTATE_EATING_FOOD = 3;
+  const GAMESTATE_LIGHT_MENU  = 4;
+  const GAMESTATE_GAME_MENU   = 5;
+  const GAMESTATE_HEAL        = 6;
+  const GAMESTATE_CLEAN       = 7;
+  const GAMESTATE_STATS_1     = 8;  // shows age/weight
+  const GAMESTATE_STATS_2     = 9;  // shows discipline
+  const GAMESTATE_STATS_3     = 10; // shows hunger
+  const GAMESTATE_STATS_4     = 11; // shows happiness
+  const GAMESTATE_YELL        = 12;
+  window.gamestate = GAMESTATE_MAIN;
+
+  // bools
+  window.is_sleeping       = false;
+  window.is_sick           = false;
+  window.lights_are_on     = true;
+  window.needs_discipline  = false;
+  window.is_dead           = false;
+
+  // stats
+  window.happiness         = 0;
+  window.hunger            = 0;
+  window.weight            = 0;
+  window.totalSnacksGiven  = 0;
+  window.poops             = 0;
+
+  // birthday / timer
+  const MS_PER_DAY = 86400000;
+  const HAPPINESS_LOSS_PER_MINUTE = 100 / (12 * 60);
+  const HUNGER_LOSS_PER_MINUTE    = 100 / (12 * 60);
+  window.petBirthday = Date.now();
+
+  // SetPetStage
+  // Updates the Display to show the correct PET graphic/sprite based on current state
+  window.SetPetStage = (newStage) => {
+    petStage = (newStage !== undefined && newStage !== null) ? parseInt(newStage) : 0;
+    
+    const display = document.getElementById("display");
+    if (!display) {
+      console.error("GAME :: Display element not found!");
+      return;
+    }
+
+    let imgPath = "";
+    switch(window.petStage) {
+      default:
+      case PETSTAGE_EGG:
+        imgPath = "/images/pet_egg.gif";
+        break;
+      case PETSTAGE_BABY:
+        imgPath = "/images/pet_baby.gif";
+        break;
+      case PETSTAGE_TEEN:
+        imgPath = "/images/pet_teen.gif";
+        break;
+    }
+
+    display.innerHTML = `<img class="pet-sprite" src="${imgPath}">`;
+    console.log("GAME :: Stage set to", window.petStage);
+  };
+
+
+  // GetPetAge
+  // Returns the "years" (days) a pet has been alive
+  function getPetAge(){
+    const now = Date.now();
+    const elapsedMS = now - window.petBirthday;
+    const daysOld = Math.floor(elapsedMS / MS_PER_DAY);
+
+    return daysOld;
+  }
+
+
+  // isMinutesOld
+  // returns true / false if the pet is above, or equal age supplied
+  function isMinutesOld(mins){
+    const now = Date.now()
+    const elapsedMS = now - window.petBirthday;
+
+    const MINS_IN_MS = mins * 60 * 1000;
+    return elapsedMS >= MINS_IN_MS;
+  }
+
+
+  // EvolvePet
+  // Evolve a pet to a different stage
+  function EvolvePet(newStage){
+    window.SetPetStage(newStage);
+
+  }
+
+
+  // UpdateAgeDisplay
+  // Updates the visual age counter
+  function updateDisplay() {
+
+    // Set Age / Birthday
+    const daysOld = getPetAge();
+    const counterEl = document.getElementById("lifetime-count");
+    if (counterEl) counterEl.innerText = `Age: ${daysOld}`;
+
+    // check if i need to evolve
+    switch(window.petStage){
+      default:
+
+      // EGG
+      case PETSTAGE_EGG:
+        // Evolve to Teen
+        if (isMinutesOld(60)){
+          EvolvePet(PETSTAGE_TEEN);
+          break;
+        }
+
+        // Evolve to Baby
+        if (isMinutesOld(5)){
+          EvolvePet(PETSTAGE_BABY);
+          break;
+        }
+      break;
+
+      // BABY
+      case PETSTAGE_BABY:
+        // Evolve to Teen
+        if (isMinutesOld(60)){
+            EvolvePet(PETSTAGE_TEEN);
+            break;
+        }
+      break;
+    }
+
+    // Check If I need to sleep / awake
+    const currentDate = new Date()
+    const time = currentDate.getHours()
+    
+    if (hours >= 9 && hours < 20)
+    {
+      // pet is awake
+
+    }
+    else
+    {
+      // pet is sleeping
+
+    }
+
+    // Check If I am due to get sick
+    
+    // update happiness
+    const FULL_HEART = `<img src="/images/pet_heart.png"/>`;
+    const EMPTY_HEART = `<img src="/images/pet_emptyheart.png"/>`;
+
+    window.happiness -= HAPPINESS_LOSS_PER_MINUTE;
+    if (window.happiness < 0) window.happiness = 0;
+    const happiness_hearts = Math.ceil(window.happiness/25)
+    
+    const happinessEl = document.getElementById("happiness-hearts");
+    var happinessHTML = ""
+    for (let i=0; i<4; i++){
+      happinessHTML += (i < happiness_hearts) ? FULL_HEART : EMPTY_HEART;
+    }
+    happinessEl.innerHTML = happinessHTML;
+
+    // update hunger
+    window.hunger -= HUNGER_LOSS_PER_MINUTE;
+    if (window.hunger < 0) window.hunger = 0;
+    const hunger_hearts = Math.ceil(window.hunger/25)
+    
+    const hungerEl = document.getElementById("hunger-hearts");
+    var hungerHTML = ""
+    for (let i=0; i<4; i++){
+      hungerHTML += (i < hunger_hearts) ? FULL_HEART : EMPTY_HEART;
+    }
+    hungerEl.innerHTML = hungerHTML;
+
+
+    // update weight
+
+    // randomly get sick based on snack count
+    
+    // check if i should poop
+
+    // Check if i need discipline
+
+    // Check if I need to die
+
+  }
+
+
+  // Initialization
+  document.addEventListener('DOMContentLoaded', () => {
+      console.log("GAME :: Initializing...");
+      const rawData = localStorage.getItem(window.STORAGE_KEY);
+      
+      if (rawData) {
+          const saveData = JSON.parse(rawData);
+          window.SetPetStage(saveData.petStage);
+          window.petBirthday = saveData.petBirthday || Date.now()
+          window.is_sleeping = saveData.is_sleeping || false;
+          window.is_sick = saveData.is_sick || false;
+          window.lights_are_on = saveData.lights_are_on || true;
+          window.needs_discipline = saveData.needs_discipline || false;
+          window.is_dead = saveData.is_dead || false;
+          window.happiness = saveData.happiness || 0;
+          window.hunger = saveData.hunger || 0;
+          window.weight = saveData.weight || 0;
+          window.totalSnacksGiven = saveData.totalSnacksGiven || 0;
+          window.poops = saveData.poops || 0;
+      } else {
+          window.SetPetStage(PETSTAGE_EGG);
+      }
+
+      updateDisplay()
+      setInterval(updateDisplay, 60000);
+  });
+
+
+  // Save on exit
+  window.addEventListener('pagehide', () => {
+      localStorage.setItem(window.STORAGE_KEY, JSON.stringify({ 
+        petStage : window.petStage,
+        petBirthday : window.petBirthday,
+        is_sleeping : window.is_sleeping,
+        is_sick : window.is_sick,
+        lights_are_on : window.lights_are_on,
+        needs_discipline : window.needs_discipline,
+        is_dead : window.is_dead,
+        happiness : window.happiness,
+        hunger : window.hunger,
+        weight : window.weight,
+        totalSnacksGiven : window.totalSnacksGiven,
+        poops : window.poops,
+      }));
+  });
+
+
+  // UpdateButtons
+  // Called when a button is clicked, highlights the correct selected Button
+  function UpdateButtons(){
+    const buttons = [
+        "button-food",
+        "button-light",
+        "button-play",
+        "button-heal",
+        "button-clean",
+        "button-stats",
+        "button-yell",
+        "button-happysad"
+      ];
+
+      // Reset CSS for all buttons
+      buttons.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = "petbutton-container"; 
+      });
+
+      // No buttons needs to be selected
+      if (window.selectedButton >= BUTTON_HAPPYSAD) return;
+
+      // Find the button that needs selecting
+      const activeId = buttons[window.selectedButton];
+      const activeEl = document.getElementById(activeId);
+      
+      // Anddd highlight that thinggg
+      if (activeEl) {
+        activeEl.className = "petbutton-container button-selected";
+      }
+  }
+
+
+  // Button1
+  // On press of the 1st (left) button
+  function Button1() {
+    if (petStage === PETSTAGE_EGG) return;
+
+    switch (window.gamestate) {
+      case GAMESTATE_MAIN:
+      default:
+        window.selectedButton = (window.selectedButton + 1) % BUTTONS_MAX;
+        UpdateButtons();
+
+        break;
+    }
+  }
+
+
+  // Button2
+  // On press of the 2nd (middle) button
+  function Button2(){
+    switch(window.gamestate){
+      default:
+      case GAMESTATE_MAIN:
+
+        switch(window.selectedButton){
+          default:
+          case BUTTON_HAPPYSAD:
+            // open timer
+          return;
+
+          case BUTTON_FOOD:
+            EvolvePet(PETSTAGE_EGG);
+          break;
+        }
+
+        // open the correct menu
+
+      break;
+    }
+  }
+
+
+  // Button3
+  // On press of the 3rd (right) button
+  function Button3(){
+    switch(gamestate){
+    default:
+    case GAMESTATE_MAIN:
+      if (window.selectedButton !== BUTTON_HAPPYSAD)
+      {
+        window.selectedButton = BUTTON_HAPPYSAD;
+        UpdateButtons();
+      }
+
+    break;
+    }
+  }
+
+</script>
+
+<div class="game-banner">
+<div class="game">
+  <h5>ChibiPet</h5>
+
+  <div class="game-container">
+    <div class="gamebuttons">
+      <p id="button-food" class="petbutton-container"><img class="petbutton" src="/images/pet_fork.png"></p>
+      <p id="button-light" class="petbutton-container"><img class="petbutton" src="/images/pet_light.png"></p>
+      <p id="button-play" class="petbutton-container"><img class="petbutton" src="/images/pet_play.png"></p>
+      <p id="button-heal" class="petbutton-container"><img class="petbutton" src="/images/pet_heal.png"></p>
+    </div>
+
+    <div id="display"></div>
+    
+    <div class="gamebuttons">
+      <p id="button-clean" class="petbutton-container"><img class="petbutton" src="/images/pet_chick.png"></p>
+      <p id="button-stats" class="petbutton-container"><img class="petbutton" src="/images/pet_stats.png"></p>
+      <p id="button-yell" class="petbutton-container"><img class="petbutton" src="/images/pet_yell.png"></p>
+      <p id="button-happysad" class="petbutton-container"><img class="petbutton" src="/images/pet_happy_sad.png"></p>
+    </div>
+  </div>
+
+  <div class="buttonrow">
+    <button onclick="Button1();" class="circle-button"></button>
+    <button onclick="Button2();" class="circle-button"></button>
+    <button onclick="Button3();" class="circle-button"></button>
+  </div>
+  {{/*  <h1 id="lifetime-count"></h1>  */}}
+
+</div>
+</div>

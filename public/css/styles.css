@@ -223,9 +223,6 @@ h1,h2,h3,h4,h5,h6,.btn,a,.gifico, label{
     height:100%;
     cursor:pointer;
 }
-.retrobox:hover{
-    background-color: var(--btn-border) !important;
-}
 
 .retrocontent{
     display:flex;
@@ -290,8 +287,9 @@ h1,h2,h3,h4,h5,h6,.btn,a,.gifico, label{
 
 .br{
     height:70px;
-    
 }
+
+.spacer{ margin-top: 10px; }
 
 hr{
     color:white !important;
@@ -429,7 +427,7 @@ pre{
 .btn,.box{
     border-width: 2px;
     border-radius: 0;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 
@@ -536,4 +534,110 @@ a,.gifico {
 }
 #statuscafe-content {
     margin: 0 1em 0.5em 1em;
+}
+
+.retrobox:hover{
+    background-color: var(--btn-border);
+}
+
+.close:hover{
+    background-color: rgb(242, 30, 30) !important;
+}
+
+.game-container{
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    height:100%;
+}
+
+.pet-sprite{
+    width: 100%;
+    height: 100%;
+    padding:10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    image-rendering: pixelated;
+}
+
+.game{
+    width: 100%;
+    height:fit-content;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin:10px;
+}
+
+.game-banner{
+    width:100%;
+    border-style: solid;
+    border-width:4px;
+    border-color: var(--btn-border) !important;
+
+
+    /* Background settings */
+    background-image: url('/images/bgbanner.webp'); /* Change to your file name */
+    background-size: cover;          /* Makes image cover the whole area */
+    background-position: center;     /* Centers the background */
+    background-repeat: no-repeat;
+}
+
+.buttonrow{
+    display: flex;
+    flex-direction: row;
+    margin-top:10px;
+    margin-bottom:10px;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    background-color: black;
+    padding:10px;
+    border-radius: 10px;
+}
+
+.circle-button{
+    padding:5px;
+    border-radius: 100%;
+    width:32px;
+    height:32px;
+}
+
+
+.gamebuttons{
+    width:100%;
+    height:max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin:auto;
+    margin-bottom: -16px;
+}
+
+.petbutton{
+    width:100%;
+    height:100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    padding:10px;
+    color:black !important;
+    image-rendering: pixelated;
+}
+
+.petbutton-container{
+    width:100%;
+    height:100%;
+}
+
+.button-selected{
+    background-color: rgb(147, 183, 236) !important;
 }

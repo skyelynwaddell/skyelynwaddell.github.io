@@ -25,3 +25,6 @@ publishDir = "public"  # Make sure this line is present
     lineNos = false
     lineNumbersInTable = false
     tabWidth = 4
+
+  [markup.goldmark.renderer]
+    unsafe = true  # This allows <script> and raw HTML in your markdown files

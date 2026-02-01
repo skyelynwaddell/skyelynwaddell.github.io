@@ -5,7 +5,10 @@
 
         <div class="main-row">
             {{ partial "sidebar" }}
-            {{ block "main" . }} {{ end }}
+            <div style="display: flex; flex-direction:column; gap:5px; width:100%;">
+                {{ partial "petgame" }}
+                {{ block "main" . }} {{ end }}
+            </div>
         </div>
 
         <div class="br"></div>

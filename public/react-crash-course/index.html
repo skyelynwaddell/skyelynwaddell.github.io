@@ -33,31 +33,49 @@
     <div class="sidebar-items">
     <a class="btn btn-outline-primary" href="https://github.com/skyelynwaddell"> <img src="/svg/github.svg" class="icon"> Github</a>
     <a class="btn btn-outline-primary" href="https://www.linkedin.com/in/skyelynwaddell/"> <img src="/svg/linkedin.svg" class="icon"> LinkedIn</a>
+    
     <div class="explore">
+        
         <div class="retrobar">
-            <h4 class="retrocontent">
-                <img src="/images/favbubble.gif" class="gifico" alt="" srcset="">
-                Navigation
-            </h4>
-            <h4 class="retrocontent2">
-                    <div class="retrobox">_</div>
-                    <div class="retrobox">&#9633</div>
-                    <div class="retrobox">X</div>
-            </h4>
-        </div>
+  <h4 class="retrocontent">
+    <img src="/images/favbubble.gif" class="gifico" alt srcset>
+    Navigation
+  </h4>
+  <h4 class="retrocontent2">
+    <div class="retrobox">_</div>
+    <div class="retrobox">&#9633</div>
+    <div class="retrobox close">X</div>
+  </h4>
+</div>
         <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Home</a>
         <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Blog</a>
         <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Categories</a>
         <a class="btn btn-outline-primary" href="/authors"> <img src="/images/arrow.gif" class="gifico">  Authors</a>
+    
+        
+        <div class="retrobar">
+  <h4 class="retrocontent">
+    <img src="/images/favbubble.gif" class="gifico" alt srcset>
+    Creations
+  </h4>
+  <h4 class="retrocontent2">
+    <div class="retrobox">_</div>
+    <div class="retrobox">&#9633</div>
+    <div class="retrobox close">X</div>
+  </h4>
+</div>
+        <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Games</a>
+        <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Art</a>
+        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Music</a>
+        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Videos</a>
     </div>
 
     <div class="box">
     <label for="theme">Theme:</label>
-
         <select name="theme" id="theme" onchange="changeTheme(this.value)">
             <option value="">🌸 Cute Pink</option>
             <option value="blue">💙 Skye Blue</option>
-            <option value="mint">🍏 Apple Green</option>
+            <option value="mint">🟢 Mint Green</option>
             <option value="lavender">🪻 Lavender Purple</option>
             <option value="peach">🍑 Chill Peach</option>
         </select>
@@ -112,7 +130,256 @@
 </script>
 
 </div>
-            
+            <div style="display: flex; flex-direction:column; gap:5px; width:100%;">
+                <script>
+  window.STORAGE_KEY = 'petgame';
+
+  
+  window.PETSTAGE_EGG  = 0;
+  window.PETSTAGE_BABY = 1;
+  window.PETSTAGE_TEEN = 2;
+  let petStage = window.PETSTAGE_EGG;
+
+  
+  const BUTTON_FOOD     = 0;
+  const BUTTON_LIGHT    = 1;
+  const BUTTON_PLAY     = 2;
+  const BUTTON_HEAL     = 3;
+  const BUTTON_CLEAN    = 4;
+  const BUTTON_STATS    = 5;
+  const BUTTON_YELL     = 6;
+  const BUTTON_HAPPYSAD = 7;
+  const BUTTONS_MAX     = 8;
+  window.selectedButton = BUTTON_HAPPYSAD;
+
+  
+  const GAMESTATE_MAIN        = 0;
+  const GAMESTATE_CLOCK       = 1;
+  const GAMESTATE_FOOD_MENU   = 2;
+  const GAMESTATE_EATING_FOOD = 3;
+  const GAMESTATE_LIGHT_MENU  = 4;
+  const GAMESTATE_GAME_MENU   = 5;
+  const GAMESTATE_HEAL        = 6;
+  const GAMESTATE_CLEAN       = 7;
+  const GAMESTATE_STATS_1     = 8;  
+  const GAMESTATE_STATS_2     = 9;  
+  const GAMESTATE_STATS_3     = 10; 
+  const GAMESTATE_STATS_4     = 11; 
+  const GAMESTATE_YELL        = 12;
+  var gamestate = GAMESTATE_MAIN;
+
+  
+  var is_sleeping       = false;
+  var lights_are_on     = true;
+  var needs_discipline  = false;
+
+  
+  var happiness         = 0;
+  var hunger            = 0;
+  var weight            = 0;
+  var totalSnacksGiven  = 0;
+
+  
+  const MS_PER_DAY = 86400000;
+  var petBirthday = Date.now();
+
+  
+  
+  
+  window.SetPetStage = function(newStage) {
+    petStage = (newStage !== undefined && newStage !== null) ? parseInt(newStage) : window.PETSTAGE_EGG;
+    
+    const display = document.getElementById("display");
+    if (!display) {
+      console.error("GAME :: Display element not found!");
+      return;
+    }
+
+    let imgPath = "";
+    switch(petStage) {
+      case window.PETSTAGE_EGG:
+        imgPath = "/images/pet_egg.gif";
+        break;
+      case window.PETSTAGE_BABY:
+        imgPath = "/images/pet_baby.gif";
+        break;
+      case window.PETSTAGE_TEEN:
+        imgPath = "/images/pet_teen.gif";
+        break;
+      default:
+        imgPath = "/images/pet_egg.gif";
+        break;
+    }
+
+    display.innerHTML = `<img class="pet-sprite" src="${imgPath}">`;
+    console.log("GAME :: Stage set to", petStage);
+  };
+
+
+  
+  
+  function getPetAge(){
+    const now = Date.now();
+    const elapsedMS = now - window.petBirthday;
+    const daysOld = Math.floor(elapsedMS / MS_PER_DAY);
+
+    return daysOld;
+  }
+
+
+  
+  
+  function updateAgeDisplay() {
+    const daysOld = getPetAge();
+
+    const counterEl = document.getElementById("lifetime-count");
+    if (counterEl) counterEl.innerText = `Age: ${daysOld}`;
+  }
+
+
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      console.log("GAME :: Initializing...");
+      const rawData = localStorage.getItem(window.STORAGE_KEY);
+      
+      if (rawData) {
+          const saveData = JSON.parse(rawData);
+          window.SetPetStage(saveData.petStage);
+          window.petBirthday = saveData.petBirthday || Date.now()
+      } else {
+          window.petBirthday = Date.now()
+          window.SetPetStage(window.PETSTAGE_EGG);
+      }
+
+      updateAgeDisplay()
+      setInterval(updateAgeDisplay, 60000);
+  });
+
+
+  
+  window.addEventListener('pagehide', () => {
+      localStorage.setItem(window.STORAGE_KEY, JSON.stringify({ 
+        petStage,
+        petBirthday,
+      }));
+  });
+
+
+  
+  
+  function UpdateButtons(){
+    const buttons = [
+        "button-food",
+        "button-light",
+        "button-play",
+        "button-heal",
+        "button-clean",
+        "button-stats",
+        "button-yell",
+        "button-happysad"
+      ];
+
+      buttons.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = "petbutton-container"; 
+      });
+
+      if (window.selectedButton >= BUTTON_HAPPYSAD) return;
+
+      const activeId = buttons[window.selectedButton];
+      const activeEl = document.getElementById(activeId);
+      
+      if (activeEl) {
+        activeEl.className = "petbutton-container button-selected";
+      }
+  }
+
+
+  
+  
+  function Button1() {
+    switch (window.gamestate) {
+      case GAMESTATE_MAIN:
+      default:
+        window.selectedButton = (window.selectedButton + 1) % BUTTONS_MAX;
+        UpdateButtons();
+
+        break;
+    }
+  }
+
+
+  
+  
+  function Button2(){
+    switch(window.gamestate){
+      default:
+      case GAMESTATE_MAIN:
+        if (window.selectedButton === BUTTON_HAPPYSAD)
+        {
+          
+
+          return;
+        }
+
+        
+
+      break;
+    }
+  }
+
+
+  
+  
+  function Button3(){
+    switch(gamestate){
+    default:
+    case GAMESTATE_MAIN:
+      if (window.selectedButton !== BUTTON_HAPPYSAD)
+      {
+        window.selectedButton = BUTTON_HAPPYSAD;
+        UpdateButtons();
+      }
+
+    break;
+    }
+  }
+
+</script>
+
+<div class="game-banner">
+<div class="game">
+  <h5>ChibiPet</h5>
+
+  <div class="game-container">
+    <div class="gamebuttons">
+      <p id="button-food" class="petbutton-container"><img class="petbutton" src="/images/pet_fork.png"></p>
+      <p id="button-light" class="petbutton-container"><img class="petbutton" src="/images/pet_light.png"></p>
+      <p id="button-play" class="petbutton-container"><img class="petbutton" src="/images/pet_play.png"></p>
+      <p id="button-heal" class="petbutton-container"><img class="petbutton" src="/images/pet_heal.png"></p>
+    </div>
+
+    <div id="display"></div>
+    
+    <div class="gamebuttons">
+      <p id="button-clean" class="petbutton-container"><img class="petbutton" src="/images/pet_chick.png"></p>
+      <p id="button-stats" class="petbutton-container"><img class="petbutton" src="/images/pet_stats.png"></p>
+      <p id="button-yell" class="petbutton-container"><img class="petbutton" src="/images/pet_yell.png"></p>
+      <p id="button-happysad" class="petbutton-container"><img class="petbutton" src="/images/pet_happy_sad.png"></p>
+    </div>
+  </div>
+
+  <div class="buttonrow">
+    <button onclick="Button1();" class="circle-button"></button>
+    <button onclick="Button2();" class="circle-button"></button>
+    <button onclick="Button3();" class="circle-button"></button>
+  </div>
+  
+
+</div>
+</div>
+
+                
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -120,6 +387,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyesblog | React Crash Course</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -166,9 +435,9 @@
             <div class="single-stats">
             <img src="/svg/people-fill.svg" alt=""> 
             
-            <a href=https://skyelynwaddell.github.io/authors/skye-waddell/>Skye Waddell</a>
+            <a href=http://localhost:1313/authors/skye-waddell/>Skye Waddell</a>
             
-            <a href=https://skyelynwaddell.github.io/authors/brocode/>BroCode</a>
+            <a href=http://localhost:1313/authors/brocode/>BroCode</a>
             
         </div>
 
@@ -177,11 +446,11 @@
         <div class="single-stats">
             <img src="/svg/tags-fill.svg" alt=""> 
             
-            <a href=https://skyelynwaddell.github.io/categories/react/>react</a>
+            <a href=http://localhost:1313/categories/react/>react</a>
             
-            <a href=https://skyelynwaddell.github.io/categories/javascript/>javascript</a>
+            <a href=http://localhost:1313/categories/javascript/>javascript</a>
             
-            <a href=https://skyelynwaddell.github.io/categories/webdev/>webdev</a>
+            <a href=http://localhost:1313/categories/webdev/>webdev</a>
             
         </div>
 
@@ -194,70 +463,70 @@
 <p>I recommend checking out this Youtube tutorial by <strong>BroCode</strong>.<br>
 <a href="https://www.youtube.com/watch?v=CgkZ7MvWUAA&amp;t=7751s"><strong>React Full Course for free ⚛️ (2024)</strong></a><br>
 it is very in depth and goes over all topics mentioned below.</p>
-<p><!-- raw HTML omitted -->Table of Contents<!-- raw HTML omitted --></p>
+<p><span style="font-size: 21px">Table of Contents</span></p>
 <ul>
-<li><a href="#getting-started"><strong><!-- raw HTML omitted -->Getting Started<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#basic-rules-for-react"><strong><!-- raw HTML omitted -->Basic Rules for React<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#react-bootstrap"><strong><!-- raw HTML omitted -->React Bootstrap<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#create-a-functional-component-jsx"><strong><!-- raw HTML omitted -->Create a Functional Component .JSX<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#importing-a-component-within-another-component"><strong><!-- raw HTML omitted -->Importing a Component within another Component<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#including-javascript-in-your-component"><strong><!-- raw HTML omitted -->Including Javascript / Variables in your Component<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#mapping-items-from-an-array"><strong><!-- raw HTML omitted -->Mapping Items from an Array / Multi-Line Javascript<!-- raw HTML omitted --></strong></a>
+<li><a href="#getting-started"><strong><u>Getting Started</u></strong></a></li>
+<li><a href="#basic-rules-for-react"><strong><u>Basic Rules for React</u></strong></a></li>
+<li><a href="#react-bootstrap"><strong><u>React Bootstrap</u></strong></a></li>
+<li><a href="#create-a-functional-component-jsx"><strong><u>Create a Functional Component .JSX</u></strong></a></li>
+<li><a href="#importing-a-component-within-another-component"><strong><u>Importing a Component within another Component</u></strong></a></li>
+<li><a href="#including-javascript-in-your-component"><strong><u>Including Javascript / Variables in your Component</u></strong></a></li>
+<li><a href="#mapping-items-from-an-array"><strong><u>Mapping Items from an Array / Multi-Line Javascript</u></strong></a>
 <ul>
-<li><a href="#sorting-examples"><strong><!-- raw HTML omitted -->Sorting Examples<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#sorting-examples"><strong><u>Sorting Examples</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#conditional-rendering"><strong><!-- raw HTML omitted -->Conditional Rendering<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate"><strong><!-- raw HTML omitted -->useState<!-- raw HTML omitted --></strong></a>
+<li><a href="#conditional-rendering"><strong><u>Conditional Rendering</u></strong></a></li>
+<li><a href="#usestate"><strong><u>useState</u></strong></a>
 <ul>
-<li><a href="#usestate-variable-updater-example"><strong><!-- raw HTML omitted -->useState Variable Updater Example<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate-counter-increaser-example"><strong><!-- raw HTML omitted -->useState Counter Increaser Example<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate-boolean-toggler-example"><strong><!-- raw HTML omitted -->useState Boolean Toggler Example<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate-update-objects"><strong><!-- raw HTML omitted -->useState Update Objects<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate-update-arrays"><strong><!-- raw HTML omitted -->useState Update Arrays<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#usestate-update-array-of-objects"><strong><!-- raw HTML omitted -->useState Update Array of Objects<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#usestate-variable-updater-example"><strong><u>useState Variable Updater Example</u></strong></a></li>
+<li><a href="#usestate-counter-increaser-example"><strong><u>useState Counter Increaser Example</u></strong></a></li>
+<li><a href="#usestate-boolean-toggler-example"><strong><u>useState Boolean Toggler Example</u></strong></a></li>
+<li><a href="#usestate-update-objects"><strong><u>useState Update Objects</u></strong></a></li>
+<li><a href="#usestate-update-arrays"><strong><u>useState Update Arrays</u></strong></a></li>
+<li><a href="#usestate-update-array-of-objects"><strong><u>useState Update Array of Objects</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#props"><strong><!-- raw HTML omitted -->Props<!-- raw HTML omitted --></strong></a>
+<li><a href="#props"><strong><u>Props</u></strong></a>
 <ul>
-<li><a href="#prop-types"><strong><!-- raw HTML omitted -->PropTypes<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#default-props"><strong><!-- raw HTML omitted -->Default Props<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#prop-types"><strong><u>PropTypes</u></strong></a></li>
+<li><a href="#default-props"><strong><u>Default Props</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#onclick-event"><strong><!-- raw HTML omitted -->onClick Event<!-- raw HTML omitted --></strong></a>
+<li><a href="#onclick-event"><strong><u>onClick Event</u></strong></a>
 <ul>
-<li><a href="#onclick-event-properties"><strong><!-- raw HTML omitted -->onClick Event Properties<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#change-button-text-onclick"><strong><!-- raw HTML omitted -->Change Button Text onClick<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#hide-image-onclick"><strong><!-- raw HTML omitted -->Hide Image onClick<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#onclick-event-properties"><strong><u>onClick Event Properties</u></strong></a></li>
+<li><a href="#change-button-text-onclick"><strong><u>Change Button Text onClick</u></strong></a></li>
+<li><a href="#hide-image-onclick"><strong><u>Hide Image onClick</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#onchange-event"><strong><!-- raw HTML omitted -->onChange Event<!-- raw HTML omitted --></strong></a>
+<li><a href="#onchange-event"><strong><u>onChange Event</u></strong></a>
 <ul>
-<li><a href="#onchange-input-box"><strong><!-- raw HTML omitted -->onChange Input Box<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#onchange-textarea"><strong><!-- raw HTML omitted -->onChange Textarea<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#onchange-option-box"><strong><!-- raw HTML omitted -->onChange Option Box<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#onchange-radio-buttons"><strong><!-- raw HTML omitted -->onChange Radio Buttons<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#onchange-input-box"><strong><u>onChange Input Box</u></strong></a></li>
+<li><a href="#onchange-textarea"><strong><u>onChange Textarea</u></strong></a></li>
+<li><a href="#onchange-option-box"><strong><u>onChange Option Box</u></strong></a></li>
+<li><a href="#onchange-radio-buttons"><strong><u>onChange Radio Buttons</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#updater-functions"><strong><!-- raw HTML omitted -->Updater Functions<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#useeffect"><strong><!-- raw HTML omitted -->useEffect<!-- raw HTML omitted --></strong></a>
+<li><a href="#updater-functions"><strong><u>Updater Functions</u></strong></a></li>
+<li><a href="#useeffect"><strong><u>useEffect</u></strong></a>
 <ul>
-<li><a href="#useeffect-after-re-render-of-a-component"><strong><!-- raw HTML omitted -->useEffect after re-render of a Component<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#useeffect-when-a-component-mounts"><strong><!-- raw HTML omitted -->useEffect when a Component mounts<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#useeffect-when-value-changes"><strong><!-- raw HTML omitted -->useEffect when value changes<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#useeffect-after-re-render-of-a-component"><strong><u>useEffect after re-render of a Component</u></strong></a></li>
+<li><a href="#useeffect-when-a-component-mounts"><strong><u>useEffect when a Component mounts</u></strong></a></li>
+<li><a href="#useeffect-when-value-changes"><strong><u>useEffect when value changes</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#usecontext"><strong><!-- raw HTML omitted -->useContext<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#useref"><strong><!-- raw HTML omitted -->useRef<!-- raw HTML omitted --></strong></a>
+<li><a href="#usecontext"><strong><u>useContext</u></strong></a></li>
+<li><a href="#useref"><strong><u>useRef</u></strong></a>
 <ul>
-<li><a href="#useref-on-an-element"><strong><!-- raw HTML omitted -->useRef on an Element<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#useref-on-an-element"><strong><u>useRef on an Element</u></strong></a></li>
 </ul>
 </li>
-<li><a href="#nodejs-&amp;-react"><strong><!-- raw HTML omitted -->NodeJS &amp; React<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#axios"><strong><!-- raw HTML omitted -->Axios<!-- raw HTML omitted --></strong></a>
+<li><a href="#nodejs-&amp;-react"><strong><u>NodeJS &amp; React</u></strong></a></li>
+<li><a href="#axios"><strong><u>Axios</u></strong></a>
 <ul>
-<li><a href="#get-request"><strong><!-- raw HTML omitted -->GET Request<!-- raw HTML omitted --></strong></a></li>
-<li><a href="#post-request"><strong><!-- raw HTML omitted -->POST Request<!-- raw HTML omitted --></strong></a></li>
+<li><a href="#get-request"><strong><u>GET Request</u></strong></a></li>
+<li><a href="#post-request"><strong><u>POST Request</u></strong></a></li>
 </ul>
 </li>
 </ul>
@@ -347,7 +616,7 @@ const App = () =&gt; {
 export default App
 </code></pre>
 <h1 id="importing-a-component-within-another-component">Importing a Component within another Component</h1>
-<p>Since you are exporting each component, you may include them within other components by using the <strong><!-- raw HTML omitted -->import<!-- raw HTML omitted --></strong> statement, and then calling it within your component as an element.</p>
+<p>Since you are exporting each component, you may include them within other components by using the <strong><u>import</u></strong> statement, and then calling it within your component as an element.</p>
 <pre><code class="language-javascript">import React from 'react'
 import ComponentName from './Component.jsx'
 
@@ -536,7 +805,7 @@ function App() {
 <h1 id="usestate">useState</h1>
 <p>In order to have variables modifiable and interactive, you must setup something called state!<br>
 You can not update declared variables, unless you use state in React.</p>
-<p><strong><!-- raw HTML omitted -->Declare a variable with useState<!-- raw HTML omitted --></strong></p>
+<p><strong><span style="font-size: 15px">Declare a variable with useState</span></strong></p>
 <ul>
 <li><strong>First variable in the array is the Variable Name (GETTER).</strong></li>
 <li><strong>Second variable in the array is the Function you use to update the first variable (SETTER).</strong></li>
@@ -547,7 +816,7 @@ import React, { useState } from &quot;react&quot;;
 
 const [newItem, setNewItem] = useState(&quot;&quot;);
 </code></pre>
-<p><strong><!-- raw HTML omitted -->Update a variable with useState<!-- raw HTML omitted --></strong></p>
+<p><strong><span style="font-size: 15px">Update a variable with useState</span></strong></p>
 <p>To update a useState variable, you call the second variable from the useState array as a function.</p>
 <pre><code class="language-javascript">setNewItem(&quot;Hello World&quot;);
 </code></pre>
@@ -773,7 +1042,7 @@ export default MyComponent;
 </code></pre>
 <p>Your child object must accept the key passed, as an argument</p>
 <ul>
-<li><strong><!-- raw HTML omitted -->Child Component<!-- raw HTML omitted --></strong></li>
+<li><strong><span style="font-size: 15px">Child Component</span></strong></li>
 </ul>
 <pre><code class="language-javascript">const Student = (props) =&gt; {
   return (
@@ -786,7 +1055,7 @@ export default MyComponent;
 }
 </code></pre>
 <ul>
-<li><strong><!-- raw HTML omitted -->Parent Component<!-- raw HTML omitted --></strong></li>
+<li><strong><span style="font-size: 15px">Parent Component</span></strong></li>
 </ul>
 <pre><code class="language-javascript">import Student from './Student.jsx';
 
@@ -872,7 +1141,7 @@ export default Student;
 <h1 id="onclick-event">onClick Event</h1>
 <p>When a user clicks on an element, we can respond to clicks by passing a callback to the <strong>onClick</strong> event handler, you can also use <strong>onDoubleClick</strong> instead!</p>
 <ul>
-<li><strong><!-- raw HTML omitted -->Basic onClick Function<!-- raw HTML omitted --></strong></li>
+<li><strong><span style="font-size: 15px">Basic onClick Function</span></strong></li>
 </ul>
 <pre><code class="language-javascript">function Button(){
 
@@ -894,7 +1163,7 @@ export default Button;
 </code></pre>
 <ul>
 <li>
-<p><strong><!-- raw HTML omitted -->onClick Function with Arguments<!-- raw HTML omitted --></strong></p>
+<p><strong><span style="font-size: 15px">onClick Function with Arguments</span></strong></p>
 <p><strong>MUST</strong> be called with an arrow function, or else it will be AUTOMATICALLY called on run!</p>
 </li>
 </ul>
@@ -1465,6 +1734,7 @@ export default App;
 
 </div>
 
+            </div>
         </div>
 
         <div class="br"></div>
