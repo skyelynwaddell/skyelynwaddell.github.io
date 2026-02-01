@@ -135,10 +135,10 @@
   window.STORAGE_KEY = 'petgame';
 
   
-  window.PETSTAGE_EGG  = 0;
-  window.PETSTAGE_BABY = 1;
-  window.PETSTAGE_TEEN = 2;
-  let petStage = window.PETSTAGE_EGG;
+  const PETSTAGE_EGG  = 0;
+  const PETSTAGE_BABY = 1;
+  const PETSTAGE_TEEN = 2;
+  window.petStage = PETSTAGE_EGG;
 
   
   const BUTTON_FOOD     = 0;
@@ -166,28 +166,32 @@
   const GAMESTATE_STATS_3     = 10; 
   const GAMESTATE_STATS_4     = 11; 
   const GAMESTATE_YELL        = 12;
-  var gamestate = GAMESTATE_MAIN;
+  window.gamestate = GAMESTATE_MAIN;
 
   
-  var is_sleeping       = false;
-  var lights_are_on     = true;
-  var needs_discipline  = false;
+  window.is_sleeping       = false;
+  window.is_sick           = false;
+  window.lights_are_on     = true;
+  window.needs_discipline  = false;
+  window.is_dead           = false;
 
   
-  var happiness         = 0;
-  var hunger            = 0;
-  var weight            = 0;
-  var totalSnacksGiven  = 0;
+  window.happiness         = 0;
+  window.hunger            = 0;
+  window.weight            = 0;
+  window.totalSnacksGiven  = 0;
+  window.poops             = 0;
 
   
   const MS_PER_DAY = 86400000;
-  var petBirthday = Date.now();
+  const HAPPINESS_LOSS_PER_MINUTE = 100 / (12 * 60);
+  const HUNGER_LOSS_PER_MINUTE    = 100 / (12 * 60);
+  window.petBirthday = Date.now();
 
   
   
-  
-  window.SetPetStage = function(newStage) {
-    petStage = (newStage !== undefined && newStage !== null) ? parseInt(newStage) : window.PETSTAGE_EGG;
+  window.SetPetStage = (newStage) => {
+    petStage = (newStage !== undefined && newStage !== null) ? parseInt(newStage) : 0;
     
     const display = document.getElementById("display");
     if (!display) {
@@ -196,23 +200,21 @@
     }
 
     let imgPath = "";
-    switch(petStage) {
-      case window.PETSTAGE_EGG:
+    switch(window.petStage) {
+      default:
+      case PETSTAGE_EGG:
         imgPath = "/images/pet_egg.gif";
         break;
-      case window.PETSTAGE_BABY:
+      case PETSTAGE_BABY:
         imgPath = "/images/pet_baby.gif";
         break;
-      case window.PETSTAGE_TEEN:
+      case PETSTAGE_TEEN:
         imgPath = "/images/pet_teen.gif";
-        break;
-      default:
-        imgPath = "/images/pet_egg.gif";
         break;
     }
 
     display.innerHTML = `<img class="pet-sprite" src="${imgPath}">`;
-    console.log("GAME :: Stage set to", petStage);
+    console.log("GAME :: Stage set to", window.petStage);
   };
 
 
@@ -229,11 +231,116 @@
 
   
   
-  function updateAgeDisplay() {
-    const daysOld = getPetAge();
+  function isMinutesOld(mins){
+    const now = Date.now()
+    const elapsedMS = now - window.petBirthday;
 
+    const MINS_IN_MS = mins * 60 * 1000;
+    return elapsedMS >= MINS_IN_MS;
+  }
+
+
+  
+  
+  function EvolvePet(newStage){
+    window.SetPetStage(newStage);
+
+  }
+
+
+  
+  
+  function updateDisplay() {
+
+    
+    const daysOld = getPetAge();
     const counterEl = document.getElementById("lifetime-count");
     if (counterEl) counterEl.innerText = `Age: ${daysOld}`;
+
+    
+    switch(window.petStage){
+      default:
+
+      
+      case PETSTAGE_EGG:
+        
+        if (isMinutesOld(60)){
+          EvolvePet(PETSTAGE_TEEN);
+          break;
+        }
+
+        
+        if (isMinutesOld(5)){
+          EvolvePet(PETSTAGE_BABY);
+          break;
+        }
+      break;
+
+      
+      case PETSTAGE_BABY:
+        
+        if (isMinutesOld(60)){
+            EvolvePet(PETSTAGE_TEEN);
+            break;
+        }
+      break;
+    }
+
+    
+    const currentDate = new Date()
+    const time = currentDate.getHours()
+    
+    if (hours >= 9 && hours < 20)
+    {
+      
+
+    }
+    else
+    {
+      
+
+    }
+
+    
+    
+    
+    const FULL_HEART = `<img src="/images/pet_heart.png"/>`;
+    const EMPTY_HEART = `<img src="/images/pet_emptyheart.png"/>`;
+
+    window.happiness -= HAPPINESS_LOSS_PER_MINUTE;
+    if (window.happiness < 0) window.happiness = 0;
+    const happiness_hearts = Math.ceil(window.happiness/25)
+    
+    const happinessEl = document.getElementById("happiness-hearts");
+    var happinessHTML = ""
+    for (let i=0; i<4; i++){
+      happinessHTML += (i < happiness_hearts) ? FULL_HEART : EMPTY_HEART;
+    }
+    happinessEl.innerHTML = happinessHTML;
+
+    
+    window.hunger -= HUNGER_LOSS_PER_MINUTE;
+    if (window.hunger < 0) window.hunger = 0;
+    const hunger_hearts = Math.ceil(window.hunger/25)
+    
+    const hungerEl = document.getElementById("hunger-hearts");
+    var hungerHTML = ""
+    for (let i=0; i<4; i++){
+      hungerHTML += (i < hunger_hearts) ? FULL_HEART : EMPTY_HEART;
+    }
+    hungerEl.innerHTML = hungerHTML;
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
   }
 
 
@@ -246,21 +353,40 @@
           const saveData = JSON.parse(rawData);
           window.SetPetStage(saveData.petStage);
           window.petBirthday = saveData.petBirthday || Date.now()
+          window.is_sleeping = saveData.is_sleeping || false;
+          window.is_sick = saveData.is_sick || false;
+          window.lights_are_on = saveData.lights_are_on || true;
+          window.needs_discipline = saveData.needs_discipline || false;
+          window.is_dead = saveData.is_dead || false;
+          window.happiness = saveData.happiness || 0;
+          window.hunger = saveData.hunger || 0;
+          window.weight = saveData.weight || 0;
+          window.totalSnacksGiven = saveData.totalSnacksGiven || 0;
+          window.poops = saveData.poops || 0;
       } else {
-          window.petBirthday = Date.now()
-          window.SetPetStage(window.PETSTAGE_EGG);
+          window.SetPetStage(PETSTAGE_EGG);
       }
 
-      updateAgeDisplay()
-      setInterval(updateAgeDisplay, 60000);
+      updateDisplay()
+      setInterval(updateDisplay, 60000);
   });
 
 
   
   window.addEventListener('pagehide', () => {
       localStorage.setItem(window.STORAGE_KEY, JSON.stringify({ 
-        petStage,
-        petBirthday,
+        petStage : window.petStage,
+        petBirthday : window.petBirthday,
+        is_sleeping : window.is_sleeping,
+        is_sick : window.is_sick,
+        lights_are_on : window.lights_are_on,
+        needs_discipline : window.needs_discipline,
+        is_dead : window.is_dead,
+        happiness : window.happiness,
+        hunger : window.hunger,
+        weight : window.weight,
+        totalSnacksGiven : window.totalSnacksGiven,
+        poops : window.poops,
       }));
   });
 
@@ -279,15 +405,19 @@
         "button-happysad"
       ];
 
+      
       buttons.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.className = "petbutton-container"; 
       });
 
+      
       if (window.selectedButton >= BUTTON_HAPPYSAD) return;
 
+      
       const activeId = buttons[window.selectedButton];
       const activeEl = document.getElementById(activeId);
+      
       
       if (activeEl) {
         activeEl.className = "petbutton-container button-selected";
@@ -298,6 +428,8 @@
   
   
   function Button1() {
+    if (petStage === PETSTAGE_EGG) return;
+
     switch (window.gamestate) {
       case GAMESTATE_MAIN:
       default:
@@ -315,11 +447,16 @@
     switch(window.gamestate){
       default:
       case GAMESTATE_MAIN:
-        if (window.selectedButton === BUTTON_HAPPYSAD)
-        {
-          
 
+        switch(window.selectedButton){
+          default:
+          case BUTTON_HAPPYSAD:
+            
           return;
+
+          case BUTTON_FOOD:
+            EvolvePet(PETSTAGE_EGG);
+          break;
         }
 
         
@@ -425,13 +562,13 @@
     
     <div class="post">
         
-        <a href="http://localhost:1313/fps-engine-c/">
+        <a href="http://10.0.0.52:1313/fps-engine-c/">
             <img style="width: 200px; height: 200px;" class="post-image" src="/images/c.png" alt="3D FPS Game Development in C &amp; .MAP files">
         </a>
 
         <div class="post-contents">
             
-            <a href="http://localhost:1313/fps-engine-c/">
+            <a href="http://10.0.0.52:1313/fps-engine-c/">
                 <h1>3D FPS Game Development in C &amp; .MAP files</h1>
             </a>
 
@@ -446,7 +583,7 @@
                 <img src="/svg/people-fill.svg" alt="Authors">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/skye-waddell/">Skye Waddell</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://10.0.0.52:1313/authors/skye-waddell/">Skye Waddell</a>
                 
                 </div>
                 
@@ -457,15 +594,15 @@
                 <img src="/svg/tags-fill.svg" alt="Categories">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/c/">c</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/c/">c</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/fps/">fps</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/fps/">fps</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/3d/">3d</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/3d/">3d</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/raylib/">raylib</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/raylib/">raylib</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/gamedev/">gamedev</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/gamedev/">gamedev</a>
                 
                 </div>
             </div>

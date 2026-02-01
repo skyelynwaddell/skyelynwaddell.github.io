@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Skyesblog</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>http://10.0.0.52:1313/categories/</link>
     <description>Recent content in Categories on Skyesblog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 12 Jul 2025 17:17:06 -0600</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://10.0.0.52:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3d</title>
-      <link>http://localhost:1313/categories/3d/</link>
+      <link>http://10.0.0.52:1313/categories/3d/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/3d/</guid>
+      <guid>http://10.0.0.52:1313/categories/3d/</guid>
       <description></description>
     </item>
     <item>
       <title>C</title>
-      <link>http://localhost:1313/categories/c/</link>
+      <link>http://10.0.0.52:1313/categories/c/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/c/</guid>
+      <guid>http://10.0.0.52:1313/categories/c/</guid>
       <description></description>
     </item>
     <item>
       <title>Fps</title>
-      <link>http://localhost:1313/categories/fps/</link>
+      <link>http://10.0.0.52:1313/categories/fps/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/fps/</guid>
+      <guid>http://10.0.0.52:1313/categories/fps/</guid>
       <description></description>
     </item>
     <item>
       <title>Gamedev</title>
-      <link>http://localhost:1313/categories/gamedev/</link>
+      <link>http://10.0.0.52:1313/categories/gamedev/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/gamedev/</guid>
+      <guid>http://10.0.0.52:1313/categories/gamedev/</guid>
       <description></description>
     </item>
     <item>
       <title>Raylib</title>
-      <link>http://localhost:1313/categories/raylib/</link>
+      <link>http://10.0.0.52:1313/categories/raylib/</link>
       <pubDate>Sat, 12 Jul 2025 17:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/raylib/</guid>
+      <guid>http://10.0.0.52:1313/categories/raylib/</guid>
       <description></description>
     </item>
     <item>
       <title>Javascript</title>
-      <link>http://localhost:1313/categories/javascript/</link>
+      <link>http://10.0.0.52:1313/categories/javascript/</link>
       <pubDate>Sat, 05 Oct 2024 12:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/javascript/</guid>
+      <guid>http://10.0.0.52:1313/categories/javascript/</guid>
       <description></description>
     </item>
     <item>
       <title>React</title>
-      <link>http://localhost:1313/categories/react/</link>
+      <link>http://10.0.0.52:1313/categories/react/</link>
       <pubDate>Sat, 05 Oct 2024 12:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/react/</guid>
+      <guid>http://10.0.0.52:1313/categories/react/</guid>
       <description></description>
     </item>
     <item>
       <title>Webdev</title>
-      <link>http://localhost:1313/categories/webdev/</link>
+      <link>http://10.0.0.52:1313/categories/webdev/</link>
       <pubDate>Sat, 05 Oct 2024 12:17:06 -0600</pubDate>
-      <guid>http://localhost:1313/categories/webdev/</guid>
+      <guid>http://10.0.0.52:1313/categories/webdev/</guid>
       <description></description>
     </item>
     <item>
       <title>C&#43;&#43;</title>
-      <link>http://localhost:1313/categories/c&#43;&#43;/</link>
+      <link>http://10.0.0.52:1313/categories/c&#43;&#43;/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
-      <guid>http://localhost:1313/categories/c&#43;&#43;/</guid>
+      <guid>http://10.0.0.52:1313/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     <item>
       <title>Sdl</title>
-      <link>http://localhost:1313/categories/sdl/</link>
+      <link>http://10.0.0.52:1313/categories/sdl/</link>
       <pubDate>Fri, 04 Oct 2024 16:44:00 -0600</pubDate>
-      <guid>http://localhost:1313/categories/sdl/</guid>
+      <guid>http://10.0.0.52:1313/categories/sdl/</guid>
       <description></description>
     </item>
   </channel>
