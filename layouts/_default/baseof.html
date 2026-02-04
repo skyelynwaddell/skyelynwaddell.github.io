@@ -5,7 +5,8 @@
 
         <div class="main-row">
             {{ partial "sidebar" }}
-            <div style="display: flex; flex-direction:column; gap:5px; width:100%;">
+            <div class="main-page">
+                {{ partial "newsbar" }}
                 {{ partial "petgame" }}
                 {{ block "main" . }} {{ end }}
             </div>

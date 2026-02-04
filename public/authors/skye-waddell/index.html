@@ -64,10 +64,10 @@
     <div class="retrobox close">X</div>
   </h4>
 </div>
-        <a class="btn btn-outline-primary" href="/"> <img src="/images/arrow.gif" class="gifico">  Games</a>
-        <a class="btn btn-outline-primary" href="/authors/skye-waddell/"> <img src="/images/arrow.gif" class="gifico">  Art</a>
-        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Music</a>
-        <a class="btn btn-outline-primary" href="/categories"> <img src="/images/arrow.gif" class="gifico">  Videos</a>
+        <a class="btn btn-outline-primary" href="https://skyestuff.itch.io/"> <img src="/images/arrow.gif" class="gifico">  Games</a>
+        <a class="btn btn-outline-primary" href="https://www.deviantart.com/ver2ion"> <img src="/images/arrow.gif" class="gifico">  Art</a>
+        <a class="btn btn-outline-primary" href="https://soundcloud.com/ver2ion"> <img src="/images/arrow.gif" class="gifico">  Music</a>
+        <a class="btn btn-outline-primary" href="https://www.youtube.com/@banish4cost"> <img src="/images/arrow.gif" class="gifico">  Videos</a>
     </div>
 
     <div class="box">
@@ -99,7 +99,6 @@
       <img src="https://blob.gifcities.org/gifcities/UEHPCFY63FE5IW2KVYVO6YCYY4GE42AS.gif" class="giffy">
       <img src="https://blob.gifcities.org/gifcities/QDF7YQ5GSRH36XIW77DOEVKP7KX4WJRH.gif" class="giffy">
 
-      
       <img src="https://blob.gifcities.org/gifcities/BXQMF6ITLYC6HGBXUWYVITM2EMQHNAHS.gif" class="giffy">
       <img src="https://blob.gifcities.org/gifcities/P6FSCFGYFZR4EZOUMHWZQCGY3CB3OKB4.gif" class="giffy">
       <img src="https://blob.gifcities.org/gifcities/45OWWL5MQXVJLL72BBJJCJ4NSQOWVCYQ.gif" class="giffy">
@@ -130,7 +129,23 @@
 </script>
 
 </div>
-            <div style="display: flex; flex-direction:column; gap:5px; width:100%;">
+            <div class="main-page">
+                <script>
+  const news = `Welcome to Skyesblog! 😊 This is my digital portfolio and my web-playground. I enjoy creating digital content of all types, whether that is through programming, doing art, creating videos, producing beats, and many others ways. I hope you enjoy my all of my work, MAKING things is what I live for!`
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('marquee').innerHTML = `• ${news}`
+  })
+</script>
+
+<div class="box newsbar">
+  <h4 class="newsbar-title">Welcome</h4>
+  <div class="newsbar-marquee-container">
+    
+    <marquee id="marquee" class="newsbar-marquee"></marquee>
+  </div>
+</div>
+
                 <script>
   window.STORAGE_KEY = 'petgame';
 
@@ -562,13 +577,13 @@
     
     <div class="post">
         
-        <a href="http://10.0.0.52:1313/fps-engine-c/">
+        <a href="http://localhost:1313/fps-engine-c/">
             <img style="width: 200px; height: 200px;" class="post-image" src="/images/c.png" alt="3D FPS Game Development in C &amp; .MAP files">
         </a>
 
         <div class="post-contents">
             
-            <a href="http://10.0.0.52:1313/fps-engine-c/">
+            <a href="http://localhost:1313/fps-engine-c/">
                 <h1>3D FPS Game Development in C &amp; .MAP files</h1>
             </a>
 
@@ -583,7 +598,7 @@
                 <img src="/svg/people-fill.svg" alt="Authors">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="http://10.0.0.52:1313/authors/skye-waddell/">Skye Waddell</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/skye-waddell/">Skye Waddell</a>
                 
                 </div>
                 
@@ -594,15 +609,15 @@
                 <img src="/svg/tags-fill.svg" alt="Categories">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/c/">c</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/c/">c</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/fps/">fps</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/fps/">fps</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/3d/">3d</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/3d/">3d</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/raylib/">raylib</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/raylib/">raylib</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/gamedev/">gamedev</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/gamedev/">gamedev</a>
                 
                 </div>
             </div>
@@ -612,13 +627,13 @@
     
     <div class="post">
         
-        <a href="http://10.0.0.52:1313/react-crash-course/">
+        <a href="http://localhost:1313/react-crash-course/">
             <img style="width: 200px; height: 200px;" class="post-image" src="/images/react.webp" alt="React Crash Course">
         </a>
 
         <div class="post-contents">
             
-            <a href="http://10.0.0.52:1313/react-crash-course/">
+            <a href="http://localhost:1313/react-crash-course/">
                 <h1>React Crash Course</h1>
             </a>
 
@@ -633,9 +648,9 @@
                 <img src="/svg/people-fill.svg" alt="Authors">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="http://10.0.0.52:1313/authors/skye-waddell/">Skye Waddell</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/skye-waddell/">Skye Waddell</a>
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="http://10.0.0.52:1313/authors/brocode/">BroCode</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/brocode/">BroCode</a>
                 
                 </div>
                 
@@ -646,11 +661,11 @@
                 <img src="/svg/tags-fill.svg" alt="Categories">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/react/">react</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/react/">react</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/javascript/">javascript</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/javascript/">javascript</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/webdev/">webdev</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/webdev/">webdev</a>
                 
                 </div>
             </div>
@@ -660,13 +675,13 @@
     
     <div class="post">
         
-        <a href="http://10.0.0.52:1313/cpp-notes/">
+        <a href="http://localhost:1313/cpp-notes/">
             <img style="width: 200px; height: 200px;" class="post-image" src="/images/cpp-logo.webp" alt="C&#43;&#43; Notes">
         </a>
 
         <div class="post-contents">
             
-            <a href="http://10.0.0.52:1313/cpp-notes/">
+            <a href="http://localhost:1313/cpp-notes/">
                 <h1>C&#43;&#43; Notes</h1>
             </a>
 
@@ -681,7 +696,7 @@
                 <img src="/svg/people-fill.svg" alt="Authors">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;" class="btn btn-primary" href="http://10.0.0.52:1313/authors/skye-waddell/">Skye Waddell</a>
+                    <a style="margin: 5px;" class="btn btn-primary" href="http://localhost:1313/authors/skye-waddell/">Skye Waddell</a>
                 
                 </div>
                 
@@ -692,9 +707,9 @@
                 <img src="/svg/tags-fill.svg" alt="Categories">
                 <div style="width:100%;">
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/c&#43;&#43;/">c&#43;&#43;</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/c&#43;&#43;/">c&#43;&#43;</a>
                 
-                    <a style="margin: 5px;"  class="btn btn-primary" href="http://10.0.0.52:1313/categories/sdl/">sdl</a>
+                    <a style="margin: 5px;"  class="btn btn-primary" href="http://localhost:1313/categories/sdl/">sdl</a>
                 
                 </div>
             </div>
