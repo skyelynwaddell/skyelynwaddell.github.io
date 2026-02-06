@@ -674,6 +674,34 @@ a,
   justify-content: center;
 }
 
+.video {
+  margin-bottom: 5px;
+}
+
+.youtubeflex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.subscribe {
+  background-color: red;
+  color: white !important;
+  border: none !important;
+  text-shadow: none;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  height: 100%;
+  font-size: x-large;
+  margin: 5px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .newsbar-marquee-container {
   background-color: rgba(255, 255, 255, 0.62);
   border-style: solid;
